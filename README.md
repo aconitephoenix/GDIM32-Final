@@ -1,10 +1,10 @@
 # GDIM32-Final
 ## Check-In
-### Team Member Name 1
+### Jess Tran
 Put your individual check-in Devlog here.
-### Team Member Name 2
+### Kaleb Reyes
 Put your individual check-in Devlog here.
-### Team Member Name 3
+### Sebastian Magana
 Put your individual check-in Devlog here.
 
 
@@ -13,11 +13,11 @@ Put your individual check-in Devlog here.
 Put your group Devlog here.
 
 
-### Team Member Name 1
+### Jess Tran
 Put your individual final Devlog here.
-### Team Member Name 2
+### Kaleb Reyes
 Put your individual final Devlog here.
-### Team Member Name 3
+### Sebastian Magana
 Put your individual final Devlog here.
 
 ## Open-Source Assets
