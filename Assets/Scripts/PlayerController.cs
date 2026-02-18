@@ -7,9 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
-    [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float gravity = -9.81f;
-    
+    [SerializeField] private float jumpForce = 5f;    
     [Header("Camera Settings")]
     [SerializeField] private float mouseSensitivity = 2f;
     [SerializeField] private Transform cameraTransform;
@@ -18,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float sprintFOV = 70f;
     [SerializeField] private float fovTransitionSpeed = 10f;
     
-    private CharacterController characterController;
+    [SerializeField] private Rigidbody rb;
     private Camera playerCamera;
     private Vector3 velocity;
     private bool isGrounded;
@@ -28,24 +26,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
-        
         // Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
-        // If camera transform not assigned, try to find it
-        if (cameraTransform == null)
-        {
-            cameraTransform = Camera.main.transform;
-        }
-        
+        cameraTransform = Camera.main.transform;
+
         // Get camera component
         playerCamera = cameraTransform.GetComponent<Camera>();
-        if (playerCamera != null)
-        {
-            normalFOV = playerCamera.fieldOfView;
-        }
+        normalFOV = playerCamera.fieldOfView;
+
     }
 
     // Update is called once per frame
@@ -59,36 +49,39 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         // Check if grounded
-        isGrounded = characterController.isGrounded;
-        
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-        
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+
         // Get input
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
         
         // Check if sprinting
-        isSprinting = Input.GetKey(KeyCode.LeftShift) && isGrounded && moveZ > 0;
+        isSprinting = Input.GetKey(KeyCode.LeftShift) && isGrounded;
         
         // Calculate current speed
-        float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
-        
-        // Calculate movement direction
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        characterController.Move(move * currentSpeed * Time.deltaTime);
-        
-        // Jump
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        float currentSpeed;
+        if (isSprinting)
         {
-            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            currentSpeed = sprintSpeed;
+        }
+        else
+        {
+            currentSpeed = moveSpeed;
+        }
+
+        //rb player movement
+        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        rb.MovePosition(rb.position + move * currentSpeed * Time.deltaTime);
+
+
+        // Jump
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            //rb force jump
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
         }
         
-        // Apply gravity
-        velocity.y += gravity * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
     }
     
     private void HandleMouseLook()
@@ -107,11 +100,17 @@ public class PlayerController : MonoBehaviour
     }
     
     private void HandleFOV()
-    {
-        if (playerCamera == null) return;
-        
+    {        
         // Smoothly transition FOV based on sprint state
-        float targetFOV = isSprinting ? sprintFOV : normalFOV;
+        float targetFOV;
+        if (isSprinting)
+        {
+            targetFOV = sprintFOV;
+        }
+        else
+        {
+            targetFOV = normalFOV;
+        }
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
     }
 }
