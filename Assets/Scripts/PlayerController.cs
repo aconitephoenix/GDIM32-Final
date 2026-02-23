@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,12 +17,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float normalFOV = 60f;
     [SerializeField] private float sprintFOV = 70f;
     [SerializeField] private float fovTransitionSpeed = 10f;
+    [Header("Sprint Settings")]
     [SerializeField] private float sprintDuration = 2f;
     [SerializeField] private Image SprintBar;
     [SerializeField] private float alphaBlinkSpeed = 2f;
     public float Sprint = 1f;
     private bool CanSprint;
+    /*
+    [Header("Raycast Settings")]
+    [SerializeField] private float _lineofSightMaxDist;
+    [SerializeField] private Vector3 _raycastStartOffset;
+    private bool _lookingAtInteractable;
 
+    private string _playerTag = "Player";
+    */
     [SerializeField] private Rigidbody rb;
     private Camera playerCamera;
     private Vector3 velocity;
@@ -43,6 +52,14 @@ public class PlayerController : MonoBehaviour
         normalFOV = playerCamera.fieldOfView;
 
     }
+    /*
+    // Raycasting Methods
+    private Vector3 _raycastStart {
+        get {
+            return transform.TransformPoint(_raycastStartOffset);
+        }
+    }
+    */
 
     // Update is called once per frame
     void Update()
@@ -165,4 +182,20 @@ public class PlayerController : MonoBehaviour
         SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);
 
     }
+    /*
+    For later when I figure out Raycast - Kaleb
+    private bool LookingAtInteractable () {
+        _lookingAtInteractable = false;
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(_raycastStart, _raycastDir, out hitInfo, _lineofSightMaxDist)) 
+        {
+            _raycastHitLocation = hit.Info.point;
+            if(hitInfo.collider.gameObject.tag.Equals(_playerTag))
+            {
+                _lookingAtInteractable = true;
+            }
+        }
+    }
+    */
 }
