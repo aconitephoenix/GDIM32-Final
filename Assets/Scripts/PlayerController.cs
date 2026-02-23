@@ -23,20 +23,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float alphaBlinkSpeed = 2f;
     public float Sprint = 1f;
     private bool CanSprint;
-    /*
+    
     [Header("Raycast Settings")]
     [SerializeField] private float _lineofSightMaxDist;
     [SerializeField] private Vector3 _raycastStartOffset;
     private bool _lookingAtInteractable;
 
     private string _playerTag = "Player";
-    */
+    private string _npcTag = "NPC";
+    private string _interactableTag = "Interactable";
+    
     [SerializeField] private Rigidbody rb;
     private Camera playerCamera;
     private Vector3 velocity;
     private bool isGrounded;
     private float verticalRotation = 0f;
     private bool isSprinting = false;
+
+    // Variables for Gizmo drawing
+    private Vector3 _raycastHitLocation;
+
+    public delegate void StringDelegate(string str);
+    public event StringDelegate InteractableDetected;
 
     // Start is called before the first frame update
     void Start()
@@ -52,14 +60,22 @@ public class PlayerController : MonoBehaviour
         normalFOV = playerCamera.fieldOfView;
 
     }
-    /*
+    
     // Raycasting Methods
+    // Vector setting Ray start position to camera's world space position
     private Vector3 _raycastStart {
         get {
-            return transform.TransformPoint(_raycastStartOffset);
+            return cameraTransform.position;
         }
     }
-    */
+
+    // Vector pointing out from camera
+    private Vector3 _raycastDir
+    {
+        get {
+            return (cameraTransform.forward).normalized;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -67,6 +83,8 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleMouseLook();
         HandleSprint();
+        // temp added this method here for testing -jess
+        LookingAtInteractable();
     }
     
     private void HandleMovement()
@@ -198,4 +216,37 @@ public class PlayerController : MonoBehaviour
         }
     }
     */
+
+    private bool LookingAtInteractable()
+    {
+        _lookingAtInteractable = false;
+        
+        RaycastHit hitInfo;
+
+        // Firing raycast out from camera
+        if (Physics.Raycast(_raycastStart, _raycastDir, out hitInfo, _lineofSightMaxDist))
+        {
+            _raycastHitLocation = hitInfo.point;
+            if (hitInfo.collider.gameObject.tag.Equals(_interactableTag) || hitInfo.collider.gameObject.tag.Equals(_npcTag))
+            {
+                _lookingAtInteractable = true;
+                Debug.Log("found interactable!");
+            }
+            // will relocate this later in a diff method probably -jess
+            InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
+        }
+
+        return _lookingAtInteractable;
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Don't draw gizmos until game is running
+        if (!Application.isPlaying) return;
+
+        // Draw Ray from camera
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(_raycastStart, _raycastDir * _lineofSightMaxDist);
+        Gizmos.DrawSphere(_raycastHitLocation, 0.1f);
+    }
 }
