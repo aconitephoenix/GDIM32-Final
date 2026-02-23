@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,7 +16,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float normalFOV = 60f;
     [SerializeField] private float sprintFOV = 70f;
     [SerializeField] private float fovTransitionSpeed = 10f;
-    
+    [SerializeField] private float sprintDuration = 2f;
+    [SerializeField] private Image SprintBar;
+    [SerializeField] private float alphaBlinkSpeed = 2f;
+    public float Sprint = 1f;
+    private bool CanSprint;
+
     [SerializeField] private Rigidbody rb;
     private Camera playerCamera;
     private Vector3 velocity;
@@ -43,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleMouseLook();
-        HandleFOV();
+        HandleSprint();
     }
     
     private void HandleMovement()
@@ -56,7 +62,7 @@ public class PlayerController : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
         
         // Check if sprinting
-        isSprinting = Input.GetKey(KeyCode.LeftShift) && isGrounded;
+        isSprinting = Input.GetKey(KeyCode.LeftShift) && isGrounded && CanSprint;
         
         // Calculate current speed
         float currentSpeed;
@@ -99,18 +105,64 @@ public class PlayerController : MonoBehaviour
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
     }
     
-    private void HandleFOV()
+    private void HandleSprint()
     {        
-        // Smoothly transition FOV based on sprint state
+        // lerp to transition FOV based on sprint state
         float targetFOV;
+        
         if (isSprinting)
         {
             targetFOV = sprintFOV;
+            // if sprinting decrease sprint bar
+            if (SprintBar.rectTransform.localScale.x >= 0f)
+            {
+                Sprint -= 0.1f * sprintDuration * Time.deltaTime;
+            }
+            
         }
         else
         {
             targetFOV = normalFOV;
+            // if sprinting increase sprint bar
+            if (SprintBar.rectTransform.localScale.x <= 1f)
+            {
+                Sprint += 0.1f * sprintDuration * Time.deltaTime;
+            }
+
+            
         }
+
+        // sprintbar coloring and sprint availability
+        if (Sprint <= 0f && CanSprint == true)
+        {
+            SprintBar.color = Color.red;
+            CanSprint = false;
+            //Debug.Log("Out of sprint!");
+        }
+        if (Sprint >= 1f && CanSprint == false)
+        {
+            SprintBar.color = Color.cyan;
+            CanSprint = true;
+            //Debug.Log("Sprint ready!");
+        }
+
+        // Pulsing alpha when sprint is unavailable
+        if (!CanSprint)
+        {
+            float alpha = Mathf.PingPong(Time.time * alphaBlinkSpeed, 1f);
+            Color sprintBarColor = SprintBar.color;
+            sprintBarColor.a = alpha;
+            SprintBar.color = sprintBarColor;
+        }
+        else
+        {
+            Color sprintBarColor = SprintBar.color;
+            sprintBarColor.a = 1f;
+            SprintBar.color = sprintBarColor;
+        }
+
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
+        SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);
+
     }
 }
