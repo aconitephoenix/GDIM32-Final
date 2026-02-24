@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [Header("Raycast Settings")]
     [SerializeField] private float _lineofSightMaxDist;
     [SerializeField] private Vector3 _raycastStartOffset;
-    private bool _lookingAtInteractable;
+    private bool _lookingAtInteractable = false;
 
     private string _playerTag = "Player";
     private string _npcTag = "NPC";
@@ -215,10 +215,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // Check if player is looking at something they can interact with
     private bool LookingAtInteractable()
-    {
-        _lookingAtInteractable = false;
-        
+    { 
         RaycastHit hitInfo;
 
         // Firing raycast out from camera
@@ -228,16 +227,16 @@ public class PlayerController : MonoBehaviour
             if (hitInfo.collider.gameObject.tag.Equals(_interactableTag) || hitInfo.collider.gameObject.tag.Equals(_npcTag))
             {
                 _lookingAtInteractable = true;
-                Debug.Log("found interactable!");
             }
             // will relocate this later in a diff method probably -jess
             InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
         } else
         {
             InteractableDetected?.Invoke("Untagged");
+            _lookingAtInteractable = false;
         }
 
-            return _lookingAtInteractable;
+        return _lookingAtInteractable;
     }
 
     private void OnDrawGizmos()
