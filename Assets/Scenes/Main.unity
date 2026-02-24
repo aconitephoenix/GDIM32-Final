@@ -546,6 +546,8 @@ MonoBehaviour:
   SprintBar: {fileID: 224123139}
   alphaBlinkSpeed: 2
   Sprint: 1
+  _lineofSightMaxDist: 0
+  _raycastStartOffset: {x: 0, y: 0, z: 0}
   rb: {fileID: 1310158051}
 --- !u!136 &1310158047
 CapsuleCollider:
@@ -985,8 +987,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542c765a142cd3a40af83735071b432f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pagesText: {fileID: 0}
+  _pagesText: {fileID: 394921887}
   _dialogueText: {fileID: 0}
+  _hoverText: {fileID: 0}
 --- !u!114 &2134760052
 MonoBehaviour:
   m_ObjectHideFlags: 0
