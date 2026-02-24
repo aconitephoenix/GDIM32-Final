@@ -23,7 +23,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float alphaBlinkSpeed = 2f;
     public float Sprint = 1f;
     private bool CanSprint;
-    
+    private bool isSprinting = false;
+    private bool isJumping = true;
+
     [Header("Raycast Settings")]
     [SerializeField] private float _lineofSightMaxDist;
     [SerializeField] private Vector3 _raycastStartOffset;
@@ -38,7 +40,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private float verticalRotation = 0f;
-    private bool isSprinting = false;
 
     // Variables for Gizmo drawing
     private Vector3 _raycastHitLocation;
@@ -86,18 +87,21 @@ public class PlayerController : MonoBehaviour
         // temp added this method here for testing -jess
         LookingAtInteractable();
     }
-    
+
+    private void FixedUpdate()
+    {
+        HandleJump();
+    }
+
     private void HandleMovement()
     {
-        // Check if grounded
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
 
         // Get input
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveZ = Input.GetAxisRaw("Vertical");
         
         // Check if sprinting
-        isSprinting = Input.GetKey(KeyCode.LeftShift) && isGrounded && CanSprint;
+        isSprinting = Input.GetKey(KeyCode.LeftShift) && CanSprint && (moveX != 0 || moveZ != 0);
         
         // Calculate current speed
         float currentSpeed;
@@ -112,19 +116,29 @@ public class PlayerController : MonoBehaviour
 
         //rb player movement
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        rb.MovePosition(rb.position + move * currentSpeed * Time.deltaTime);
+        rb.MovePosition(rb.position + move.normalized * currentSpeed * Time.deltaTime);
 
+        
+        
+    }
 
+    private void HandleJump()
+    {
+        // Check if grounded
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+        if (isGrounded)
+        {
+            isJumping = false;
+        }
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && !isJumping && rb.velocity.y == 0)
         {
             //rb force jump
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
+            isJumping = true;
         }
-        
     }
-    
+
     private void HandleMouseLook()
     {
         // Get mouse input
