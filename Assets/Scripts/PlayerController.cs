@@ -214,22 +214,6 @@ public class PlayerController : MonoBehaviour
         SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);
 
     }
-    /*
-    For later when I figure out Raycast - Kaleb
-    private bool LookingAtInteractable () {
-        _lookingAtInteractable = false;
-        RaycastHit hitInfo;
-
-        if (Physics.Raycast(_raycastStart, _raycastDir, out hitInfo, _lineofSightMaxDist)) 
-        {
-            _raycastHitLocation = hit.Info.point;
-            if(hitInfo.collider.gameObject.tag.Equals(_playerTag))
-            {
-                _lookingAtInteractable = true;
-            }
-        }
-    }
-    */
 
     private bool LookingAtInteractable()
     {
@@ -246,8 +230,8 @@ public class PlayerController : MonoBehaviour
                 _lookingAtInteractable = true;
                 Debug.Log("found interactable!");
             }
-            // will relocate this later in a diff method probably -jess
-            InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
+                // will relocate this later in a diff method probably -jess
+                InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
         }
 
         return _lookingAtInteractable;
