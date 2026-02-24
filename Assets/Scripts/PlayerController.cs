@@ -216,10 +216,6 @@ public class PlayerController : MonoBehaviour
                 _lookingAtInteractable = true;
                 Debug.Log("found interactable!");
             }
-            else 
-            {
-                _lookingAtInteractable = false;
-            }
                 // will relocate this later in a diff method probably -jess
                 InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
         }
