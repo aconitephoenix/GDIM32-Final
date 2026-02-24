@@ -230,11 +230,14 @@ public class PlayerController : MonoBehaviour
                 _lookingAtInteractable = true;
                 Debug.Log("found interactable!");
             }
-                // will relocate this later in a diff method probably -jess
-                InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
+            // will relocate this later in a diff method probably -jess
+            InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
+        } else
+        {
+            InteractableDetected?.Invoke("Untagged");
         }
 
-        return _lookingAtInteractable;
+            return _lookingAtInteractable;
     }
 
     private void OnDrawGizmos()

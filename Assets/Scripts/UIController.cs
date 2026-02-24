@@ -23,21 +23,19 @@ public class UIController : MonoBehaviour
     // Display text when player hovers over objects
     private void HandleHoverText(string tag)
     {
-        if (tag.Equals("NPC") || tag.Equals("Interactable"))
+        switch (tag)
         {
-            switch(tag)
-            {
-                case "NPC":
-                    _hoverText.text = "Click to talk";
-                    break;
-                case "Interactable":
-                    _hoverText.text = "Click to interact";
-                    break;
-            }
-            _hoverText.gameObject.SetActive(true);
-        } else
-        {
-            _hoverText.gameObject.SetActive(false);
+            case "NPC":
+                _hoverText.text = "Click to talk";
+                _hoverText.gameObject.SetActive(true);
+                break;
+            case "Interactable":
+                _hoverText.text = "Click to interact";
+                _hoverText.gameObject.SetActive(true);
+                break;
+            default:
+                _hoverText.gameObject.SetActive(false);
+                break;
         }
     }
 }
