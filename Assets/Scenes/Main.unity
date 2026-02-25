@@ -1322,6 +1322,7 @@ MonoBehaviour:
   fovTransitionSpeed: 10
   sprintDuration: 2
   SprintBar: {fileID: 224123139}
+  SprintBarBackground: {fileID: 607435072}
   alphaBlinkSpeed: 2
   Sprint: 1
   _lineofSightMaxDist: 3.01

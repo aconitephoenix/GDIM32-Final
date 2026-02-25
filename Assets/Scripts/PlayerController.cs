@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sprint Settings")]
     [SerializeField] private float sprintDuration = 2f;
     [SerializeField] private Image SprintBar;
+    [SerializeField] private Image SprintBarBackground;
     [SerializeField] private float alphaBlinkSpeed = 2f;
     public float Sprint = 1f;
     private bool CanSprint;
@@ -190,25 +191,37 @@ public class PlayerController : MonoBehaviour
         }
         if (Sprint >= 1f && CanSprint == false)
         {
-            SprintBar.color = Color.cyan;
+            SprintBar.color = new Color(0.678f, 0.996f, 1f); // #ADFEFF
             CanSprint = true;
             //Debug.Log("Sprint ready!");
         }
 
-        // Pulsing alpha when sprint is unavailable
-        if (!CanSprint)
+        // Handle alpha fade based on sprint availability for SprintBar
+        Color sprintBarColor = SprintBar.color;
+        Color sprintBarBackgroundColor = SprintBarBackground.color;
+
+        if (Sprint >= 1f)
         {
-            float alpha = Mathf.PingPong(Time.time * alphaBlinkSpeed, 1f);
-            Color sprintBarColor = SprintBar.color;
+            // Fade to alpha 0 when sprint is full
+            sprintBarColor.a = Mathf.Lerp(sprintBarColor.a, 0f, fovTransitionSpeed * Time.deltaTime);
+            // Fade to alpha 0 when sprint is full
+            sprintBarBackgroundColor.a = Mathf.Lerp(sprintBarBackgroundColor.a, 0f, fovTransitionSpeed * Time.deltaTime);
+        }
+        else if (!CanSprint)
+        {
+            // Pulsing alpha when sprint is unavailable
+            float alpha = Mathf.PingPong(Time.time * alphaBlinkSpeed, .5f);
             sprintBarColor.a = alpha;
-            SprintBar.color = sprintBarColor;
         }
         else
         {
-            Color sprintBarColor = SprintBar.color;
-            sprintBarColor.a = 1f;
-            SprintBar.color = sprintBarColor;
+            // Normal alpha when sprint is available but not full
+            sprintBarColor.a = .5f;
+            // Normal alpha when sprint is available but not full
+            sprintBarBackgroundColor.a = .5f;
         }
+        SprintBar.color = sprintBarColor;
+        SprintBarBackground.color = sprintBarBackgroundColor;
 
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
         SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);

@@ -31,6 +31,7 @@ public class UIInteractableTest : MonoBehaviour
                 if (gameObject.CompareTag("NPC"))
                 {
                     AdvanceDialogue();
+                    Debug.Log("dialogueee");
                 } else if (gameObject.CompareTag("Interactable")) {
                     Collect();
                 }
