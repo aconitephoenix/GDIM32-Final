@@ -8,6 +8,10 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text _pagesText;
     [SerializeField] private TMP_Text _dialogueText;
     [SerializeField] private TMP_Text _hoverText;
+    [SerializeField] private GameObject _dialogueBox;
+    [SerializeField] private GameObject _playerOptions;
+    [SerializeField] private GameObject _sprintBar;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +25,7 @@ public class UIController : MonoBehaviour
     }
 
     // Display text when player hovers over objects
-    private void HandleHoverText(string tag)
+    public void HandleHoverText(string tag)
     {
         switch (tag)
         {
@@ -37,5 +41,29 @@ public class UIController : MonoBehaviour
                 _hoverText.gameObject.SetActive(false);
                 break;
         }
+    }
+
+    public void ShowDialogue(string dialogue)
+    {
+        _dialogueBox.SetActive(true);
+        _playerOptions.SetActive(false);
+        _sprintBar.SetActive(false);
+        _hoverText.gameObject.SetActive(false);
+
+        _dialogueText.text = dialogue;
+    }
+
+    public void HideDialogue()
+    {
+        _dialogueBox.SetActive(false);
+        _playerOptions.SetActive(false);
+        _sprintBar.SetActive(true);
+    }
+
+    public void ShowPlayerOptions()
+    {
+        _playerOptions.SetActive(true);
+        _sprintBar.SetActive(false);
+        _hoverText.gameObject.SetActive(false);
     }
 }
