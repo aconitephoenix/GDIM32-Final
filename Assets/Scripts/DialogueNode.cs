@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueNode : MonoBehaviour
+[CreateAssetMenu(fileName = "DialogueLine", menuName = "ScriptableObjects/DialogueLine", order = 1)]
+public class DialogueNode : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // lines of dialogue the NPC says this node
+    public string[] _lines;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // potential player reply options
+    public string[] _playerReplyOptions;
+
+    // player replies correspond with npc replies
+    public DialogueNode[] _npcReplies;
 }
