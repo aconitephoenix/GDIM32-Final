@@ -13,6 +13,7 @@ public class UINPCTest : MonoBehaviour
     private DialogueNode _currentNode;
     private int _currentLine = 0;
     private bool _waitingForPlayerResponse;
+    private bool _runningDialogue;
 
     // Start is called before the first frame update
     void Start()
@@ -24,21 +25,45 @@ public class UINPCTest : MonoBehaviour
     void Update()
     {
         if (GameController.Instance.Player == null) return;
+    }
 
+    private void OnMouseDown()
+    {
         if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance)
         {
-            if (!_waitingForPlayerResponse && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)) && gameObject.CompareTag("NPC"))
+            if (!_waitingForPlayerResponse && gameObject.CompareTag("NPC"))
             {
                 AdvanceDialogue();
+            } else if (gameObject.CompareTag("Interactable"))
+            {
+                Collect();
+            } else
+            {
+                EndDialogue();
             }
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance && !_runningDialogue)
+        {
+            _uiController.HandleHoverText(gameObject.tag);
         } else
         {
-            EndDialogue();
+            _uiController.HandleHoverText("Untagged");
         }
+    }
+
+    private void OnMouseExit()
+    {
+        _uiController.HandleHoverText("Untagged");
     }
 
     private void AdvanceDialogue()
     {
+        _runningDialogue = true;
+
         if (_currentLine < _currentNode._lines.Length)
         {
             // keep playing NPC lines if there are still any left
@@ -63,6 +88,7 @@ public class UINPCTest : MonoBehaviour
         _waitingForPlayerResponse = false;
         _currentNode = _startingNode;
         _currentLine = 0;
+        _runningDialogue = false;
         _uiController.HideDialogue();
     }
 
@@ -73,5 +99,12 @@ public class UINPCTest : MonoBehaviour
 
         _currentNode = _currentNode._npcReplies[option];
         AdvanceDialogue();
+    }
+
+    private void Collect()
+    {
+        Destroy(gameObject);
+        _uiController.HandleHoverText("Untagged");
+        _uiController.UpdatePageNumber();
     }
 }

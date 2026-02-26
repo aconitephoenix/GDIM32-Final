@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 233295860}
   - component: {fileID: 233295859}
   - component: {fileID: 233295858}
+  - component: {fileID: 233295862}
   m_Layer: 0
   m_Name: Sample Interactable
   m_TagString: Interactable
@@ -539,6 +540,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &233295862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233295857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c5cdc75be5fcb469b145f832c58bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionDistance: 2
+  _uiController: {fileID: 940002242}
+  _name: 
+  _startingNode: {fileID: 0}
 --- !u!1 &250251442
 GameObject:
   m_ObjectHideFlags: 0

@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         HandleMouseLook();
         HandleSprint();
         // temp added this method here for testing -jess
-        LookingAtInteractable();
+        //LookingAtInteractable();
     }
 
     private void FixedUpdate()
@@ -229,6 +229,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Check if player is looking at something they can interact with
+    /*
     private bool LookingAtInteractable()
     { 
         RaycastHit hitInfo;
@@ -262,4 +263,5 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawRay(_raycastStart, _raycastDir * _lineofSightMaxDist);
         Gizmos.DrawSphere(_raycastHitLocation, 0.1f);
     }
+    */
 }

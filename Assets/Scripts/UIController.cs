@@ -20,7 +20,8 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameController.Instance.Player.InteractableDetected += HandleHoverText;
+        //GameController.Instance.Player.InteractableDetected += HandleHoverText;
+        _pagesText.text = "Pages: " + _pageNumber + "/8";
     }
 
     // Update is called once per frame
@@ -35,11 +36,11 @@ public class UIController : MonoBehaviour
         switch (tag)
         {
             case "NPC":
-                _hoverText.text = "Click or Press E to talk";
+                _hoverText.text = "Click to talk";
                 _hoverText.gameObject.SetActive(true);
                 break;
             case "Interactable":
-                _hoverText.text = "Click or Press E to interact";
+                _hoverText.text = "Click to interact";
                 _hoverText.gameObject.SetActive(true);
                 break;
             default:
@@ -93,6 +94,7 @@ public class UIController : MonoBehaviour
 
     public void UpdatePageNumber()
     {
-
+        _pageNumber++;
+        _pagesText.text = "Pages: " + _pageNumber + "/8";
     }
 }
