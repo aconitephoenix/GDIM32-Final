@@ -39,9 +39,10 @@ public class UINPCTest : UIInteractableTest
                 {
                     EndDialogue();
                 }
-            } 
+            }
 
             // Disabling hover text if dialogue is currently playing
+            // otherwise, enable hover text if player is close enough
             if (!_runningDialogue)
             {
                 _uiController.HandleHoverText(gameObject.tag);
@@ -85,6 +86,7 @@ public class UINPCTest : UIInteractableTest
         _uiController.HideDialogue();
     }
 
+    // Which option the player chose
     public void SelectedOption(int option)
     {
         _currentLine = 0;

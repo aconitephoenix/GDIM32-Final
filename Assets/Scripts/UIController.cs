@@ -49,6 +49,7 @@ public class UIController : MonoBehaviour
         }
     }
 
+    // Show dialogue box
     public void ShowDialogue(string dialogue, string name)
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -62,6 +63,7 @@ public class UIController : MonoBehaviour
         _nameText.text = name;
     }
 
+    // Hide dialogue box
     public void HideDialogue()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -71,6 +73,7 @@ public class UIController : MonoBehaviour
         _sprintBar.SetActive(true);
     }
 
+    // Show the player dialogue options
     public void ShowPlayerOptions(string[] options)
     {
         Cursor.lockState = CursorLockMode.None;
@@ -81,6 +84,7 @@ public class UIController : MonoBehaviour
 
         _option1.text = options[0];
 
+        // If there is more than 1 dialogue option, add a second button
         if (options.Length >= 2)
         {
             _option2.transform.parent.gameObject.SetActive(true);
@@ -92,6 +96,7 @@ public class UIController : MonoBehaviour
         }
     }
 
+    // Update page count
     public void UpdatePageNumber()
     {
         _pageNumber++;

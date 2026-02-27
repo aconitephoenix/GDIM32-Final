@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
             //InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
         } else
         {
-            InteractableDetected?.Invoke("Untagged");
+            //InteractableDetected?.Invoke("Untagged");
             _lookingAtInteractable = false;
         }
 

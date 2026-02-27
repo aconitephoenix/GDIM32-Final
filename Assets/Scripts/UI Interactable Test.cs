@@ -8,10 +8,12 @@ public class UIInteractableTest : MonoBehaviour
     [SerializeField] protected float _interactionDistance = 2.0f;
     [SerializeField] protected UIController _uiController;
 
+    private bool _collected;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        _collected = false;
     }
 
     // Update is called once per frame
@@ -31,7 +33,15 @@ public class UIInteractableTest : MonoBehaviour
                 Collect();
             }
 
-            _uiController.HandleHoverText(gameObject.tag);
+            // Enable hover text if player is close enough and item has not been collected
+            if (!_collected)
+            {
+                _uiController.HandleHoverText(gameObject.tag);
+            }
+            else
+            {
+                _uiController.HandleHoverText("Untagged");
+            }
         }
     }
 
@@ -41,9 +51,10 @@ public class UIInteractableTest : MonoBehaviour
         _uiController.HandleHoverText("Untagged");
     }
 
+    // Collect the item
     private void Collect()
     {
-        _uiController.HandleHoverText("Untagged");
+        _collected = true;
         _uiController.UpdatePageNumber();
         Destroy(gameObject);
     }
