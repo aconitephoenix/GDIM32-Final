@@ -1508,7 +1508,7 @@ MonoBehaviour:
   _nameText: {fileID: 449528797}
   _option1: {fileID: 250251444}
   _option2: {fileID: 183848291}
-  _typingSpeed: 0.5
+  _typingSpeed: 0.04
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
