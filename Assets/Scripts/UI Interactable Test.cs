@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class UINPCTest : MonoBehaviour
+public class UIInteractableTest : MonoBehaviour
 {
     [SerializeField] private float _interactionDistance = 2.0f;
     [SerializeField] private UIController _uiController;
@@ -27,34 +27,40 @@ public class UINPCTest : MonoBehaviour
         if (GameController.Instance.Player == null) return;
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance)
+        // Checking if player is within interaction distance
+        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance && gameObject != null)
         {
-            if (!_waitingForPlayerResponse && gameObject.CompareTag("NPC"))
+            // Player interaction once they press E or click the mouse
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
             {
-                AdvanceDialogue();
-            } else if (gameObject.CompareTag("Interactable"))
+                if (!_waitingForPlayerResponse && gameObject.CompareTag("NPC"))
+                {
+                    AdvanceDialogue();
+                }
+                else if (gameObject.CompareTag("Interactable"))
+                {
+                    Collect();
+                }
+                else
+                {
+                    EndDialogue();
+                }
+            }
+
+            // Disabling hover text if dialogue is currently playing
+            if (!_runningDialogue)
             {
-                Collect();
+                _uiController.HandleHoverText(gameObject.tag);
             } else
             {
-                EndDialogue();
+                _uiController.HandleHoverText("Untagged");
             }
         }
     }
 
-    private void OnMouseOver()
-    {
-        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance && !_runningDialogue)
-        {
-            _uiController.HandleHoverText(gameObject.tag);
-        } else
-        {
-            _uiController.HandleHoverText("Untagged");
-        }
-    }
-
+    // Disabling hover text once player has looked away from the object
     private void OnMouseExit()
     {
         _uiController.HandleHoverText("Untagged");
@@ -103,8 +109,8 @@ public class UINPCTest : MonoBehaviour
 
     private void Collect()
     {
-        Destroy(gameObject);
         _uiController.HandleHoverText("Untagged");
         _uiController.UpdatePageNumber();
+        Destroy(gameObject);
     }
 }

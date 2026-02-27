@@ -36,11 +36,11 @@ public class UIController : MonoBehaviour
         switch (tag)
         {
             case "NPC":
-                _hoverText.text = "Click to talk";
+                _hoverText.text = "Click or press E to talk";
                 _hoverText.gameObject.SetActive(true);
                 break;
             case "Interactable":
-                _hoverText.text = "Click to interact";
+                _hoverText.text = "Click or press E to interact";
                 _hoverText.gameObject.SetActive(true);
                 break;
             default:

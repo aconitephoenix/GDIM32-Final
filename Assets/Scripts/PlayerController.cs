@@ -118,9 +118,6 @@ public class PlayerController : MonoBehaviour
         //rb player movement
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
         rb.MovePosition(rb.position + move.normalized * currentSpeed * Time.deltaTime);
-
-        
-        
     }
 
     private void HandleJump()
