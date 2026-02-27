@@ -554,8 +554,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDistance: 2
   _uiController: {fileID: 940002242}
-  _name: 
-  _startingNode: {fileID: 0}
 --- !u!1 &250251442
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,10 +937,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 480823269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22c5cdc75be5fcb469b145f832c58bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f6da9b6854ea14438c76c13f3850446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionDistance: 4
+  _interactionDistance: 2
   _uiController: {fileID: 940002242}
   _name: Sample NPC
   _startingNode: {fileID: 11400000, guid: 128d5885bee623d429c2a602abdde7b3, type: 2}
@@ -1163,7 +1161,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 480823274}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UINPCTest, Assembly-CSharp
         m_MethodName: SelectedOption
         m_Mode: 3
@@ -2378,7 +2376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 480823274}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UINPCTest, Assembly-CSharp
         m_MethodName: SelectedOption
         m_Mode: 3

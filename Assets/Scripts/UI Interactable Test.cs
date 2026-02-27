@@ -5,20 +5,13 @@ using UnityEngine;
 
 public class UIInteractableTest : MonoBehaviour
 {
-    [SerializeField] private float _interactionDistance = 2.0f;
-    [SerializeField] private UIController _uiController;
-    [SerializeField] private string _name;
-    [SerializeField] private DialogueNode _startingNode;
-
-    private DialogueNode _currentNode;
-    private int _currentLine = 0;
-    private bool _waitingForPlayerResponse;
-    private bool _runningDialogue;
+    [SerializeField] protected float _interactionDistance = 2.0f;
+    [SerializeField] protected UIController _uiController;
 
     // Start is called before the first frame update
     void Start()
     {
-        _currentNode = _startingNode;
+        
     }
 
     // Update is called once per frame
@@ -27,84 +20,25 @@ public class UIInteractableTest : MonoBehaviour
         if (GameController.Instance.Player == null) return;
     }
 
-    private void OnMouseOver()
+    public virtual void OnMouseOver()
     {
         // Checking if player is within interaction distance
-        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance && gameObject != null)
+        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance)
         {
             // Player interaction once they press E or click the mouse
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
             {
-                if (!_waitingForPlayerResponse && gameObject.CompareTag("NPC"))
-                {
-                    AdvanceDialogue();
-                }
-                else if (gameObject.CompareTag("Interactable"))
-                {
-                    Collect();
-                }
-                else
-                {
-                    EndDialogue();
-                }
+                Collect();
             }
 
-            // Disabling hover text if dialogue is currently playing
-            if (!_runningDialogue)
-            {
-                _uiController.HandleHoverText(gameObject.tag);
-            } else
-            {
-                _uiController.HandleHoverText("Untagged");
-            }
+            _uiController.HandleHoverText(gameObject.tag);
         }
     }
 
     // Disabling hover text once player has looked away from the object
-    private void OnMouseExit()
+    public void OnMouseExit()
     {
         _uiController.HandleHoverText("Untagged");
-    }
-
-    private void AdvanceDialogue()
-    {
-        _runningDialogue = true;
-
-        if (_currentLine < _currentNode._lines.Length)
-        {
-            // keep playing NPC lines if there are still any left
-            _uiController.ShowDialogue(_currentNode._lines[_currentLine], _name);
-            _currentLine++;
-        }
-        else if (_currentNode._playerReplyOptions != null && _currentNode._playerReplyOptions.Length > 0)
-        {
-            // show player dialogue options, if any
-            _waitingForPlayerResponse = true;
-            _uiController.ShowPlayerOptions(_currentNode._playerReplyOptions);
-        }
-        else
-        {
-            // end dialogue if none left
-            EndDialogue();
-        }
-    }
-
-    private void EndDialogue()
-    {
-        _waitingForPlayerResponse = false;
-        _currentNode = _startingNode;
-        _currentLine = 0;
-        _runningDialogue = false;
-        _uiController.HideDialogue();
-    }
-
-    public void SelectedOption(int option)
-    {
-        _currentLine = 0;
-        _waitingForPlayerResponse = false;
-
-        _currentNode = _currentNode._npcReplies[option];
-        AdvanceDialogue();
     }
 
     private void Collect()
