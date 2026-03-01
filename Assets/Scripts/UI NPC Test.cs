@@ -56,24 +56,27 @@ public class UINPCTest : UIInteractableTest
 
     private void AdvanceDialogue()
     {
-        _runningDialogue = true;
+        if (!_uiController._isTyping)
+        {
+            _runningDialogue = true;
 
-        if (_currentLine < _currentNode._lines.Length)
-        {
-            // keep playing NPC lines if there are still any left
-            _uiController.ShowDialogue(_currentNode._lines[_currentLine], _name);
-            _currentLine++;
-        }
-        else if (_currentNode._playerReplyOptions != null && _currentNode._playerReplyOptions.Length > 0)
-        {
-            // show player dialogue options, if any
-            _waitingForPlayerResponse = true;
-            _uiController.ShowPlayerOptions(_currentNode._playerReplyOptions);
-        }
-        else
-        {
-            // end dialogue if none left
-            EndDialogue();
+            if (_currentLine < _currentNode._lines.Length)
+            {
+                // keep playing NPC lines if there are still any left
+                _uiController.ShowDialogue(_currentNode._lines[_currentLine], _name);
+                _currentLine++;
+            }
+            else if (_currentNode._playerReplyOptions != null && _currentNode._playerReplyOptions.Length > 0)
+            {
+                // show player dialogue options, if any
+                _waitingForPlayerResponse = true;
+                _uiController.ShowPlayerOptions(_currentNode._playerReplyOptions);
+            }
+            else
+            {
+                // end dialogue if none left
+                EndDialogue();
+            }
         }
     }
 
@@ -89,10 +92,13 @@ public class UINPCTest : UIInteractableTest
     // Which option the player chose
     public void SelectedOption(int option)
     {
-        _currentLine = 0;
-        _waitingForPlayerResponse = false;
+        if (!_uiController._isTyping)
+        {
+            _currentLine = 0;
+            _waitingForPlayerResponse = false;
 
-        _currentNode = _currentNode._npcReplies[option];
-        AdvanceDialogue();
+            _currentNode = _currentNode._npcReplies[option];
+            AdvanceDialogue();
+        }
     }
 }

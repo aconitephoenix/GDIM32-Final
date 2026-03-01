@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text _dialogueText;
     [SerializeField] private TMP_Text _hoverText;
     [SerializeField] private GameObject _dialogueBox;
+    [SerializeField] private TMP_Text _continueDialogueText;
     [SerializeField] private GameObject _playerOptions;
     [SerializeField] private GameObject _sprintBar;
     [SerializeField] private TMP_Text _nameText;
@@ -17,7 +18,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private float _typingSpeed = 0.04f;
 
     private int _pageNumber = 0;
-    //private Coroutine _typeLineCoroutine;
+    private Coroutine _typeLineCoroutine;
+    public bool _isTyping;
 
     // Start is called before the first frame update
     void Start()
@@ -60,34 +62,42 @@ public class UIController : MonoBehaviour
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(false);
         _hoverText.gameObject.SetActive(false);
-
-        /*
+        _continueDialogueText.gameObject.SetActive(false);
+        
         if (_typeLineCoroutine != null)
         {
             StopCoroutine(_typeLineCoroutine);
         }
 
         _typeLineCoroutine = StartCoroutine(TypeLine(dialogue));
-        */
-
-        _dialogueText.text = dialogue;
 
         _nameText.text = name;
     }
 
     // type dialogue letter by letter
-    /*
     private IEnumerator TypeLine(string dialogue)
     {
-        _dialogueText.text = "";
+        _isTyping = true;
 
-        foreach (char letter in dialogue.ToCharArray())
+        _dialogueText.text = dialogue;
+        _dialogueText.maxVisibleCharacters = 0;
+
+        for (int i = 1; i < dialogue.Length + 1; i++)
         {
-            _dialogueText.text += letter;
+            if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)) && i > 1)
+            {
+                _dialogueText.maxVisibleCharacters = dialogue.Length + 1;
+                break;
+            }
+
+            _dialogueText.maxVisibleCharacters = i;
             yield return new WaitForSeconds(_typingSpeed);
         }
+
+        _isTyping = false;
+        _continueDialogueText.gameObject.SetActive(true);
     }
-    */
+    
 
     // Hide dialogue box
     public void HideDialogue()

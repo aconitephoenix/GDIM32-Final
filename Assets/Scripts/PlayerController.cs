@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 _raycastStartOffset;
     private bool _lookingAtInteractable = false;
 
-    private string _playerTag = "Player";
     private string _npcTag = "NPC";
     private string _interactableTag = "Interactable";
     

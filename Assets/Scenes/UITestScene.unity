@@ -1503,6 +1503,7 @@ MonoBehaviour:
   _dialogueText: {fileID: 52717887}
   _hoverText: {fileID: 551523909}
   _dialogueBox: {fileID: 1868898403}
+  _continueDialogueText: {fileID: 997860644}
   _playerOptions: {fileID: 1782611619}
   _sprintBar: {fileID: 1076870090}
   _nameText: {fileID: 449528797}
