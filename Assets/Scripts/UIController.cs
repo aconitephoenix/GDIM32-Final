@@ -17,7 +17,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private float _typingSpeed = 0.04f;
 
     private int _pageNumber = 0;
-    private Coroutine _typeLineCoroutine;
+    //private Coroutine _typeLineCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -61,16 +61,22 @@ public class UIController : MonoBehaviour
         _sprintBar.SetActive(false);
         _hoverText.gameObject.SetActive(false);
 
+        /*
         if (_typeLineCoroutine != null)
         {
             StopCoroutine(_typeLineCoroutine);
         }
 
         _typeLineCoroutine = StartCoroutine(TypeLine(dialogue));
-        
+        */
+
+        _dialogueText.text = dialogue;
+
         _nameText.text = name;
     }
 
+    // type dialogue letter by letter
+    /*
     private IEnumerator TypeLine(string dialogue)
     {
         _dialogueText.text = "";
@@ -81,6 +87,7 @@ public class UIController : MonoBehaviour
             yield return new WaitForSeconds(_typingSpeed);
         }
     }
+    */
 
     // Hide dialogue box
     public void HideDialogue()
