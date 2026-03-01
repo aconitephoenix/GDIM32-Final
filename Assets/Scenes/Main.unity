@@ -556,12 +556,14 @@ MonoBehaviour:
   _dialogueText: {fileID: 1933019033}
   _hoverText: {fileID: 1819089997}
   _dialogueBox: {fileID: 1249499281}
+  _continueDialogueText: {fileID: 0}
   _playerOptions: {fileID: 87942295}
   _sprintBar: {fileID: 1309480941}
   _nameText: {fileID: 1067690913}
   _option1: {fileID: 1405706619}
   _option2: {fileID: 576667009}
   _typingSpeed: 0.04
+  _isTyping: 0
 --- !u!114 &491677717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1048,7 +1050,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.028735397, y: 0.7784752}
   m_AnchorMax: {x: 0.9785293, y: 0.95052487}
-  m_AnchoredPosition: {x: -0.89190674, y: -1.3619003}
+  m_AnchoredPosition: {x: -0.89190674, y: -1.361908}
   m_SizeDelta: {x: 3.0200195, y: 7.559799}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1249499281
@@ -1241,7 +1243,7 @@ MonoBehaviour:
   moveSpeed: 5
   sprintSpeed: 8
   jumpForce: 5
-  mouseSensitivity: 5
+  mouseSensitivity: 1
   cameraTransform: {fileID: 1877222296}
   maxLookAngle: 80
   normalFOV: 60
