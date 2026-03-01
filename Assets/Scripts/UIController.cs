@@ -84,6 +84,7 @@ public class UIController : MonoBehaviour
 
         for (int i = 1; i < dialogue.Length + 1; i++)
         {
+            // skip to the end of the line (i'll fix this later) -jess
             if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)) && i > 1)
             {
                 _dialogueText.maxVisibleCharacters = dialogue.Length + 1;
