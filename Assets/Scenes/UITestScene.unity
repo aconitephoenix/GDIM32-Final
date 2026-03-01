@@ -722,7 +722,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.028735397, y: 0.7784752}
   m_AnchorMax: {x: 0.9785293, y: 0.95052487}
-  m_AnchoredPosition: {x: -0.89190674, y: -1.3619003}
+  m_AnchoredPosition: {x: -0.89190674, y: -1.361908}
   m_SizeDelta: {x: 3.0200195, y: 7.559799}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &449528797
@@ -1510,6 +1510,7 @@ MonoBehaviour:
   _option1: {fileID: 250251444}
   _option2: {fileID: 183848291}
   _typingSpeed: 0.04
+  _isTyping: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,7 +2033,7 @@ MonoBehaviour:
   moveSpeed: 5
   sprintSpeed: 8
   jumpForce: 1.6
-  mouseSensitivity: 2
+  mouseSensitivity: 1
   cameraTransform: {fileID: 963194228}
   maxLookAngle: 80
   normalFOV: 60

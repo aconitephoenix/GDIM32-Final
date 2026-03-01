@@ -530,6 +530,15 @@ MonoBehaviour:
   _pagesText: {fileID: 0}
   _dialogueText: {fileID: 0}
   _hoverText: {fileID: 0}
+  _dialogueBox: {fileID: 0}
+  _continueDialogueText: {fileID: 0}
+  _playerOptions: {fileID: 0}
+  _sprintBar: {fileID: 0}
+  _nameText: {fileID: 0}
+  _option1: {fileID: 0}
+  _option2: {fileID: 0}
+  _typingSpeed: 0.04
+  _isTyping: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,7 +851,7 @@ MonoBehaviour:
   moveSpeed: 5
   sprintSpeed: 8
   jumpForce: 4
-  mouseSensitivity: 2
+  mouseSensitivity: 1
   cameraTransform: {fileID: 963194228}
   maxLookAngle: 80
   normalFOV: 60
