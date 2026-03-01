@@ -1,5 +1,9 @@
 # GDIM32-Final
 ## Check-In
+### Group Devlog
+Put your group Devlog here.
+
+
 ### Jess Tran
 Put your individual check-in Devlog here.
 ### Kaleb Reyes
