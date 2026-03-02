@@ -26,4 +26,4 @@ Put your individual final Devlog here.
 Put your individual final Devlog here.
 
 ## Open-Source Assets
-[PSX Shader Kit](https://assetstore.unity.com/packages/vfx/shaders/psx-shader-kit-183591) - PSX Shader
+- [PSX Shader Kit](https://assetstore.unity.com/packages/vfx/shaders/psx-shader-kit-183591) - PSX Shader
