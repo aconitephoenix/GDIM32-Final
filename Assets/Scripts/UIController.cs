@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text _continueDialogueText;
     [SerializeField] private GameObject _playerOptions;
     [SerializeField] private GameObject _sprintBar;
+    [SerializeField] private GameObject _crosshair;
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private TMP_Text _option1;
     [SerializeField] private TMP_Text _option2;
@@ -58,6 +59,7 @@ public class UIController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        _crosshair.SetActive(false);
         _dialogueBox.SetActive(true);
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(false);
@@ -105,6 +107,7 @@ public class UIController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        _crosshair.SetActive(true);
         _dialogueBox.SetActive(false);
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(true);

@@ -6,6 +6,20 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    // Player State Machine
+    public enum PlayerState
+    {
+        Normal,      // Can move, interact, and enter cutscenes/dialogue
+        InDialogue,  // Cannot move, camera locked onto npc
+        Cutscene,    // Cannot move, camera controlled by cutscene
+        Disabled     // Debug state - no movement or interactions
+    }
+
+    [Header("State")]
+    [SerializeField] private PlayerState currentState = PlayerState.Normal;
+    // Public property to get current state
+    public PlayerState CurrentState => currentState;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
@@ -47,9 +61,12 @@ public class PlayerController : MonoBehaviour
     public delegate void StringDelegate(string str);
     public event StringDelegate InteractableDetected;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         // Lock and hide cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -81,16 +98,97 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleMovement();
-        HandleMouseLook();
-        HandleSprint();
-        // temp added this method here for testing -jess
-        LookingAtInteractable();
+        // Update behavior based on current state
+        switch (currentState)
+        {
+            case PlayerState.Normal:
+                HandleMovement();
+                HandleMouseLook();
+                HandleSprint();
+                LookingAtInteractable();
+                break;
+
+            case PlayerState.InDialogue:
+                // no movement, camera lerp to npc
+                LookingAtInteractable();
+                LerpToNPC();
+                break;
+
+            case PlayerState.Cutscene:
+                // Camera is controlled by cutscene, no player input
+                break;
+
+            case PlayerState.Disabled:
+                // No interactions or movement
+                break;
+        }
     }
 
     private void FixedUpdate()
     {
-        HandleJump();
+        // Only allow jumping in Normal state
+        if (currentState == PlayerState.Normal)
+        {
+            HandleJump();
+        }
+    }
+
+    // Change the player's state
+    public void SetState(PlayerState newState)
+    {
+        if (currentState == newState) return;
+
+        // Exit current state
+        OnStateExit(currentState);
+        
+        // Change state
+        currentState = newState;
+        
+        // Enter new state
+        OnStateEnter(newState);
+    }
+
+    // Called when entering a new state
+    private void OnStateEnter(PlayerState state)
+    {
+        switch (state)
+        {
+            case PlayerState.Normal:
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                break;
+
+            case PlayerState.InDialogue:
+                // Stop any movement
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                isSprinting = false;
+                break;
+
+            case PlayerState.Cutscene:
+                // Stop all movement and store camera state if needed
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                isSprinting = false;
+                break;
+
+            case PlayerState.Disabled:
+                // Stop all movement
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                isSprinting = false;
+                break;
+        }
+    }
+
+    // Called when exiting a state
+    private void OnStateExit(PlayerState state)
+    {
+        switch (state)
+        {
+            case PlayerState.InDialogue:
+                // Restore camera control to player
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                break;
+        }
     }
 
     private void HandleMovement()
@@ -141,16 +239,41 @@ public class PlayerController : MonoBehaviour
         // Get mouse input
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-        
+
+
         // Rotate player horizontally
         transform.Rotate(Vector3.up * mouseX);
-        
+
         // Rotate camera vertically
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -maxLookAngle, maxLookAngle);
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        
+        
     }
     
+    private void LerpToNPC()
+    {
+        // Raycast to find NPC position
+        RaycastHit hitInfo;
+        if (Physics.Raycast(_raycastStart, _raycastDir, out hitInfo, _lineofSightMaxDist))
+        {
+            if (hitInfo.collider.gameObject.tag.Equals(_npcTag))
+            {
+                Vector3 npcPosition = hitInfo.collider.gameObject.transform.position;
+                Vector3 directionToNPC = (npcPosition - cameraTransform.position).normalized;
+                Quaternion targetRotation = Quaternion.LookRotation(directionToNPC);
+                
+                //slerp player horizontal rotate to npc
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f), fovTransitionSpeed * Time.deltaTime);
+                //slerp camera vertical rotation to npc
+                verticalRotation = targetRotation.eulerAngles.x;
+                cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, Quaternion.Euler(verticalRotation, 0f, 0f), fovTransitionSpeed * Time.deltaTime);
+
+            }
+        }
+    }
+
     private void HandleSprint()
     {        
         // lerp to transition FOV based on sprint state

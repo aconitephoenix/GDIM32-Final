@@ -32,6 +32,8 @@ public class UINPCTest : UIInteractableTest
             // Player interaction once they press E or click the mouse
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
             {
+                GameController.Instance.Player.SetState(PlayerController.PlayerState.InDialogue);
+
                 if (!_waitingForPlayerResponse)
                 {
                     AdvanceDialogue();
@@ -87,6 +89,8 @@ public class UINPCTest : UIInteractableTest
         _currentLine = 0;
         _runningDialogue = false;
         _uiController.HideDialogue();
+        GameController.Instance.Player.SetState(PlayerController.PlayerState.Normal);
+
     }
 
     // Which option the player chose
