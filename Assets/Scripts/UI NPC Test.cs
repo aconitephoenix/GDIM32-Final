@@ -101,8 +101,14 @@ public class UINPCTest : UIInteractableTest
             _currentLine = 0;
             _waitingForPlayerResponse = false;
 
-            _currentNode = _currentNode._npcReplies[option];
-            AdvanceDialogue();
+            if (option < _currentNode._npcReplies.Length)
+            {
+                _currentNode = _currentNode._npcReplies[option];
+                AdvanceDialogue();
+            } else {
+                EndDialogue();
+            }
+                
         }
     }
 }
