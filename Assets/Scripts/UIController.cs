@@ -18,15 +18,15 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text _option2;
     [SerializeField] private float _typingSpeed = 0.04f;
 
-    private int _pageNumber = 0;
     private Coroutine _typeLineCoroutine;
     public bool _isTyping;
+    public bool _questActive;
 
     // Start is called before the first frame update
     void Start()
     {
-        //GameController.Instance.Player.InteractableDetected += HandleHoverText;
-        _pagesText.text = "Pages: " + _pageNumber + "/8";
+        GameController.Instance.Player.PageCollected += UpdatePageNumber;
+        _pagesText.text = "Pages: 0/" + GameController.Instance.Player._maxPageCount;
     }
 
     // Update is called once per frame
@@ -139,7 +139,6 @@ public class UIController : MonoBehaviour
     // Update page count
     public void UpdatePageNumber()
     {
-        _pageNumber++;
-        _pagesText.text = "Pages: " + _pageNumber + "/8";
+        _pagesText.text = "Pages: " + GameController.Instance.Player._currentPageCount + "/" + GameController.Instance.Player._maxPageCount;
     }
 }

@@ -312,6 +312,10 @@ PrefabInstance:
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1417,6 +1421,8 @@ MonoBehaviour:
   _lineofSightMaxDist: 3.01
   _raycastStartOffset: {x: 0, y: 0, z: 0}
   rb: {fileID: 1310158051}
+  _currentPageCount: 0
+  _maxPageCount: 1
 --- !u!136 &1310158047
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1615,6 +1621,7 @@ MonoBehaviour:
   _option2: {fileID: 89319300}
   _typingSpeed: 0.04
   _isTyping: 0
+  _questActive: 0
 --- !u!114 &1363857250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2102,6 +2109,8 @@ MonoBehaviour:
   _uiController: {fileID: 1363857249}
   _name: Slenderman's Understudy
   _startingNode: {fileID: 11400000, guid: bea9e06536c86c3409f1be7caa048889, type: 2}
+  _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
+  _questFinishedNode: {fileID: 11400000, guid: 253d671c4eb27064bb94bc807ec36d69, type: 2}
 --- !u!1 &1682806097
 GameObject:
   m_ObjectHideFlags: 0

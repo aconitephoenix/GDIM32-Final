@@ -11,4 +11,7 @@ public class DialogueNode : ScriptableObject
 
     // player replies correspond with npc replies
     public DialogueNode[] _npcReplies;
+
+    // whether or not this node triggers a quest
+    public bool _questTrigger;
 }

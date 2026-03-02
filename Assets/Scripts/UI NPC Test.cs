@@ -6,6 +6,8 @@ public class UINPCTest : UIInteractableTest
 {
     [SerializeField] private string _name;
     [SerializeField] private DialogueNode _startingNode;
+    [SerializeField] private DialogueNode _questInProgressNode;
+    [SerializeField] private DialogueNode _questFinishedNode;
 
     private DialogueNode _currentNode;
     private int _currentLine = 0;
@@ -34,7 +36,7 @@ public class UINPCTest : UIInteractableTest
             {
                 GameController.Instance.Player.SetState(PlayerController.PlayerState.InDialogue);
 
-                if (!_waitingForPlayerResponse)
+                if (!_waitingForPlayerResponse && _currentNode != _questFinishedNode)
                 {
                     AdvanceDialogue();
                 } else
@@ -43,9 +45,9 @@ public class UINPCTest : UIInteractableTest
                 }
             }
 
-            // Disabling hover text if dialogue is currently playing
+            // Disabling hover text if dialogue is currently playing/quest has been finished
             // otherwise, enable hover text if player is close enough
-            if (!_runningDialogue)
+            if (!_runningDialogue && _currentNode != _questFinishedNode)
             {
                 _uiController.HandleHoverText(gameObject.tag);
             }
@@ -85,7 +87,17 @@ public class UINPCTest : UIInteractableTest
     private void EndDialogue()
     {
         _waitingForPlayerResponse = false;
-        _currentNode = _startingNode;
+        if (_currentNode._questTrigger)
+        {
+            _currentNode = _questInProgressNode;
+        } else if (_currentNode == _questFinishedNode)
+        {
+            _currentNode = _questFinishedNode;
+        }
+        else
+        {
+            _currentNode = _startingNode;
+        }
         _currentLine = 0;
         _runningDialogue = false;
         _uiController.HideDialogue();

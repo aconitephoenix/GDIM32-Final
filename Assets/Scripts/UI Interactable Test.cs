@@ -55,7 +55,7 @@ public class UIInteractableTest : MonoBehaviour
     private void Collect()
     {
         _collected = true;
-        _uiController.UpdatePageNumber();
+        GameController.Instance.Player.CollectPage();
         Destroy(gameObject);
     }
 }

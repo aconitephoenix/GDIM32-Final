@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f618f3d4319444199716e1fed81d86, type: 3}
-  m_Name: CheckInReply2
+  m_Name: QuestInProgressTest
   m_EditorClassIdentifier: 
   _lines:
-  - Ehhhh, worry about the logistics later.
-  - For now, you see that page over there?
-  - Give it to me.
-  - It's part of my job.
+  - So...
+  - Did you get the page?
   _playerReplyOptions:
-  - Is that really all you do?
-  - Okay...
+  - No.......
+  - Yeah, I got it right here
   _npcReplies:
-  - {fileID: 11400000, guid: 592e2d9a407a1a74abfa11faf752bb95, type: 2}
-  _questTrigger: 1
+  - {fileID: 11400000, guid: 7234c6c37907359488db434db898f36f, type: 2}
+  - {fileID: 11400000, guid: 253d671c4eb27064bb94bc807ec36d69, type: 2}
+  _questTrigger: 0

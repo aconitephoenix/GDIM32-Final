@@ -58,10 +58,16 @@ public class PlayerController : MonoBehaviour
     // Variables for Gizmo drawing
     private Vector3 _raycastHitLocation;
 
+    // tracking pages collected
+    public int _currentPageCount = 0;
+    public int _maxPageCount = 1; // this is temp 1 for the check-in -jess
+
     public delegate void StringDelegate(string str);
     public event StringDelegate InteractableDetected;
 
-    
+    public delegate void EmptyDelegate();
+    public event EmptyDelegate PageCollected;
+    public event EmptyDelegate QuestComplete;
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +82,6 @@ public class PlayerController : MonoBehaviour
         // Get camera component
         playerCamera = cameraTransform.GetComponent<Camera>();
         normalFOV = playerCamera.fieldOfView;
-
     }
     
     // Raycasting Methods
@@ -248,8 +253,6 @@ public class PlayerController : MonoBehaviour
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -maxLookAngle, maxLookAngle);
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-        
-        
     }
     
     private void LerpToNPC()
@@ -269,8 +272,18 @@ public class PlayerController : MonoBehaviour
                 //slerp camera vertical rotation to npc
                 verticalRotation = targetRotation.eulerAngles.x;
                 cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, Quaternion.Euler(verticalRotation, 0f, 0f), fovTransitionSpeed * Time.deltaTime);
-
             }
+        }
+    }
+
+    public void CollectPage()
+    {
+        _currentPageCount++;
+        PageCollected?.Invoke();
+
+        if (_currentPageCount == _maxPageCount)
+        {
+            QuestComplete?.Invoke();
         }
     }
 
@@ -344,7 +357,6 @@ public class PlayerController : MonoBehaviour
 
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
         SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);
-
     }
 
     // Check if player is looking at something they can interact with

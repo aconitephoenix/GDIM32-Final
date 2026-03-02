@@ -19,3 +19,4 @@ MonoBehaviour:
   - So take the action and give me that page. Yeah?
   _playerReplyOptions: []
   _npcReplies: []
+  _questTrigger: 1
