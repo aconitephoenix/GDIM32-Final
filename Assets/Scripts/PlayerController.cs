@@ -387,5 +387,6 @@ public class PlayerController : MonoBehaviour
         // Draw ray pointing down to the ground
         Gizmos.color = Color.yellow;
         Gizmos.DrawRay(transform.position, Vector3.down * 1.1f);
+        Gizmos.DrawSphere(transform.position, 0.1f);
     }
 }
