@@ -7,7 +7,7 @@ public class UINPCTest : UIInteractableTest
     [SerializeField] private string _name;
     [SerializeField] private DialogueNode _startingNode;
     [SerializeField] private DialogueNode _questInProgressNode;
-    [SerializeField] private DialogueNode _questFinishedNode;
+    //[SerializeField] private DialogueNode _questFinishedNode;
 
     private DialogueNode _currentNode;
     private int _currentLine = 0;
@@ -36,7 +36,7 @@ public class UINPCTest : UIInteractableTest
             {
                 GameController.Instance.Player.SetState(PlayerController.PlayerState.InDialogue);
 
-                if (!_waitingForPlayerResponse && _currentNode != _questFinishedNode)
+                if (!_waitingForPlayerResponse && (!_currentNode._questComplete || _currentLine < _currentNode._lines.Length))
                 {
                     AdvanceDialogue();
                 } else
@@ -47,7 +47,7 @@ public class UINPCTest : UIInteractableTest
 
             // Disabling hover text if dialogue is currently playing/quest has been finished
             // otherwise, enable hover text if player is close enough
-            if (!_runningDialogue && _currentNode != _questFinishedNode)
+            if (!_runningDialogue && !_currentNode._questComplete)
             {
                 _uiController.HandleHoverText(gameObject.tag);
             }
@@ -90,13 +90,25 @@ public class UINPCTest : UIInteractableTest
         if (_currentNode._questTrigger)
         {
             _currentNode = _questInProgressNode;
-        } else if (_currentNode == _questFinishedNode)
-        {
-            _currentNode = _questFinishedNode;
+            if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount)
+            {
+                _uiController._questActive = false;
+            } else
+            {
+                _uiController._questActive = true;
+            }
         }
         else
         {
-            _currentNode = _startingNode;
+            if (!_currentNode._questComplete)
+            {
+                _currentNode = _startingNode;
+            } else
+            {
+                gameObject.GetComponent<UINPCTest>().enabled = false;
+            }
+
+            _uiController._questActive = false;
         }
         _currentLine = 0;
         _runningDialogue = false;

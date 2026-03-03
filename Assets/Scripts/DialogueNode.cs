@@ -14,4 +14,7 @@ public class DialogueNode : ScriptableObject
 
     // whether or not this node triggers a quest
     public bool _questTrigger;
+
+    // whether or not this node marks the completion of a quest
+    public bool _questComplete;
 }

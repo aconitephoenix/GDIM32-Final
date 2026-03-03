@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lines:
   - Thanks
-  _playerReplyOptions: []
+  - As a reward, you get to feel good about yourself.
+  - Enjoy it.
+  _playerReplyOptions:
+  - ...that's it???
+  - Thanks bro
   _npcReplies: []
   _questTrigger: 0
+  _questComplete: 1

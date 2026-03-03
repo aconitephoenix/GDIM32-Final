@@ -67,7 +67,6 @@ public class PlayerController : MonoBehaviour
 
     public delegate void EmptyDelegate();
     public event EmptyDelegate PageCollected;
-    public event EmptyDelegate QuestComplete;
 
     // Start is called before the first frame update
     void Start()
@@ -280,11 +279,6 @@ public class PlayerController : MonoBehaviour
     {
         _currentPageCount++;
         PageCollected?.Invoke();
-
-        if (_currentPageCount == _maxPageCount)
-        {
-            QuestComplete?.Invoke();
-        }
     }
 
     private void HandleSprint()
@@ -300,7 +294,6 @@ public class PlayerController : MonoBehaviour
             {
                 Sprint -= 0.1f * sprintDuration * Time.deltaTime;
             }
-            
         }
         else
         {
@@ -309,9 +302,7 @@ public class PlayerController : MonoBehaviour
             if (SprintBar.rectTransform.localScale.x <= 1f)
             {
                 Sprint += 0.1f * sprintDuration * Time.deltaTime;
-            }
-
-            
+            }   
         }
 
         // sprintbar coloring and sprint availability

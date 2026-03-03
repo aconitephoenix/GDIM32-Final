@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _pagesText;
+    [SerializeField] public TMP_Text _pagesText;
     [SerializeField] private TMP_Text _dialogueText;
     [SerializeField] private TMP_Text _hoverText;
     [SerializeField] private GameObject _dialogueBox;
@@ -20,7 +20,8 @@ public class UIController : MonoBehaviour
 
     private Coroutine _typeLineCoroutine;
     public bool _isTyping;
-    public bool _questActive;
+    public bool _questActive = false;
+    //public bool _questComplete = false;
 
     // Start is called before the first frame update
     void Start()
@@ -125,7 +126,7 @@ public class UIController : MonoBehaviour
         _option1.text = options[0];
 
         // If there is more than 1 dialogue option, add a second button
-        if (options.Length >= 2)
+        if (options.Length >= 2 && !_questActive)
         {
             _option2.transform.parent.gameObject.SetActive(true);
             _option2.text = options[1];
@@ -140,5 +141,9 @@ public class UIController : MonoBehaviour
     public void UpdatePageNumber()
     {
         _pagesText.text = "Pages: " + GameController.Instance.Player._currentPageCount + "/" + GameController.Instance.Player._maxPageCount;
+        if (GameController.Instance.Player._currentPageCount == GameController.Instance.Player._maxPageCount)
+        {
+            _questActive = false;
+        }
     }
 }
