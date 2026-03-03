@@ -1,0 +1,888 @@
+fileFormatVersion: 2
+guid: 21b6c701617055d4ba32f0d91dd64339
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Freddy--Idle (1)
+      takeName: Freddy--Idle
+      internalID: 1611804828400228412
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Glimpse
+      takeName: Freddy--Glimpse (2)
+      internalID: 6275892415579311928
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--JumpscareFinalPose
+      takeName: Freddy--JumpscareFinalPose
+      internalID: 5884841486732138231
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Jumpscare
+      takeName: Freddy--Jumpscare
+      internalID: -3637249025101285589
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Decloak
+      takeName: Freddy--Decloak
+      internalID: -4040583361291236586
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Idle
+      takeName: Freddy--Idle
+      internalID: -8515617845740019320
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--CPU_ShutdownFinalPose
+      takeName: Freddy--CPU_ShutdownFinalPose
+      internalID: -8709089520895991050
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Charge
+      takeName: Freddy--Charge
+      internalID: 1808525090311163672
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Jumpscare_Intro
+      takeName: Freddy--Jumpscare_Intro
+      internalID: 4609272626240838746
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Glimpse (1)
+      takeName: Freddy--Glimpse (1)
+      internalID: -3478775466959984490
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--ChargePose
+      takeName: Freddy--ChargePose
+      internalID: 4102277984536627741
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Haywire
+      takeName: Freddy--Haywire
+      internalID: -3920284227205517587
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--CPU_Lurch
+      takeName: Freddy--CPU_Lurch
+      internalID: -8685413618515374351
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Decloaked
+      takeName: Freddy--Decloaked
+      internalID: 5441719166605055204
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Glimpse (2)
+      takeName: Freddy--Glimpse
+      internalID: -3529689986513524387
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Shocked
+      takeName: Freddy--Shocked
+      internalID: 5968385275357103552
+      firstFrame: 0
+      lastFrame: 375
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Shutdown
+      takeName: Freddy--Shutdown
+      internalID: 1596808031315683295
+      firstFrame: 0
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--ShutdownFinalPose
+      takeName: Freddy--ShutdownFinalPose
+      internalID: 5019070340475842968
+      firstFrame: 0
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--CPU_Shutdown
+      takeName: Freddy--CPU_Shutdown
+      internalID: -8120145747238763986
+      firstFrame: 0
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Freddy--Charge_old
+      takeName: Freddy--Charge_old
+      internalID: 172714526601909986
+      firstFrame: 0
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: mixamo.com
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Freddy(Clone)
+      parentName: 
+      position: {x: -0.0011436096, y: -0.00049702404, z: -0.00015998438}
+      rotation: {x: 0.031731136, y: -0.27576956, z: -0.027164634, w: 0.9603158}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Body_Geo
+      parentName: Freddy(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Transform_Bn
+      parentName: Freddy(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Root_Bn
+      parentName: Transform_Bn
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Plane_Bn
+      parentName: Root_Bn
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 6.123234e-17, y: 1, z: -6.123234e-17, w: -6.123234e-17}
+      scale: {x: 1, y: 1e-12, z: 1}
+    - name: Hip_Bn
+      parentName: Root_Bn
+      position: {x: -0, y: 0.007558483, z: -0.0005221324}
+      rotation: {x: -0.028000224, y: 0.2758864, z: 0.02659633, w: 0.9604141}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: L_Leg_01_Bn
+      parentName: Hip_Bn
+      position: {x: -0.0010217681, y: -0.000076367214, z: -0.00015186741}
+      rotation: {x: -0.013132752, y: 0.013132813, z: 0.7069848, w: 0.7069848}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1}
+    - name: L_Knee_Bn
+      parentName: L_Leg_01_Bn
+      position: {x: -0.003540448, y: 8.179625e-14, z: 1.2434497e-18}
+      rotation: {x: -0.00000008940697, y: -0.043619454, z: -0.000000018626451, w: 0.9990483}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Leg_02_Bn
+      parentName: L_Leg_01_Bn
+      position: {x: -0.003540448, y: 8.1796434e-14, z: 1.1546318e-18}
+      rotation: {x: -0.000000067055225, y: -0.043619417, z: 0.000000010477379, w: 0.99904823}
+      scale: {x: 0.9999998, y: 1, z: 0.9999999}
+    - name: L_Leg_03_Bn
+      parentName: L_Leg_02_Bn
+      position: {x: -0.0026573765, y: -8.1792707e-14, z: 4.440892e-19}
+      rotation: {x: -0, y: -0, z: 2.220446e-16, w: 1}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000002}
+    - name: R_Leg_01_Bn
+      parentName: Hip_Bn
+      position: {x: 0.00102177, y: -0.00007636354, z: -0.0001518676}
+      rotation: {x: -0.7069848, y: 0.7069848, z: -0.013132761, w: -0.013132784}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000002}
+    - name: R_Knee_Bn
+      parentName: R_Leg_01_Bn
+      position: {x: 0.0035404523, y: -7.148362e-14, z: -3.2291256e-10}
+      rotation: {x: -0.000000014901161, y: -0.0436194, z: -0, w: 0.99904823}
+      scale: {x: 0.9999999, y: 1, z: 1.0000001}
+    - name: R_Leg_02_Bn
+      parentName: R_Leg_01_Bn
+      position: {x: 0.0035404523, y: -7.1483794e-14, z: -3.2291256e-10}
+      rotation: {x: 0.000000008381903, y: -0.043619387, z: -0, w: 0.99904823}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000008}
+    - name: R_Leg_03_Bn
+      parentName: R_Leg_02_Bn
+      position: {x: 0.0026573767, y: 7.1487704e-14, z: 1.324371e-12}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.99999994}
+    - name: Spine_Bn
+      parentName: Hip_Bn
+      position: {x: 0.0000041686703, y: 0.00030941117, z: -0.000011771507}
+      rotation: {x: -0.000000009313226, y: -0, z: 6.661338e-16, w: 1}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    - name: L_Clavicle_Bn
+      parentName: Spine_Bn
+      position: {x: -0.00052904995, y: 0.003912371, z: -0.00021139975}
+      rotation: {x: 0.9999335, y: -0.0011389795, z: -0.011476078, w: 0.000013070179}
+      scale: {x: 1.0000001, y: 1.0000006, z: 1.0000005}
+    - name: L_Arm_01_Bn
+      parentName: L_Clavicle_Bn
+      position: {x: -0.0017025077, y: -4.263256e-18, z: 6.2172487e-19}
+      rotation: {x: -0.000000026077032, y: 4.0745363e-10, z: -0.000000022351742, w: 1}
+      scale: {x: 0.99999976, y: 0.9999997, z: 0.9999998}
+    - name: L_Arm_02_Bn
+      parentName: L_Arm_01_Bn
+      position: {x: -0.002535565, y: 8.526512e-18, z: -6.661338e-18}
+      rotation: {x: 0.000000018626453, y: -0.00000003055902, z: -0.0000000018626422, w: 1}
+      scale: {x: 1.0000006, y: 1.0000002, z: 0.99999994}
+    - name: L_Arm_03_Bn
+      parentName: L_Arm_02_Bn
+      position: {x: -0.0019985968, y: 5.6843417e-18, z: 3.197442e-18}
+      rotation: {x: -0, y: -0, z: 1.409468e-17, w: 1}
+      scale: {x: 1, y: 0.9999998, z: 0.9999998}
+    - name: Neck_Bn
+      parentName: Spine_Bn
+      position: {x: -0.0000049834894, y: 0.003988356, z: -0.0001637432}
+      rotation: {x: 0.0000000037252907, y: -0, z: -0.000000002793968, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Head_Bn
+      parentName: Neck_Bn
+      position: {x: 0.0000080159225, y: 0.0015412425, z: 0.00019320475}
+      rotation: {x: 0.000000005587936, y: -0, z: 0.0000000037252907, w: 1}
+      scale: {x: 1, y: 1, z: 0.9999999}
+    - name: Jaw_Bn
+      parentName: Head_Bn
+      position: {x: -0, y: -0.00006139587, z: 0.00018959872}
+      rotation: {x: -0, y: -1.6543614e-24, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: L_Ear_Bn
+      parentName: Head_Bn
+      position: {x: -0.0014340853, y: 0.0018161761, z: 0.00022470993}
+      rotation: {x: -0.000000005501479, y: -0.00000006058381, z: -0.17522843, w: 0.9845278}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: L_Eye_Bn
+      parentName: Head_Bn
+      position: {x: -0.00055092626, y: 0.0011246755, z: 0.0006821612}
+      rotation: {x: -0, y: -1.6543614e-24, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: L_LowerLid_Bn
+      parentName: Head_Bn
+      position: {x: -0.00055092626, y: 0.0011246755, z: 0.0006821612}
+      rotation: {x: -0, y: -1.6543614e-24, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: L_UpperLid_Bn
+      parentName: Head_Bn
+      position: {x: -0.00055092626, y: 0.0011246755, z: 0.0006821612}
+      rotation: {x: -0, y: -1.6543614e-24, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: R_Ear_Bn
+      parentName: Head_Bn
+      position: {x: 0.0014340888, y: 0.0018162067, z: 0.00022471037}
+      rotation: {x: 0.9845279, y: 0.17522839, z: 0.000000011872236, w: 0.0000000128944215}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Eye_Bn
+      parentName: Head_Bn
+      position: {x: 0.00053562806, y: 0.001128507, z: 0.0006784423}
+      rotation: {x: 0.00036004372, y: -0.0049005155, z: 0.0000000019082962, w: 0.99998796}
+      scale: {x: 1.0000001, y: 1, z: 0.9999999}
+    - name: R_LowerLid_Bn
+      parentName: Head_Bn
+      position: {x: 0.00053562806, y: 0.001128507, z: 0.0006784423}
+      rotation: {x: -0.0000000018626454, y: 3.1225026e-17, z: -1.3570936e-25, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: R_UpperLid_Bn
+      parentName: Head_Bn
+      position: {x: 0.00053562806, y: 0.001128507, z: 0.0006784423}
+      rotation: {x: -0.0000000018626454, y: 3.1225026e-17, z: -1.3570936e-25, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: R_Clavicle_Bn
+      parentName: Spine_Bn
+      position: {x: 0.0005290503, y: 0.003912405, z: -0.00021140008}
+      rotation: {x: -0.000013073906, y: -0.011476071, z: 0.0011389721, w: 0.99993354}
+      scale: {x: 1, y: 1.0000002, z: 1.0000002}
+    - name: R_Arm_01_Bn
+      parentName: R_Clavicle_Bn
+      position: {x: 0.0017025037, y: -0.000000078457525, z: 5.174378e-10}
+      rotation: {x: 0.000000007450581, y: -0, z: 9.313226e-10, w: 1}
+      scale: {x: 0.9999998, y: 1, z: 0.99999976}
+    - name: R_Arm_02_Bn
+      parentName: R_Arm_01_Bn
+      position: {x: 0.0025355644, y: 0.00000002375489, z: 2.784004e-10}
+      rotation: {x: -0.000000014901161, y: -0.000000059604645, z: -0.000000016763806, w: 1}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000002}
+    - name: R_Arm_03_Bn
+      parentName: R_Arm_02_Bn
+      position: {x: 0.0019986012, y: -0.00000001754207, z: -1.4906498e-10}
+      rotation: {x: -0, y: -0, z: -8.881784e-16, w: 1}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
