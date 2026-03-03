@@ -27,3 +27,4 @@ Put your individual final Devlog here.
 
 ## Open-Source Assets
 - [PSX Shader Kit](https://assetstore.unity.com/packages/vfx/shaders/psx-shader-kit-183591) - PSX Shader
+- [Real Stars Skybox Lite](https://assetstore.unity.com/packages/3d/environments/sci-fi/real-stars-skybox-lite-116333) - Skybox Texture
