@@ -2110,7 +2110,6 @@ MonoBehaviour:
   _name: Slenderman's Understudy
   _startingNode: {fileID: 11400000, guid: bea9e06536c86c3409f1be7caa048889, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
-  _questFinishedNode: {fileID: 11400000, guid: 253d671c4eb27064bb94bc807ec36d69, type: 2}
 --- !u!1 &1682806097
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,7 +2324,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.980011, y: -19.990005}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 7.2013, y: 7.2013}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1877222293
