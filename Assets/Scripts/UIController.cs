@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class UIController : MonoBehaviour
 {
@@ -17,6 +19,10 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text _option1;
     [SerializeField] private TMP_Text _option2;
     [SerializeField] private float _typingSpeed = 0.04f;
+    [SerializeField] private Button dialoguebutton1;
+    [SerializeField] private Button dialoguebutton2;
+
+    public GameObject CurrentNPC;
 
     private Coroutine _typeLineCoroutine;
     public bool _isTyping;
@@ -27,6 +33,7 @@ public class UIController : MonoBehaviour
     void Start()
     {
         GameController.Instance.Player.PageCollected += UpdatePageNumber;
+        GameController.Instance.Player.NPCDetected += SetNPC;
         _pagesText.text = "Pages: 0/" + GameController.Instance.Player._maxPageCount;
     }
 
@@ -34,6 +41,11 @@ public class UIController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetNPC(GameObject npc)
+    {
+        CurrentNPC = npc;
     }
 
     // Display text when player hovers over objects
@@ -89,12 +101,14 @@ public class UIController : MonoBehaviour
         _dialogueText.text = dialogue;
         _dialogueText.maxVisibleCharacters = 0;
 
-        for (int i = 1; i < dialogue.Length + 1; i++)
+        for (int i = 0; i < dialogue.Length + 1; i++)
         {
             // skip to the end of the line (i'll fix this later) -jess
-            if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)) && i > 1)
+            if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)) && _isTyping && i > 0)
             {
                 _dialogueText.maxVisibleCharacters = dialogue.Length + 1;
+                _isTyping = false;
+                _continueDialogueText.gameObject.SetActive(true);
                 break;
             }
 
@@ -116,6 +130,9 @@ public class UIController : MonoBehaviour
         _dialogueBox.SetActive(false);
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(true);
+        //remove all listeners here
+        dialoguebutton1.onClick.RemoveAllListeners();
+        dialoguebutton2.onClick.RemoveAllListeners();
     }
 
     // Show the player dialogue options
@@ -126,6 +143,10 @@ public class UIController : MonoBehaviour
         _playerOptions.SetActive(true);
         _sprintBar.SetActive(false);
         _hoverText.gameObject.SetActive(false);
+        dialoguebutton1.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(0); });
+        dialoguebutton2.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(0); });
+
+
 
         _option1.text = options[0];
 
@@ -134,6 +155,10 @@ public class UIController : MonoBehaviour
         {
             _option2.transform.parent.gameObject.SetActive(true);
             _option2.text = options[1];
+            dialoguebutton1.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(1); });
+            dialoguebutton2.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(1); });
+
+
         }
         else
         {

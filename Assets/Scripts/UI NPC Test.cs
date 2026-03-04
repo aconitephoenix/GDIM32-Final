@@ -7,17 +7,18 @@ public class UINPCTest : UIInteractableTest
     [SerializeField] private string _name;
     public DialogueNode _startingNode;
     [SerializeField] private DialogueNode _questInProgressNode;
-    //[SerializeField] private DialogueNode _questFinishedNode;
 
     private DialogueNode _currentNode;
     private int _currentLine = 0;
     private bool _waitingForPlayerResponse;
     private bool _runningDialogue;
+    private bool _canContinue;
 
     // Start is called before the first frame update
     void Start()
     {
         _currentNode = _startingNode;
+        _canContinue = true;
     }
 
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class UINPCTest : UIInteractableTest
                 if (!_waitingForPlayerResponse && (!_currentNode._questComplete || _currentLine < _currentNode._lines.Length))
                 {
                     AdvanceDialogue();
-                } else
+                } else if (_canContinue)
                 {
                     EndDialogue();
                 }
@@ -69,17 +70,20 @@ public class UINPCTest : UIInteractableTest
                 // keep playing NPC lines if there are still any left
                 _uiController.ShowDialogue(_currentNode._lines[_currentLine], _name);
                 _currentLine++;
+                _canContinue = true;
             }
             else if (_currentNode._playerReplyOptions != null && _currentNode._playerReplyOptions.Length > 0)
             {
                 // show player dialogue options, if any
                 _waitingForPlayerResponse = true;
                 _uiController.ShowPlayerOptions(_currentNode._playerReplyOptions);
+                _canContinue = false;
             }
             else
             {
                 // end dialogue if none left
                 EndDialogue();
+                _canContinue = true;
             }
         }
     }
@@ -105,6 +109,7 @@ public class UINPCTest : UIInteractableTest
                 _currentNode = _startingNode;
             } else
             {
+                _canContinue = false;
                 gameObject.GetComponent<UINPCTest>().enabled = false;
             }
 
@@ -124,6 +129,7 @@ public class UINPCTest : UIInteractableTest
         {
             _currentLine = 0;
             _waitingForPlayerResponse = false;
+            _canContinue = true;
 
             if (option < _currentNode._npcReplies.Length)
             {
