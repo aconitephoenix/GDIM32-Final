@@ -49,6 +49,10 @@ public class UIController : MonoBehaviour
                 _hoverText.text = "Click or press E to interact";
                 _hoverText.gameObject.SetActive(true);
                 break;
+            case "Door":
+                _hoverText.text = "Click or press E to enter";
+                _hoverText.gameObject.SetActive(true);
+                break;
             default:
                 _hoverText.gameObject.SetActive(false);
                 break;

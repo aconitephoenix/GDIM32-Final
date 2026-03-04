@@ -5,7 +5,7 @@ using UnityEngine;
 public class UINPCTest : UIInteractableTest
 {
     [SerializeField] private string _name;
-    [SerializeField] private DialogueNode _startingNode;
+    public DialogueNode _startingNode;
     [SerializeField] private DialogueNode _questInProgressNode;
     //[SerializeField] private DialogueNode _questFinishedNode;
 

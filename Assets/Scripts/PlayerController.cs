@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
     private string _npcTag = "NPC";
     private string _interactableTag = "Interactable";
+    private string _doorTag = "Door";
     
     [SerializeField] private Rigidbody rb;
     private Camera playerCamera;
@@ -359,7 +360,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(_raycastStart, _raycastDir, out hitInfo, _lineofSightMaxDist))
         {
             _raycastHitLocation = hitInfo.point;
-            if (hitInfo.collider.gameObject.tag.Equals(_interactableTag) || hitInfo.collider.gameObject.tag.Equals(_npcTag))
+            if (hitInfo.collider.gameObject.tag.Equals(_interactableTag) || hitInfo.collider.gameObject.tag.Equals(_npcTag) || hitInfo.collider.gameObject.tag.Equals(_doorTag))
             {
                 _lookingAtInteractable = true;
             }
