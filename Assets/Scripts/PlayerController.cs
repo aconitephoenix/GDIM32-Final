@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     public delegate void EmptyDelegate();
     public event EmptyDelegate PageCollected;
+
     public delegate void SetNPCDelegate(GameObject npc);
     public event SetNPCDelegate NPCDetected;
 
@@ -269,7 +270,6 @@ public class PlayerController : MonoBehaviour
                 Vector3 directionToNPC = (npcPosition - cameraTransform.position).normalized;
                 Quaternion targetRotation = Quaternion.LookRotation(directionToNPC);
                 NPCDetected?.Invoke(hitInfo.collider.gameObject);
-                
 
                 //slerp player horizontal rotate to npc
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f), fovTransitionSpeed * Time.deltaTime);

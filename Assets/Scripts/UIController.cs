@@ -19,15 +19,14 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text _option1;
     [SerializeField] private TMP_Text _option2;
     [SerializeField] private float _typingSpeed = 0.04f;
-    [SerializeField] private Button dialoguebutton1;
-    [SerializeField] private Button dialoguebutton2;
+    [SerializeField] private Button _dialogueButton1;
+    [SerializeField] private Button _dialogueButton2;
 
     public GameObject CurrentNPC;
 
     private Coroutine _typeLineCoroutine;
     public bool _isTyping;
     public bool _questActive = false;
-    //public bool _questComplete = false;
 
     // Start is called before the first frame update
     void Start()
@@ -131,8 +130,8 @@ public class UIController : MonoBehaviour
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(true);
         //remove all listeners here
-        dialoguebutton1.onClick.RemoveAllListeners();
-        dialoguebutton2.onClick.RemoveAllListeners();
+        _dialogueButton1.onClick.RemoveAllListeners();
+        _dialogueButton2.onClick.RemoveAllListeners();
     }
 
     // Show the player dialogue options
@@ -143,10 +142,7 @@ public class UIController : MonoBehaviour
         _playerOptions.SetActive(true);
         _sprintBar.SetActive(false);
         _hoverText.gameObject.SetActive(false);
-        dialoguebutton1.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(0); });
-        dialoguebutton2.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(0); });
-
-
+        _dialogueButton1.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(0); });
 
         _option1.text = options[0];
 
@@ -155,10 +151,7 @@ public class UIController : MonoBehaviour
         {
             _option2.transform.parent.gameObject.SetActive(true);
             _option2.text = options[1];
-            dialoguebutton1.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(1); });
-            dialoguebutton2.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(1); });
-
-
+            _dialogueButton2.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(1); });
         }
         else
         {
