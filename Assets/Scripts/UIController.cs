@@ -97,12 +97,14 @@ public class UIController : MonoBehaviour
         _dialogueText.text = dialogue;
         _dialogueText.maxVisibleCharacters = 0;
 
-        for (int i = 1; i < dialogue.Length + 1; i++)
+        for (int i = 0; i < dialogue.Length + 1; i++)
         {
             // skip to the end of the line (i'll fix this later) -jess
-            if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)) && i > 1)
+            if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)) && _isTyping && i > 0)
             {
                 _dialogueText.maxVisibleCharacters = dialogue.Length + 1;
+                _isTyping = false;
+                _continueDialogueText.gameObject.SetActive(true);
                 break;
             }
 
