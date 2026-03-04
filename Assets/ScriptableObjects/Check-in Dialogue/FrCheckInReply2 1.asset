@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f618f3d4319444199716e1fed81d86, type: 3}
+  m_Name: FrCheckInReply2 1
+  m_EditorClassIdentifier: 
+  _lines:
+  - harhar
+  - har
+  - ok.
+  - hi
+  _playerReplyOptions:
+  - wow...
+  - ??????
+  _npcReplies:
+  - {fileID: 11400000, guid: 592e2d9a407a1a74abfa11faf752bb95, type: 2}
+  _questTrigger: 1
+  _questComplete: 0

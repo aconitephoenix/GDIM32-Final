@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour
 
     public delegate void EmptyDelegate();
     public event EmptyDelegate PageCollected;
+    public delegate void SetNPCDelegate(GameObject npc);
+    public event SetNPCDelegate NPCDetected;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +84,7 @@ public class PlayerController : MonoBehaviour
         playerCamera = cameraTransform.GetComponent<Camera>();
         normalFOV = playerCamera.fieldOfView;
     }
-    
+
     // Raycasting Methods
     // Vector setting Ray start position to camera's world space position
     private Vector3 _raycastStart {
@@ -265,7 +267,9 @@ public class PlayerController : MonoBehaviour
                 Vector3 npcPosition = hitInfo.collider.gameObject.transform.position;
                 Vector3 directionToNPC = (npcPosition - cameraTransform.position).normalized;
                 Quaternion targetRotation = Quaternion.LookRotation(directionToNPC);
+                NPCDetected?.Invoke(hitInfo.collider.gameObject);
                 
+
                 //slerp player horizontal rotate to npc
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f), fovTransitionSpeed * Time.deltaTime);
                 //slerp camera vertical rotation to npc
