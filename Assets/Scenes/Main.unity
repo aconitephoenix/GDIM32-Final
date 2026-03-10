@@ -615,7 +615,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1645463882}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UINPCTest, Assembly-CSharp
         m_MethodName: SelectedOption
         m_Mode: 3
@@ -2860,7 +2860,7 @@ GameObject:
   - component: {fileID: 1645463880}
   - component: {fileID: 1645463879}
   - component: {fileID: 1645463878}
-  - component: {fileID: 1645463882}
+  - component: {fileID: 1645463883}
   m_Layer: 0
   m_Name: Random NPC
   m_TagString: NPC
@@ -2954,7 +2954,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1645463882
+--- !u!114 &1645463883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

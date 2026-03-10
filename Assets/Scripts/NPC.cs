@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class NPC : Interactable
 {
-    [SerializeField] private string _name;
+    [SerializeField] protected string _name;
     public DialogueNode _startingNode;
-    [SerializeField] private DialogueNode _questInProgressNode;
+    [SerializeField] protected DialogueNode _questInProgressNode;
 
-    private DialogueNode _currentNode;
-    private int _currentLine = 0;
-    private bool _waitingForPlayerResponse;
-    private bool _runningDialogue;
-    private bool _canContinue;
+    protected DialogueNode _currentNode;
+    protected int _currentLine = 0;
+    protected bool _waitingForPlayerResponse;
+    protected bool _runningDialogue;
+    protected bool _canContinue;
+    protected bool _questComplete;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         _currentNode = _startingNode;
         _canContinue = true;
+        _questComplete = false;
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         if (GameController.Instance.Player == null) return;
     }
@@ -59,7 +61,7 @@ public class NPC : Interactable
         }
     }
 
-    private void AdvanceDialogue()
+    protected void AdvanceDialogue()
     {
         if (!_uiController._isTyping)
         {
@@ -88,13 +90,13 @@ public class NPC : Interactable
         }
     }
 
-    private void EndDialogue()
+    protected void EndDialogue()
     {
         _waitingForPlayerResponse = false;
         if (_currentNode._questTrigger)
         {
             _currentNode = _questInProgressNode;
-            if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount)
+            if (QuestCheck())
             {
                 _uiController._questActive = false;
             } else
@@ -139,5 +141,21 @@ public class NPC : Interactable
                 EndDialogue();
             }
         }
+    }
+
+    // Check if NPC quest is complete
+    public virtual bool QuestCheck()
+    {
+        //temporarily put this here as i figure out inheritance -jess
+        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount)
+        {
+            _questComplete = true;
+        }
+        else
+        {
+            _questComplete = false;
+        }
+
+        return _questComplete;
     }
 }

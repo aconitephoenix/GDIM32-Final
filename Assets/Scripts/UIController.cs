@@ -77,7 +77,10 @@ public class UIController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _crosshair.SetActive(false);
-        _compass.SetActive(false);
+        if (_compass != null)
+        {
+            _compass.SetActive(false);
+        }
         _dialogueBox.SetActive(true);
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(false);
@@ -128,7 +131,10 @@ public class UIController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _crosshair.SetActive(true);
-        _compass.SetActive(true);
+        if (_compass != null)
+        {
+            _compass.SetActive(true);
+        }
         _dialogueBox.SetActive(false);
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(true);
