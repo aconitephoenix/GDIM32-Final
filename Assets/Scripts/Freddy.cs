@@ -9,6 +9,8 @@ public class Freddy : NPC
         IsInteractable, IsJumpscaring, IsMoving
     }
 
+    [SerializeField] private float _movementSpeed = 2.0f;
+
     private FreddyState _state;
 
     // Start is called before the first frame update
@@ -16,7 +18,7 @@ public class Freddy : NPC
     {
         base.Start();
         //setting this just for dialogue testing purposes -jess
-        _state = FreddyState.IsMoving;
+        _state = FreddyState.IsInteractable;
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class Freddy : NPC
         UpdateBehavior();
     }
 
+    // Update Freddy's state
     private void UpdateState()
     {
         if (QuestCheck())
@@ -39,6 +42,7 @@ public class Freddy : NPC
     {
         if (_state == FreddyState.IsInteractable)
         {
+            // If Freddy is currently interactable, do normal NPC interaction
             base.OnMouseOver();
         } else
         {
@@ -51,18 +55,19 @@ public class Freddy : NPC
         switch (_state)
         {
             case FreddyState.IsInteractable:
-                base.OnMouseOver();
+                _movementSpeed = 0.0f;
                 break;
             case FreddyState.IsJumpscaring:
                 break;
             case FreddyState.IsMoving:
+                _movementSpeed = 2.0f;
                 break;
         }
     }
 
     public override bool QuestCheck()
     {
-        if (GameController.Instance.Player._currentPageCount == GameController.Instance.Player._maxPageCount - 1)
+        if (GameController.Instance.Player._currentPageCount == GameController.Instance.Player._maxPageCount - 1 && GameController.Instance.Player._currentPageCount > 0)
         {
             _questComplete = true;
         } else

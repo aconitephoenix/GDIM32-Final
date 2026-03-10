@@ -1131,7 +1131,6 @@ GameObject:
   - component: {fileID: 513277823}
   - component: {fileID: 513277822}
   - component: {fileID: 513277821}
-  - component: {fileID: 513277820}
   - component: {fileID: 513277825}
   m_Layer: 0
   m_Name: Freddy
@@ -1140,23 +1139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &513277820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513277819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f6da9b6854ea14438c76c13f3850446, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactionDistance: 3
-  _uiController: {fileID: 1363857249}
-  _name: Freddy
-  _startingNode: {fileID: 11400000, guid: 3baa708490b3ae2488c4d0fcfda4a911, type: 2}
-  _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
 --- !u!65 &513277821
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1259,7 +1241,8 @@ MonoBehaviour:
   _uiController: {fileID: 1363857249}
   _name: Freddy
   _startingNode: {fileID: 11400000, guid: 3baa708490b3ae2488c4d0fcfda4a911, type: 2}
-  _questInProgressNode: {fileID: 0}
+  _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
+  _movementSpeed: 2
 --- !u!1 &617533742
 GameObject:
   m_ObjectHideFlags: 0
