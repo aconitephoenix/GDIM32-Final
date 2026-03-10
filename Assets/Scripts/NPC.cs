@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UINPCTest : UIInteractableTest
+public class NPC : Interactable
 {
     [SerializeField] private string _name;
     public DialogueNode _startingNode;
@@ -110,7 +110,7 @@ public class UINPCTest : UIInteractableTest
             } else
             {
                 _canContinue = false;
-                gameObject.GetComponent<UINPCTest>().enabled = false;
+                gameObject.GetComponent<NPC>().enabled = false;
             }
 
             _uiController._questActive = false;

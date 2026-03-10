@@ -6,7 +6,7 @@ public class DialogueController : MonoBehaviour
 {
     private DialogueNode _activeDialogue;
 
-    public void SetActiveNpc(UINPCTest npc) 
+    public void SetActiveNpc(NPC npc) 
     {
         _activeDialogue = npc._startingNode;
     }

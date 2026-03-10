@@ -6,10 +6,6 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; }
     public PlayerController Player { get; private set; }
-    
-    public UIController UIController { get; private set; }
-
-
 
     //Setting up player locator
     private void Awake()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class UIInteractableTest : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
     [SerializeField] protected float _interactionDistance = 2.0f;
     [SerializeField] protected UIController _uiController;

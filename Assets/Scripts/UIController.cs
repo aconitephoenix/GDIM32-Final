@@ -145,7 +145,7 @@ public class UIController : MonoBehaviour
         _playerOptions.SetActive(true);
         _sprintBar.SetActive(false);
         _hoverText.gameObject.SetActive(false);
-        _dialogueButton1.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(0); });
+        _dialogueButton1.onClick.AddListener(delegate { CurrentNPC.GetComponent<NPC>().SelectedOption(0); });
 
         _option1.text = options[0];
 
@@ -154,7 +154,7 @@ public class UIController : MonoBehaviour
         {
             _option2.transform.parent.gameObject.SetActive(true);
             _option2.text = options[1];
-            _dialogueButton2.onClick.AddListener(delegate { CurrentNPC.GetComponent<UINPCTest>().SelectedOption(1); });
+            _dialogueButton2.onClick.AddListener(delegate { CurrentNPC.GetComponent<NPC>().SelectedOption(1); });
         }
         else
         {
