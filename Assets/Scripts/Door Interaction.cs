@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorInteraction : UIInteractableTest
+public class DoorInteraction : Interactable
 {
     [SerializeField] private Transform _destination;
     [SerializeField] private Vector3 _offset;
