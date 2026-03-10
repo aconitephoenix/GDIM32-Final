@@ -264,7 +264,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hitInfo;
         if (Physics.Raycast(_raycastStart, _raycastDir, out hitInfo, _lineofSightMaxDist))
         {
-            if (hitInfo.collider.gameObject.tag.Equals(_npcTag))
+            if (hitInfo.collider.gameObject.tag.Equals(_npcTag) && hitInfo.collider.gameObject.GetComponent<NPC>().enabled == true)
             {
                 Vector3 npcPosition = hitInfo.collider.gameObject.transform.position;
                 Vector3 directionToNPC = (npcPosition - cameraTransform.position).normalized;

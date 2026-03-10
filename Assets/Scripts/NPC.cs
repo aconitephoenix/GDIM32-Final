@@ -32,7 +32,7 @@ public class NPC : Interactable
     public override void OnMouseOver()
     {
         // Checking if player is within interaction distance
-        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance)
+        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance && gameObject.GetComponent<NPC>().enabled == true)
         {
             // Player interaction once they press E or click the mouse
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
@@ -63,7 +63,7 @@ public class NPC : Interactable
 
     protected void AdvanceDialogue()
     {
-        if (!_uiController._isTyping)
+        if (!_uiController._isTyping && gameObject.GetComponent<NPC>().enabled == true)
         {
             _runningDialogue = true;
 
@@ -137,7 +137,8 @@ public class NPC : Interactable
             {
                 _currentNode = _currentNode._npcReplies[option];
                 AdvanceDialogue();
-            } else {
+            } else 
+            {
                 EndDialogue();
             }
         }
@@ -155,7 +156,7 @@ public class NPC : Interactable
         {
             _questComplete = false;
         }
-
+        
         return _questComplete;
     }
 }
