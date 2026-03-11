@@ -7,20 +7,20 @@ public class NPC : Interactable
     [SerializeField] protected string _name;
     public DialogueNode _startingNode;
     [SerializeField] protected DialogueNode _questInProgressNode;
+    [SerializeField] protected AudioClip _dialogueAudioClip;
 
     protected DialogueNode _currentNode;
     protected int _currentLine = 0;
     protected bool _waitingForPlayerResponse;
     protected bool _runningDialogue;
     protected bool _canContinue;
-    protected bool _questComplete;
 
     // Start is called before the first frame update
     public virtual void Start()
     {
         _currentNode = _startingNode;
         _canContinue = true;
-        _questComplete = false;
+        GameController.Instance.Player.PageCollected += QuestCheck;
     }
 
     // Update is called once per frame
@@ -42,6 +42,16 @@ public class NPC : Interactable
                 if (!_waitingForPlayerResponse && (!_currentNode._questComplete || _currentLine < _currentNode._lines.Length))
                 {
                     AdvanceDialogue();
+                    if (_uiController._dialogueAudioController != null)
+                    {
+                        if (_dialogueAudioClip != null)
+                        {
+                            _uiController._dialogueAudioController.clip = _dialogueAudioClip;
+                        } else
+                        {
+                            _uiController._dialogueAudioController.clip = null;
+                        }
+                    }
                 } else if (_canContinue)
                 {
                     EndDialogue();
@@ -96,13 +106,7 @@ public class NPC : Interactable
         if (_currentNode._questTrigger)
         {
             _currentNode = _questInProgressNode;
-            if (QuestCheck())
-            {
-                _uiController._questActive = false;
-            } else
-            {
-                _uiController._questActive = true;
-            }
+            _uiController._questActive = true;
         }
         else
         {
@@ -145,18 +149,16 @@ public class NPC : Interactable
     }
 
     // Check if NPC quest is complete
-    public virtual bool QuestCheck()
+    public virtual void QuestCheck()
     {
         //temporarily put this here as i figure out inheritance -jess
         if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount)
         {
-            _questComplete = true;
+            _uiController._questActive = false;
         }
         else
         {
-            _questComplete = false;
+            _uiController._questActive = true;
         }
-        
-        return _questComplete;
     }
 }
