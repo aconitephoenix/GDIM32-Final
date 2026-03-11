@@ -32,7 +32,7 @@ public class Freddy : NPC
     // Update Freddy's state
     private void UpdateState()
     {
-        if (QuestCheck())
+        if (!_uiController._questActive)
         {
             _state = FreddyState.IsInteractable;
         }
@@ -65,16 +65,14 @@ public class Freddy : NPC
         }
     }
 
-    public override bool QuestCheck()
+    public override void QuestCheck()
     {
         if (GameController.Instance.Player._currentPageCount == GameController.Instance.Player._maxPageCount - 1 && GameController.Instance.Player._currentPageCount > 0)
         {
-            _questComplete = true;
+            _uiController._questActive = false;
         } else
         {
-            _questComplete = false;
+            _uiController._questActive = true;
         }
-
-        return _questComplete;
     }
 }
