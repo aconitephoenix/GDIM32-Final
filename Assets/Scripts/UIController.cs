@@ -22,7 +22,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private float _typingSpeed = 0.04f;
     [SerializeField] private Button _dialogueButton1;
     [SerializeField] private Button _dialogueButton2;
-    [SerializeField] private AudioSource _dialogueAudioController;
+    [SerializeField] public AudioSource _dialogueAudioController;
 
     public GameObject CurrentNPC;
 
@@ -148,6 +148,7 @@ public class UIController : MonoBehaviour
         {
             _compass.SetActive(true);
         }
+        _dialogueAudioController.clip = null;
         _dialogueBox.SetActive(false);
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(true);
