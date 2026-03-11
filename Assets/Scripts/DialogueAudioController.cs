@@ -18,16 +18,19 @@ public class DialogueAudioController : MonoBehaviour
 
     }
 
+    // Plays the clip
     public void PlayClip()
     {
         _audioSource.Play();
     }
 
+    // Stops the clip from playing
     public void StopClip()
     {
         _audioSource.Stop();
     }
 
+    // Sets the clip list
     public void AddAudioClips(List<AudioClip> clips)
     {
         foreach (AudioClip clip in clips)
@@ -36,12 +39,14 @@ public class DialogueAudioController : MonoBehaviour
         }
     }
 
+    // Removes all clips from the list + resets the audio source's clip
     public void RemoveAudioClips()
     {
         _clips.Clear();
         _audioSource.clip = null;
     }
 
+    // Sets the audio source's clip to a random clip in the list
     public void SetClip()
     {
         if (_clips.Count > 0)

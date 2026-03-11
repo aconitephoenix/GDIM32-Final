@@ -44,14 +44,17 @@ public class NPC : Interactable
                 {
                     AdvanceDialogue();
 
+                    // Clearing the audio clips when dialogue starts
                     _dialogueAudioController.RemoveAudioClips();
 
                     if (_dialogueAudioClips.Count > 0)
                     {
+                        // If there are audio clips attached to this NPC, add those clips to the Dialogue Audio Controller
                         _dialogueAudioController.AddAudioClips(_dialogueAudioClips);
                     }
                     else
                     {
+                        // Othwerise, clear all audio clips from the Dialogue Audio Controller
                         _dialogueAudioController.RemoveAudioClips();
                     }
 
@@ -63,15 +66,15 @@ public class NPC : Interactable
                 }
             }
 
-            // Disabling hover text if dialogue is currently playing/quest has been finished
-            // otherwise, enable hover text if player is close enough
             if (!_runningDialogue && !_currentNode._questComplete)
             {
+                // Enabling hovertext if the player is not currently in dialogue + if the NPC's quest has not been finished yet
                 _uiController.HandleHoverText(gameObject.tag);
             }
         }
         else
         {
+            // Otherwise, disable hovertext
             _uiController.HandleHoverText("Untagged");
         }
     }
