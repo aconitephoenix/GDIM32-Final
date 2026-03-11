@@ -4,21 +4,53 @@ using UnityEngine;
 
 public class PageCompass : MonoBehaviour
 {
-    [SerializeField] private Transform _pageTransform; //temporary for testing - Kaleb
+    [SerializeField] private Transform[] _pageTransform; 
     [SerializeField] private float _rotateSpeed;
+
+    private Transform _closestPage;
+    private void Start()
+    {
+        _closestPage = _pageTransform[0];
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (_pageTransform == null)
+        int n = 0;
+        while (_closestPage == null && n < _pageTransform.Length) 
+        {
+            if (_pageTransform[n] != null)
+            {
+                _closestPage = (Transform)_pageTransform[n];
+            }
+            n++;
+        }
+
+        if (_closestPage == null)
         {
             Destroy(gameObject);
         }
         else
         {
+
+            for (int i = 0; i < _pageTransform.Length; i++)
+            {
+                if (_pageTransform[i] != null)
+                {
+                    float currentDist = Vector3.Distance(transform.position, _closestPage.position);
+                    float otherDist = Vector3.Distance(transform.position, _pageTransform[i].position);
+
+                    if (otherDist < currentDist)
+                    {
+                        _closestPage = (Transform)_pageTransform[i];
+                    }
+                }
+            }
+
+
             Vector3 compassPos = new Vector3(transform.position.x, 0, transform.position.z);
 
-            Vector3 pagePos = new Vector3(_pageTransform.position.x, 0, _pageTransform.position.z);
+            Vector3 pagePos = new Vector3(_closestPage.position.x, 0, _closestPage.position.z);
             Vector3 playertoPage = (pagePos - compassPos).normalized;
 
             RotateTowards(playertoPage);
