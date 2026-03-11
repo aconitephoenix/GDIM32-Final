@@ -7,7 +7,7 @@ public class NPC : Interactable
     [SerializeField] protected string _name;
     public DialogueNode _startingNode;
     [SerializeField] protected DialogueNode _questInProgressNode;
-    [SerializeField] protected AudioClip _dialogueAudioClip;
+    [SerializeField] public List<AudioClip> _dialogueAudioClips = new List<AudioClip>();
 
     protected DialogueNode _currentNode;
     protected int _currentLine = 0;
@@ -42,11 +42,12 @@ public class NPC : Interactable
                 if (!_waitingForPlayerResponse && (!_currentNode._questComplete || _currentLine < _currentNode._lines.Length))
                 {
                     AdvanceDialogue();
+
                     if (_uiController._dialogueAudioController != null)
                     {
-                        if (_dialogueAudioClip != null)
+                        if (_dialogueAudioClips.Count >= 1)
                         {
-                            _uiController._dialogueAudioController.clip = _dialogueAudioClip;
+                            _uiController._dialogueAudioController.clip = _dialogueAudioClips[Random.Range(0, _dialogueAudioClips.Count - 1)];
                         } else
                         {
                             _uiController._dialogueAudioController.clip = null;

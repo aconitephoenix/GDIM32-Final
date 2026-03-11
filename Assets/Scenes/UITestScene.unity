@@ -427,7 +427,7 @@ MonoBehaviour:
   _name: Sample NPC
   _startingNode: {fileID: 11400000, guid: 128d5885bee623d429c2a602abdde7b3, type: 2}
   _questInProgressNode: {fileID: 0}
-  _dialogueAudioClip: {fileID: 0}
+  _dialogueAudioClips: []
 --- !u!65 &199748948
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1145,7 +1145,9 @@ MonoBehaviour:
   _name: Sample NPC
   _startingNode: {fileID: 11400000, guid: 128d5885bee623d429c2a602abdde7b3, type: 2}
   _questInProgressNode: {fileID: 0}
-  _dialogueAudioClip: {fileID: 8300000, guid: 0d06113049266a4498c462b0adf0f6c8, type: 3}
+  _dialogueAudioClips:
+  - {fileID: 8300000, guid: 0d06113049266a4498c462b0adf0f6c8, type: 3}
+  - {fileID: 8300000, guid: b70fbb3529c5dc2409b23dea6ff61d40, type: 3}
 --- !u!1 &551523907
 GameObject:
   m_ObjectHideFlags: 0
