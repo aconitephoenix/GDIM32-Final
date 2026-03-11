@@ -428,6 +428,7 @@ MonoBehaviour:
   _startingNode: {fileID: 11400000, guid: 128d5885bee623d429c2a602abdde7b3, type: 2}
   _questInProgressNode: {fileID: 0}
   _dialogueAudioClips: []
+  _dialogueAudioController: {fileID: 1999082061}
 --- !u!65 &199748948
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1148,6 +1149,8 @@ MonoBehaviour:
   _dialogueAudioClips:
   - {fileID: 8300000, guid: 0d06113049266a4498c462b0adf0f6c8, type: 3}
   - {fileID: 8300000, guid: b70fbb3529c5dc2409b23dea6ff61d40, type: 3}
+  - {fileID: 8300000, guid: a3d8e2017f4961e43ba1cadcd4e5a6ee, type: 3}
+  _dialogueAudioController: {fileID: 1999082061}
 --- !u!1 &551523907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1719,7 +1722,7 @@ MonoBehaviour:
   _typingSpeed: 0.04
   _dialogueButton1: {fileID: 1919007659}
   _dialogueButton2: {fileID: 567683648}
-  _dialogueAudioController: {fileID: 1999082059}
+  _dialogueAudioController: {fileID: 1999082061}
   CurrentNPC: {fileID: 0}
   _isTyping: 0
   _questActive: 0
@@ -2655,6 +2658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1999082060}
   - component: {fileID: 1999082059}
+  - component: {fileID: 1999082061}
   m_Layer: 0
   m_Name: Dialogue Audio Controller
   m_TagString: Untagged
@@ -2773,6 +2777,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1999082061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999082058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85286e01058326948b553202f5fbd3fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clips: []
+  _audioSource: {fileID: 1999082059}
 --- !u!1 &2010952588
 GameObject:
   m_ObjectHideFlags: 0

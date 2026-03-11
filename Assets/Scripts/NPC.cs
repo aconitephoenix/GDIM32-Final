@@ -8,6 +8,7 @@ public class NPC : Interactable
     public DialogueNode _startingNode;
     [SerializeField] protected DialogueNode _questInProgressNode;
     [SerializeField] public List<AudioClip> _dialogueAudioClips = new List<AudioClip>();
+    [SerializeField] private DialogueAudioController _dialogueAudioController;
 
     protected DialogueNode _currentNode;
     protected int _currentLine = 0;
@@ -43,19 +44,22 @@ public class NPC : Interactable
                 {
                     AdvanceDialogue();
 
-                    if (_uiController._dialogueAudioController != null)
+                    _dialogueAudioController.RemoveAudioClips();
+
+                    if (_dialogueAudioClips.Count > 0)
                     {
-                        if (_dialogueAudioClips.Count >= 1)
-                        {
-                            _uiController._dialogueAudioController.clip = _dialogueAudioClips[Random.Range(0, _dialogueAudioClips.Count - 1)];
-                        } else
-                        {
-                            _uiController._dialogueAudioController.clip = null;
-                        }
+                        _dialogueAudioController.AddAudioClips(_dialogueAudioClips);
                     }
-                } else if (_canContinue)
+                    else
+                    {
+                        _dialogueAudioController.RemoveAudioClips();
+                    }
+
+                }
+                else if (_canContinue)
                 {
                     EndDialogue();
+                    _dialogueAudioController.RemoveAudioClips();
                 }
             }
 
@@ -114,7 +118,8 @@ public class NPC : Interactable
             if (!_currentNode._questComplete)
             {
                 _currentNode = _startingNode;
-            } else
+            }
+            else
             {
                 _canContinue = false;
                 gameObject.GetComponent<NPC>().enabled = false;
@@ -142,7 +147,8 @@ public class NPC : Interactable
             {
                 _currentNode = _currentNode._npcReplies[option];
                 AdvanceDialogue();
-            } else 
+            }
+            else
             {
                 EndDialogue();
             }

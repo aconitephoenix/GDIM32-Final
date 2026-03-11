@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] public TMP_Text _pagesText;
+    public TMP_Text _pagesText;
     [SerializeField] private TMP_Text _dialogueText;
     [SerializeField] private TMP_Text _hoverText;
     [SerializeField] private GameObject _dialogueBox;
@@ -22,7 +21,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private float _typingSpeed = 0.04f;
     [SerializeField] private Button _dialogueButton1;
     [SerializeField] private Button _dialogueButton2;
-    [SerializeField] public AudioSource _dialogueAudioController;
+    [SerializeField] private DialogueAudioController _dialogueAudioController;
 
     public GameObject CurrentNPC;
 
@@ -41,7 +40,7 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetNPC(GameObject npc)
@@ -57,16 +56,19 @@ public class UIController : MonoBehaviour
             if (tag == "NPC")
             {
                 _hoverText.text = "Click or press E to talk";
-            } else if (tag == "Interactable")
+            }
+            else if (tag == "Interactable")
             {
                 _hoverText.text = "Click or press E to interact";
-            } else if (tag == "Door")
+            }
+            else if (tag == "Door")
             {
                 _hoverText.text = "Click or press E to enter";
             }
 
             _hoverText.gameObject.SetActive(true);
-        } else
+        }
+        else
         {
             _hoverText.gameObject.SetActive(false);
         }
@@ -87,7 +89,7 @@ public class UIController : MonoBehaviour
         _sprintBar.SetActive(false);
         _hoverText.gameObject.SetActive(false);
         _continueDialogueText.gameObject.SetActive(false);
-        
+
         if (_typeLineCoroutine != null)
         {
             StopCoroutine(_typeLineCoroutine);
@@ -113,30 +115,24 @@ public class UIController : MonoBehaviour
             {
                 _dialogueText.maxVisibleCharacters = dialogue.Length + 1;
                 _isTyping = false;
-                if (_dialogueAudioController != null)
-                {
-                    _dialogueAudioController.Stop();
-                }
+                _dialogueAudioController.StopClip();
+                _dialogueAudioController.RemoveAudioClips();
                 _continueDialogueText.gameObject.SetActive(true);
                 break;
             }
 
             _dialogueText.maxVisibleCharacters = i;
-            if (_dialogueAudioController != null)
-            {
-                _dialogueAudioController.Play();
-            }
+            _dialogueAudioController.SetClip();
+            _dialogueAudioController.PlayClip();
             yield return new WaitForSeconds(_typingSpeed);
         }
 
         _isTyping = false;
-        if (_dialogueAudioController != null)
-        {
-            _dialogueAudioController.Stop();
-        }
+        _dialogueAudioController.StopClip();
+        _dialogueAudioController.RemoveAudioClips();
         _continueDialogueText.gameObject.SetActive(true);
     }
-    
+
 
     // Hide dialogue box
     public void HideDialogue()
@@ -148,10 +144,7 @@ public class UIController : MonoBehaviour
         {
             _compass.SetActive(true);
         }
-        if (_dialogueAudioController != null)
-        {
-            _dialogueAudioController.clip = null;
-        }
+        _dialogueAudioController.RemoveAudioClips();
         _dialogueBox.SetActive(false);
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(true);
@@ -168,6 +161,7 @@ public class UIController : MonoBehaviour
         _playerOptions.SetActive(true);
         _sprintBar.SetActive(false);
         _hoverText.gameObject.SetActive(false);
+        _dialogueAudioController.RemoveAudioClips();
         _dialogueButton1.onClick.AddListener(delegate { CurrentNPC.gameObject.GetComponent<NPC>().SelectedOption(0); });
 
         _option1.text = options[0];
