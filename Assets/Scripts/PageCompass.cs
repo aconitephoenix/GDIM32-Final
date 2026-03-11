@@ -16,6 +16,7 @@ public class PageCompass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Checks if the closest page exists. If it doesn't, sets new transform as closest page
         int n = 0;
         while (_closestPage == null && n < _pageTransform.Length) 
         {
@@ -26,6 +27,7 @@ public class PageCompass : MonoBehaviour
             n++;
         }
 
+        //Checks if closest page is still null after the while loop. If it is, kill the gameObject
         if (_closestPage == null)
         {
             Destroy(gameObject);
@@ -37,6 +39,7 @@ public class PageCompass : MonoBehaviour
             {
                 if (_pageTransform[i] != null)
                 {
+                    //compares the distance between two pages, closest to the player gets set as closest page
                     float currentDist = Vector3.Distance(transform.position, _closestPage.position);
                     float otherDist = Vector3.Distance(transform.position, _pageTransform[i].position);
 
@@ -47,7 +50,7 @@ public class PageCompass : MonoBehaviour
                 }
             }
 
-
+            //Handles the arrow's rotation
             Vector3 compassPos = new Vector3(transform.position.x, 0, transform.position.z);
 
             Vector3 pagePos = new Vector3(_closestPage.position.x, 0, _closestPage.position.z);
