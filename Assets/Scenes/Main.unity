@@ -187,6 +187,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+--- !u!4 &3722410 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1584227946270123934, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+  m_PrefabInstance: {fileID: 3722409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &21981260 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d2f96c1ae89550a42b1dbb3572859828, type: 3}
@@ -504,8 +509,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8921c234251d1d4f8f1641384fe6b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pageTransform: {fileID: 664376794}
-  _rotateSpeed: 100
+  _pageTransform:
+  - {fileID: 664376794}
+  - {fileID: 3722410}
+  _rotateSpeed: 999999
 --- !u!1001 &125233327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1307,6 +1314,7 @@ MonoBehaviour:
   _name: Freddy
   _startingNode: {fileID: 11400000, guid: 3baa708490b3ae2488c4d0fcfda4a911, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
+  _dialogueAudioClip: {fileID: 0}
   _movementSpeed: 2
 --- !u!1 &617533742
 GameObject:
@@ -3039,6 +3047,7 @@ MonoBehaviour:
   _name: Slenderman's Understudy
   _startingNode: {fileID: 11400000, guid: bea9e06536c86c3409f1be7caa048889, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
+  _dialogueAudioClip: {fileID: 0}
 --- !u!1 &1682806097
 GameObject:
   m_ObjectHideFlags: 0
