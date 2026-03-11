@@ -65,10 +65,10 @@ public class NPC : Interactable
             {
                 _uiController.HandleHoverText(gameObject.tag);
             }
-            else
-            {
-                _uiController.HandleHoverText("Untagged");
-            }
+        }
+        else
+        {
+            _uiController.HandleHoverText("Untagged");
         }
     }
 

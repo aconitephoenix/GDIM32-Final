@@ -1314,7 +1314,7 @@ MonoBehaviour:
   _name: Freddy
   _startingNode: {fileID: 11400000, guid: 3baa708490b3ae2488c4d0fcfda4a911, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
-  _dialogueAudioClip: {fileID: 0}
+  _dialogueAudioClips: []
   _movementSpeed: 2
 --- !u!1 &617533742
 GameObject:
@@ -2937,6 +2937,7 @@ GameObject:
   - component: {fileID: 1645463879}
   - component: {fileID: 1645463878}
   - component: {fileID: 1645463883}
+  - component: {fileID: 1645463884}
   m_Layer: 0
   m_Name: Random NPC
   m_TagString: NPC
@@ -2985,7 +2986,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 36a85f7f321031b4ea1951967c7262b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3024,8 +3025,8 @@ Transform:
   m_GameObject: {fileID: 1645463877}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.9, y: 0.5, z: -45.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 41.5, y: 1.4661, z: -49.59}
+  m_LocalScale: {x: 1, y: 2.9323, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3047,7 +3048,19 @@ MonoBehaviour:
   _name: Slenderman's Understudy
   _startingNode: {fileID: 11400000, guid: bea9e06536c86c3409f1be7caa048889, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
-  _dialogueAudioClip: {fileID: 0}
+  _dialogueAudioClips: []
+--- !u!114 &1645463884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645463877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1cf39457011c904eb935c6cffc2e3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1682806097
 GameObject:
   m_ObjectHideFlags: 0
