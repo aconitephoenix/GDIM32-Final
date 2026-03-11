@@ -148,7 +148,10 @@ public class UIController : MonoBehaviour
         {
             _compass.SetActive(true);
         }
-        _dialogueAudioController.clip = null;
+        if (_dialogueAudioController != null)
+        {
+            _dialogueAudioController.clip = null;
+        }
         _dialogueBox.SetActive(false);
         _playerOptions.SetActive(false);
         _sprintBar.SetActive(true);
