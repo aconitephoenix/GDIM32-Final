@@ -30,6 +30,6 @@ Put your individual final Devlog here.
 Put your individual final Devlog here.
 
 ## Open-Source Assets
-- [PSX Shader Kit](https://assetstore.unity.com/packages/vfx/shaders/psx-shader-kit-183591) - PSX Shader
+- [PSX-Style Shader](https://assetstore.unity.com/packages/vfx/shaders/fullscreen-camera-effects/psx-style-shader-351978) - PSX Shader
 - [Real Stars Skybox Lite](https://assetstore.unity.com/packages/3d/environments/sci-fi/real-stars-skybox-lite-116333) - Skybox Texture
 - [Freddy Model](https://sketchfab.com/3d-models/forsaken-ar-freddy-fazbear-f6e019333d694cbfbb2f3fbc9e791763) - Model and Animations
