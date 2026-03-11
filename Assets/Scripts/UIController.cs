@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private float _typingSpeed = 0.04f;
     [SerializeField] private Button _dialogueButton1;
     [SerializeField] private Button _dialogueButton2;
+    [SerializeField] private AudioSource _dialogueAudioController;
 
     public GameObject CurrentNPC;
 
@@ -112,15 +113,27 @@ public class UIController : MonoBehaviour
             {
                 _dialogueText.maxVisibleCharacters = dialogue.Length + 1;
                 _isTyping = false;
+                if (_dialogueAudioController != null)
+                {
+                    _dialogueAudioController.Stop();
+                }
                 _continueDialogueText.gameObject.SetActive(true);
                 break;
             }
 
             _dialogueText.maxVisibleCharacters = i;
+            if (_dialogueAudioController != null)
+            {
+                _dialogueAudioController.Play();
+            }
             yield return new WaitForSeconds(_typingSpeed);
         }
 
         _isTyping = false;
+        if (_dialogueAudioController != null)
+        {
+            _dialogueAudioController.Stop();
+        }
         _continueDialogueText.gameObject.SetActive(true);
     }
     

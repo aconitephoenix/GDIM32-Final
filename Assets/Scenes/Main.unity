@@ -2342,6 +2342,7 @@ MonoBehaviour:
   _typingSpeed: 0.04
   _dialogueButton1: {fileID: 203355862}
   _dialogueButton2: {fileID: 195561978}
+  _dialogueAudioController: {fileID: 0}
   CurrentNPC: {fileID: 0}
   _isTyping: 0
   _questActive: 0
