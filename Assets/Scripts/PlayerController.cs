@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private float mouseSensitivity = 2f;
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Transform ArrowCameraTransform;
     [SerializeField] private float maxLookAngle = 80f;
     [SerializeField] private float normalFOV = 60f;
     [SerializeField] private float sprintFOV = 70f;
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
-        cameraTransform = Camera.main.transform;
+        //cameraTransform = Camera.main.transform;
 
         // Get camera component
         playerCamera = cameraTransform.GetComponent<Camera>();
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Update behavior based on current state
         switch (currentState)
         {
@@ -256,6 +258,7 @@ public class PlayerController : MonoBehaviour
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -maxLookAngle, maxLookAngle);
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        ArrowCameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
     }
     
     private void LerpToNPC()
@@ -276,6 +279,7 @@ public class PlayerController : MonoBehaviour
                 //slerp camera vertical rotation to npc
                 verticalRotation = targetRotation.eulerAngles.x;
                 cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, Quaternion.Euler(verticalRotation, 0f, 0f), fovTransitionSpeed * Time.deltaTime);
+                ArrowCameraTransform.localRotation = Quaternion.Slerp(ArrowCameraTransform.localRotation, Quaternion.Euler(verticalRotation, 0f, 0f), fovTransitionSpeed * Time.deltaTime);
             }
         }
     }
