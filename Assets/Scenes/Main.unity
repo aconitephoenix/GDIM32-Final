@@ -3475,7 +3475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shader: {fileID: 4800000, guid: eb732616613fa2d4ab375752805c9e6c, type: 3}
-  _targetResolution: {x: 200, y: 150}
+  _targetResolution: {x: 267, y: 200}
   _colorBits: 4
   _ditherStrength: 0.6
 --- !u!114 &1877222298
