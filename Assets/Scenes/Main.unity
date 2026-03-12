@@ -1459,7 +1459,7 @@ MonoBehaviour:
   _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
   _dialogueAudioClips: []
   _dialogueAudioController: {fileID: 461446602}
-  _dialogueFont: {fileID: 0}
+  _dialogueFont: {fileID: 11400000, guid: 2cee722033e1b8f4f8ec64e020435b8d, type: 2}
   _movementSpeed: 2
 --- !u!1 &617533742
 GameObject:

@@ -56,8 +56,8 @@ public class NPC : Interactable
                         _uiController.SetDialogueFont(null);
                     }
 
-                        // Clearing the audio clips when dialogue starts
-                        _dialogueAudioController.RemoveAudioClips();
+                    // Clearing the audio clips when dialogue starts
+                    _dialogueAudioController.RemoveAudioClips();
 
                     if (_dialogueAudioClips.Count > 0)
                     {
