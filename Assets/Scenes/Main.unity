@@ -3083,7 +3083,7 @@ GameObject:
   - component: {fileID: 1645463883}
   - component: {fileID: 1645463884}
   m_Layer: 0
-  m_Name: Random NPC
+  m_Name: Slenderman
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3189,11 +3189,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDistance: 3
   _uiController: {fileID: 1363857249}
-  _name: Slenderman's Understudy
-  _startingNode: {fileID: 11400000, guid: bea9e06536c86c3409f1be7caa048889, type: 2}
-  _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
+  _name: Slenderman
+  _startingNode: {fileID: 11400000, guid: a15fd126ce235b444a3cc15441754742, type: 2}
+  _questInProgressNode: {fileID: 11400000, guid: 96aa98867e38392429ee6faad87bb9d6, type: 2}
   _dialogueAudioClips: []
-  _dialogueAudioController: {fileID: 0}
+  _dialogueAudioController: {fileID: 461446602}
 --- !u!114 &1645463884
 MonoBehaviour:
   m_ObjectHideFlags: 0
