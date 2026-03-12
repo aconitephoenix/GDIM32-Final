@@ -132,6 +132,9 @@ public class PlayerController : MonoBehaviour
                 // No interactions or movement
                 break;
         }
+
+
+        Debug.Log(verticalRotation);
     }
 
     private void FixedUpdate()
@@ -141,6 +144,7 @@ public class PlayerController : MonoBehaviour
         {
             HandleJump();
         }
+
     }
 
     // Change the player's state
@@ -246,6 +250,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMouseLook()
     {
+
+
         // Get mouse input
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -271,15 +277,27 @@ public class PlayerController : MonoBehaviour
             {
                 Vector3 npcPosition = hitInfo.collider.gameObject.transform.position;
                 Vector3 directionToNPC = (npcPosition - cameraTransform.position).normalized;
-                Quaternion targetRotation = Quaternion.LookRotation(directionToNPC);
+                Quaternion targetRotation = Quaternion.LookRotation(directionToNPC, Vector3.up);
                 NPCDetected?.Invoke(hitInfo.collider.gameObject);
 
                 //slerp player horizontal rotate to npc
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f), fovTransitionSpeed * Time.deltaTime);
+                
+                
                 //slerp camera vertical rotation to npc
-                verticalRotation = targetRotation.eulerAngles.x;
-                cameraTransform.localRotation = Quaternion.Slerp(cameraTransform.localRotation, Quaternion.Euler(verticalRotation, 0f, 0f), fovTransitionSpeed * Time.deltaTime);
-                ArrowCameraTransform.localRotation = Quaternion.Slerp(ArrowCameraTransform.localRotation, Quaternion.Euler(verticalRotation, 0f, 0f), fovTransitionSpeed * Time.deltaTime);
+                // Normalize euler angle from 0-360 to -180 to 180 range
+                float targetVertical = targetRotation.eulerAngles.x - 15f;
+                if (targetVertical > 180f)
+                    targetVertical -= 360f;
+                
+                // Clamp the target rotation to prevent exceeding look angle limits
+                targetVertical = Mathf.Clamp(targetVertical, -maxLookAngle, maxLookAngle);
+                
+                // Lerp towards the clamped target
+                verticalRotation = Mathf.Lerp(verticalRotation, targetVertical, fovTransitionSpeed * Time.deltaTime);
+                
+                cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+                ArrowCameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
             }
         }
     }

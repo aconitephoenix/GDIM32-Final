@@ -3169,13 +3169,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645463877}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 41.5, y: 1.4661, z: -49.59}
   m_LocalScale: {x: 1, y: 2.9323, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1645463883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3281,7 +3281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.367, y: 0.05}
   m_AnchorMax: {x: 0.62600005, y: 0.091528654}
-  m_AnchoredPosition: {x: -1.6475983, y: -0.020996094}
+  m_AnchoredPosition: {x: -1.647583, y: -0.020996094}
   m_SizeDelta: {x: 4.2953186, y: 4.412899}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &1778782277
@@ -3549,8 +3549,6 @@ GameObject:
   - component: {fileID: 1877222296}
   - component: {fileID: 1877222295}
   - component: {fileID: 1877222294}
-  - component: {fileID: 1877222298}
-  - component: {fileID: 1877222297}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3634,53 +3632,6 @@ Transform:
   - {fileID: 111410414}
   m_Father: {fileID: 1310158050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1877222297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877222293}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a74f60c3c83a4ee49bec83952eedd45f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shader: {fileID: 4800000, guid: eb732616613fa2d4ab375752805c9e6c, type: 3}
-  _targetResolution: {x: 267, y: 200}
-  _colorBits: 4
-  _ditherStrength: 0.6
---- !u!114 &1877222298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877222293}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946cab0d2ada0ad4b9ca8aac5ed2c62f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enabled: 1
-  _snapResolution: {x: 320, y: 240}
-  _useScreenResolution: 1
-  _snapStrength: 1
-  _jitterSpeed: 30
-  _jitterPixels: 1
-  _depthSteps: 48
-  _depthStrength: 0.75
-  _depthNoise: 0.0015
-  _uvPrecision: 96
-  _uvSnapStrength: 1
-  _uvWarpStrength: 0.35
-  _affineSwim: 0.25
-  _affineUvInterpolation: 0
-  _mipBias: -1
-  _vertexLighting: 1
-  _lightSteps: 6
-  _colorBits: 5
-  _ditherStrength: 0.65
 --- !u!1 &1883383233
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,8 +3680,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shader: {fileID: 4800000, guid: eb732616613fa2d4ab375752805c9e6c, type: 3}
   _targetResolution: {x: 267, y: 200}
-  _colorBits: 4
-  _ditherStrength: 0.6
+  _colorBits: 5
+  _ditherStrength: 0.2
 --- !u!114 &1883383236
 MonoBehaviour:
   m_ObjectHideFlags: 0
