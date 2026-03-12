@@ -1458,7 +1458,8 @@ MonoBehaviour:
   _startingNode: {fileID: 11400000, guid: 3baa708490b3ae2488c4d0fcfda4a911, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
   _dialogueAudioClips: []
-  _dialogueAudioController: {fileID: 0}
+  _dialogueAudioController: {fileID: 461446602}
+  _dialogueFont: {fileID: 0}
   _movementSpeed: 2
 --- !u!1 &617533742
 GameObject:
@@ -3194,6 +3195,7 @@ MonoBehaviour:
   _questInProgressNode: {fileID: 11400000, guid: 96aa98867e38392429ee6faad87bb9d6, type: 2}
   _dialogueAudioClips: []
   _dialogueAudioController: {fileID: 461446602}
+  _dialogueFont: {fileID: 11400000, guid: ecee31dfb1f3f05498c84a3caa4a65fd, type: 2}
 --- !u!114 &1645463884
 MonoBehaviour:
   m_ObjectHideFlags: 0

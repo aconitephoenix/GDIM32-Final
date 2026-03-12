@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NPC : Interactable
@@ -9,12 +10,15 @@ public class NPC : Interactable
     [SerializeField] protected DialogueNode _questInProgressNode;
     [SerializeField] public List<AudioClip> _dialogueAudioClips = new List<AudioClip>();
     [SerializeField] private DialogueAudioController _dialogueAudioController;
+    [SerializeField] protected TMP_FontAsset _dialogueFont;
 
     protected DialogueNode _currentNode;
     protected int _currentLine = 0;
     protected bool _waitingForPlayerResponse;
     protected bool _runningDialogue;
     protected bool _canContinue;
+    protected bool _quest1Complete;
+    protected bool _quest2Complete;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -44,8 +48,16 @@ public class NPC : Interactable
                 {
                     AdvanceDialogue();
 
-                    // Clearing the audio clips when dialogue starts
-                    _dialogueAudioController.RemoveAudioClips();
+                    if (_dialogueFont != null)
+                    {
+                        _uiController.SetDialogueFont(_dialogueFont);
+                    } else
+                    {
+                        _uiController.SetDialogueFont(null);
+                    }
+
+                        // Clearing the audio clips when dialogue starts
+                        _dialogueAudioController.RemoveAudioClips();
 
                     if (_dialogueAudioClips.Count > 0)
                     {
@@ -68,7 +80,9 @@ public class NPC : Interactable
 
             if (!_runningDialogue && !_currentNode._questComplete)
             {
-                // Enabling hovertext if the player is not currently in dialogue + if the NPC's quest has not been finished yet
+                // Enabling hovertext if the player is not currently in dialogue,
+                // if the NPC's quest has not been finished yet,
+                // and if the player is close enough to the NPC
                 _uiController.HandleHoverText(gameObject.tag);
             }
         }
@@ -111,6 +125,7 @@ public class NPC : Interactable
     protected void EndDialogue()
     {
         _waitingForPlayerResponse = false;
+
         if (_currentNode._questTrigger)
         {
             _currentNode = _questInProgressNode;
@@ -134,7 +149,6 @@ public class NPC : Interactable
         _runningDialogue = false;
         _uiController.HideDialogue();
         GameController.Instance.Player.SetState(PlayerController.PlayerState.Normal);
-
     }
 
     // Which option the player chose
@@ -161,14 +175,24 @@ public class NPC : Interactable
     // Check if NPC quest is complete
     public virtual void QuestCheck()
     {
-        //temporarily put this here as i figure out inheritance -jess
-        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount)
+        // If player has collected 7/8 pages, make it possible for them to ask Slenderman about the last page
+        if (GameController.Instance.Player._currentPageCount == GameController.Instance.Player._maxPageCount - 1 && GameController.Instance.Player._currentPageCount > 0)
         {
+            _quest1Complete = true;
             _uiController._questActive = false;
         }
         else
         {
+            _quest1Complete = false;
             _uiController._questActive = true;
+        }
+
+        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount)
+        {
+            _quest2Complete = true;
+        } else
+        {
+            _quest2Complete = false;
         }
     }
 }

@@ -184,4 +184,16 @@ public class UIController : MonoBehaviour
     {
         _pagesText.text = "Pages: " + GameController.Instance.Player._currentPageCount + "/" + GameController.Instance.Player._maxPageCount;
     }
+
+    // Set a different font for specific NPC dialogue
+    public void SetDialogueFont(TMP_FontAsset font)
+    {
+        if (font != null)
+        {
+            _dialogueText.font = font;
+        } else
+        {
+            _dialogueText.font = default;
+        }
+    }
 }
