@@ -94,7 +94,7 @@ public class NPC : Interactable
         }
     }
 
-    protected void AdvanceDialogue()
+    protected virtual void AdvanceDialogue()
     {
         if (!_uiController._isTyping && gameObject.GetComponent<NPC>().enabled == true)
         {

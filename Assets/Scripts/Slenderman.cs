@@ -28,6 +28,39 @@ public class Slenderman : NPC
         base.OnMouseOver();
     }
 
+    protected override void AdvanceDialogue()
+    {
+        if (!_uiController._isTyping && gameObject.GetComponent<NPC>().enabled == true)
+        {
+            _runningDialogue = true;
+
+            if (_currentLine < _currentNode._lines.Length)
+            {
+                // keep playing NPC lines if there are still any left
+                _uiController.ShowDialogue(_currentNode._lines[_currentLine], _name);
+                _currentLine++;
+                _canContinue = true;
+            }
+            else if (_currentNode._playerReplyOptions != null && _currentNode._playerReplyOptions.Length > 0)
+            {
+                // show player dialogue options, if any
+                if (GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Started || GameController.Instance.Player._questState == PlayerController.QuestState.Quest2Complete)
+                {
+                    _uiController._questActive = false;
+                }
+                _waitingForPlayerResponse = true;
+                _uiController.ShowPlayerOptions(_currentNode._playerReplyOptions);
+                _canContinue = false;
+            }
+            else
+            {
+                // end dialogue if none left
+                EndDialogue();
+                _canContinue = true;
+            }
+        }
+    }
+
     protected override void EndDialogue()
     {
         base.EndDialogue();

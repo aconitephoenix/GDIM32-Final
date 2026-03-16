@@ -27,14 +27,27 @@ public class Freddy : NPC
         base.Update();
         UpdateState();
         UpdateBehavior();
+
+        if (!_slenderman.GetComponent<NPC>().enabled && GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Started)
+        {
+            _quest3Complete = true;
+            GameController.Instance.Player._questState = PlayerController.QuestState.Quest3Complete;
+        }
+        else
+        {
+            _quest3Complete = false;
+        }
     }
 
     // Update Freddy's state
     private void UpdateState()
     {
-        if (GameController.Instance.Player._questState == PlayerController.QuestState.Quest1Complete)
+        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
         {
             _state = FreddyState.IsInteractable;
+        } else
+        {
+            _state = FreddyState.IsMoving;
         }
     }
 
@@ -60,10 +73,48 @@ public class Freddy : NPC
                 _flyer.GetComponent<Interactable>().enabled = false;
                 break;
             case FreddyState.IsJumpscaring:
+                _flyer.SetActive(false);
                 break;
             case FreddyState.IsMoving:
                 _movementSpeed = 2.0f;
+                _flyer.SetActive(false);
                 break;
+        }
+    }
+
+    protected override void AdvanceDialogue()
+    {
+        if (!_uiController._isTyping && gameObject.GetComponent<NPC>().enabled == true)
+        {
+            _runningDialogue = true;
+
+            if (_currentLine < _currentNode._lines.Length)
+            {
+                // keep playing NPC lines if there are still any left
+                _uiController.ShowDialogue(_currentNode._lines[_currentLine], _name);
+                _currentLine++;
+                _canContinue = true;
+            }
+            else if (_currentNode._playerReplyOptions != null && _currentNode._playerReplyOptions.Length > 0)
+            {
+                // show player dialogue options, if any
+                if (GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Complete)
+                {
+                    _uiController._questActive = false;
+                } else if (GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Started)
+                {
+                    _uiController._questActive = true;
+                }
+                    _waitingForPlayerResponse = true;
+                _uiController.ShowPlayerOptions(_currentNode._playerReplyOptions);
+                _canContinue = false;
+            }
+            else
+            {
+                // end dialogue if none left
+                EndDialogue();
+                _canContinue = true;
+            }
         }
     }
 
@@ -77,21 +128,14 @@ public class Freddy : NPC
 
             GameController.Instance.Player._questState = PlayerController.QuestState.Quest3Started;
             
-            if (!_quest1Complete)
+            if (!_quest3Complete)
             {
-                if (!_quest3Complete)
-                {
-                    _uiController._questActive = true;
-                }
-                else
-                {
-                    _uiController._questActive = false;
-                }
-            } else
+                _uiController._questActive = true;
+            }
+            else
             {
                 _uiController._questActive = false;
             }
-            
         }
         else
         {
@@ -101,8 +145,11 @@ public class Freddy : NPC
             }
             else
             {
+                if (GameController.Instance.Player._questState != PlayerController.QuestState.Quest3Complete)
+                { 
+                    _flyer.GetComponent<Interactable>().enabled = true; 
+                }
                 _canContinue = false;
-                _flyer.GetComponent<Interactable>().enabled = true;
                 gameObject.GetComponent<NPC>().enabled = false;
             }
 
@@ -117,7 +164,5 @@ public class Freddy : NPC
     public override void QuestCheck()
     {
         base.QuestCheck();
-
-        
     }
 }
