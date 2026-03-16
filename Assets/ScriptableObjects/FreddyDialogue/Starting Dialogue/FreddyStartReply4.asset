@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f618f3d4319444199716e1fed81d86, type: 3}
-  m_Name: SlendermanQuestCheck
+  m_Name: FreddyStartReply4
   m_EditorClassIdentifier: 
   _lines:
-  - YOU GOT MY PAGES OR WHAT
+  - I knew I would.
+  - So, what's your answer?
   _playerReplyOptions:
-  - No.....
-  - Uhh... I can't find the last page
-  - Yep, got them right here
+  - Nah, Imma do my own thing
+  - Sure, I'll help you
   _npcReplies:
-  - {fileID: 11400000, guid: 3019af2e8fc938d41b3878bdf822163f, type: 2}
-  - {fileID: 11400000, guid: 122cad14f9379894a90ce25f949c7243, type: 2}
-  - {fileID: 11400000, guid: 2764518aa65693141acdca05ce799aed, type: 2}
+  - {fileID: 11400000, guid: 89b868b42f844254aa3409cb90358f4e, type: 2}
+  - {fileID: 11400000, guid: f20241680f523b14ba06b32ad751af95, type: 2}
   _questTrigger: 0
   _questComplete: 0

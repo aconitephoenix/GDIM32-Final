@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f618f3d4319444199716e1fed81d86, type: 3}
-  m_Name: SlendermanQuestComplete
+  m_Name: FreddyStartDialogue
   m_EditorClassIdentifier: 
   _lines:
-  - THANKS
-  - I'LL PROBABLY HAVE MORE DIALOGUE LATER
-  - BUT MY SCRIPTS HAVE TO BE EDITED FIRST
-  _playerReplyOptions: []
-  _npcReplies: []
+  - Hor hor hor hor
+  _playerReplyOptions:
+  - Are you this "Freddy Fivebear" I've been looking for?
+  _npcReplies:
+  - {fileID: 11400000, guid: cb81ee1597ec708438d4dc3c4cc0a04e, type: 2}
   _questTrigger: 0
-  _questComplete: 1
+  _questComplete: 0

@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f618f3d4319444199716e1fed81d86, type: 3}
-  m_Name: SlendermanQuest1Complete
+  m_Name: FreddyQuestStart
   m_EditorClassIdentifier: 
   _lines:
-  - MUST BE THE WORK OF THAT B**** FREDDY
-  _playerReplyOptions:
-  - Where do I find him?
-  _npcReplies:
-  - {fileID: 11400000, guid: e4adf1b2d4f39cd4c9a49602ac1fbd8a, type: 2}
-  _questTrigger: 0
+  - Bet. Go back to Slenderman and tell him the bad news
+  _playerReplyOptions: []
+  _npcReplies: []
+  _questTrigger: 1
   _questComplete: 0

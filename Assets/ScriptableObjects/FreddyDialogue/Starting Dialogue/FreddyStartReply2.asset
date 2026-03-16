@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f618f3d4319444199716e1fed81d86, type: 3}
-  m_Name: SlendermanQuestCheck
+  m_Name: FreddyStartReply2
   m_EditorClassIdentifier: 
   _lines:
-  - YOU GOT MY PAGES OR WHAT
+  - Okay fine...
+  - But hear me out.
+  - What if...I don't give you the page and you work for me at this totally legit
+    Walmart
   _playerReplyOptions:
-  - No.....
-  - Uhh... I can't find the last page
-  - Yep, got them right here
+  - Why would I do that???
   _npcReplies:
-  - {fileID: 11400000, guid: 3019af2e8fc938d41b3878bdf822163f, type: 2}
-  - {fileID: 11400000, guid: 122cad14f9379894a90ce25f949c7243, type: 2}
-  - {fileID: 11400000, guid: 2764518aa65693141acdca05ce799aed, type: 2}
+  - {fileID: 11400000, guid: 9aa12b0f7128a834fb718c8070b0bc29, type: 2}
   _questTrigger: 0
   _questComplete: 0
