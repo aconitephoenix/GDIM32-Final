@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour
     private void HandleJump()
     {
         // Check if grounded
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1f);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
         if (isGrounded)
         {
             isJumping = false;
