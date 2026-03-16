@@ -10,6 +10,7 @@ public class Freddy : NPC
     }
 
     [SerializeField] private float _movementSpeed = 2.0f;
+    [SerializeField] private GameObject _flyer;
 
     private FreddyState _state;
 
@@ -56,6 +57,8 @@ public class Freddy : NPC
         {
             case FreddyState.IsInteractable:
                 _movementSpeed = 0.0f;
+                _flyer.SetActive(true);
+                _flyer.GetComponent<Interactable>().enabled = false;
                 break;
             case FreddyState.IsJumpscaring:
                 break;

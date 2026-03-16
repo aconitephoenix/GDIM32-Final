@@ -620,6 +620,7 @@ MonoBehaviour:
   _dialogueAudioController: {fileID: 461446602}
   _dialogueFont: {fileID: 11400000, guid: 2cee722033e1b8f4f8ec64e020435b8d, type: 2}
   _movementSpeed: 2
+  _flyer: {fileID: 343569432}
 --- !u!65 &164444357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1005,6 +1006,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &343569432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1115513861995567589, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+  m_PrefabInstance: {fileID: 824708674}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &353789757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,6 +1509,7 @@ MonoBehaviour:
   _dialogueAudioController: {fileID: 461446602}
   _dialogueFont: {fileID: 11400000, guid: 2cee722033e1b8f4f8ec64e020435b8d, type: 2}
   _movementSpeed: 2
+  _flyer: {fileID: 0}
 --- !u!1 &617533742
 GameObject:
   m_ObjectHideFlags: 0
