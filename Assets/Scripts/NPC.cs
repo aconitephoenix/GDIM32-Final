@@ -129,7 +129,13 @@ public class NPC : Interactable
         if (_currentNode._questTrigger)
         {
             _currentNode = _questInProgressNode;
-            _uiController._questActive = true;
+            if (!_quest1Complete)
+            { 
+                _uiController._questActive = true;
+            } else
+            {
+                _uiController._questActive = false;
+            }
         }
         else
         {
@@ -175,8 +181,8 @@ public class NPC : Interactable
     // Check if NPC quest is complete
     public virtual void QuestCheck()
     {
-        // If player has collected 7/8 pages, make it possible for them to ask Slenderman about the last page
-        if (GameController.Instance.Player._currentPageCount == GameController.Instance.Player._maxPageCount - 1 && GameController.Instance.Player._currentPageCount > 0)
+        // If player has collected at least 7/8 pages, make it possible for them to ask Slenderman about the last page
+        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
         {
             _quest1Complete = true;
             _uiController._questActive = false;

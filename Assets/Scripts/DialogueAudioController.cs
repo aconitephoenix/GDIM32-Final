@@ -6,18 +6,6 @@ public class DialogueAudioController : MonoBehaviour
     public List<AudioClip> _clips = new List<AudioClip>();
     [SerializeField] private AudioSource _audioSource;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     // Plays the clip
     public void PlayClip()
     {

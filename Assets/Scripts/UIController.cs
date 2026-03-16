@@ -172,8 +172,15 @@ public class UIController : MonoBehaviour
         if (options.Length >= 2 && !_questActive)
         {
             _option2.transform.parent.gameObject.SetActive(true);
-            _option2.text = options[1];
-            _dialogueButton2.onClick.AddListener(delegate { CurrentNPC.gameObject.GetComponent<NPC>().SelectedOption(1); });
+            if (options.Length >= 3 && GameController.Instance.Player._questState == PlayerController.QuestState.Quest2Complete)
+            {
+                _option2.text = options[2];
+                _dialogueButton2.onClick.AddListener(delegate { CurrentNPC.gameObject.GetComponent<NPC>().SelectedOption(2); });
+            } else
+            {
+                _option2.text = options[1];
+                _dialogueButton2.onClick.AddListener(delegate { CurrentNPC.gameObject.GetComponent<NPC>().SelectedOption(1); });
+            }
         }
         else
         {

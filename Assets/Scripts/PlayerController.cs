@@ -15,10 +15,20 @@ public class PlayerController : MonoBehaviour
         Disabled     // Debug state - no movement or interactions
     }
 
+    public enum QuestState
+    {
+        NotInQuest,
+        Quest1Complete,
+        Quest2Complete,
+        Quest3Started,
+        Quest3Complete
+    }
+
     [Header("State")]
     [SerializeField] private PlayerState currentState = PlayerState.Normal;
     // Public property to get current state
     public PlayerState CurrentState => currentState;
+    public QuestState _questState = QuestState.NotInQuest;
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
