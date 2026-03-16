@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f618f3d4319444199716e1fed81d86, type: 3}
-  m_Name: SlendermanQuestComplete3
+  m_Name: SlendermanQuest2Complete2
   m_EditorClassIdentifier: 
   _lines:
-  - DON'T WORRY ABOUT IT
-  - NOW SHOO. LEAVE ME BE
-  _playerReplyOptions: []
-  _npcReplies: []
+  - NAH
+  - SORRY
+  - I'M ON BREAK
+  - I NEED TO PUT THESE UP SOMEWHERE
+  - FEEL FREE TO EXPLORE THE AREA
+  - SEBASTIAN JESS AND KALEB PUT A LOT OF WORK INTO IT
+  _playerReplyOptions:
+  - For real? And who?
+  _npcReplies:
+  - {fileID: 11400000, guid: afd7d1d08542b03419cf9bdf48c6c925, type: 2}
   _questTrigger: 0
-  _questComplete: 1
+  _questComplete: 0

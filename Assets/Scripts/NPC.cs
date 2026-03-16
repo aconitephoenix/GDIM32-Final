@@ -19,6 +19,7 @@ public class NPC : Interactable
     protected bool _canContinue;
     protected bool _quest1Complete;
     protected bool _quest2Complete;
+    protected bool _quest3Complete;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -122,7 +123,7 @@ public class NPC : Interactable
         }
     }
 
-    protected void EndDialogue()
+    protected virtual void EndDialogue()
     {
         _waitingForPlayerResponse = false;
 
@@ -182,10 +183,11 @@ public class NPC : Interactable
     public virtual void QuestCheck()
     {
         // If player has collected at least 7/8 pages, make it possible for them to ask Slenderman about the last page
-        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
+        if (GameController.Instance.Player._currentPageCount == GameController.Instance.Player._maxPageCount - 1)
         {
             _quest1Complete = true;
             _uiController._questActive = false;
+            GameController.Instance.Player._questState = PlayerController.QuestState.Quest1Complete;
         }
         else
         {
