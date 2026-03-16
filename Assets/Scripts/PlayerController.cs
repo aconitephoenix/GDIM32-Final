@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     // tracking pages collected
     public int _currentPageCount = 0;
-    public int _maxPageCount = 2;
+    public int _maxPageCount = 8;
 
     public delegate void StringDelegate(string str);
     public event StringDelegate InteractableDetected;
