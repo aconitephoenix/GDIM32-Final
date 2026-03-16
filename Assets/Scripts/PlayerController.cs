@@ -284,18 +284,15 @@ public class PlayerController : MonoBehaviour
 
                 //slerp player horizontal rotate to npc
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f), fovTransitionSpeed * Time.deltaTime);
-                
-                
+
+
                 //slerp camera vertical rotation to npc
-                // Normalize euler angle from 0-360 to -180 to 180 range
-                float targetVertical = targetRotation.eulerAngles.x - 15f;
-                if (targetVertical > 180f)
-                    targetVertical -= 360f;
+                float targetVertical = -10f;
                 
                 // Clamp the target rotation to prevent exceeding look angle limits
-                targetVertical = Mathf.Clamp(targetVertical, -maxLookAngle, maxLookAngle);
+                //targetVertical = Mathf.Clamp(targetVertical, -maxLookAngle, maxLookAngle);
                 
-                // Lerp towards the clamped target
+                // Lerp towards target
                 verticalRotation = Mathf.Lerp(verticalRotation, targetVertical, fovTransitionSpeed * Time.deltaTime);
                 
                 cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
