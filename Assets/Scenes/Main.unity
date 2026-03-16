@@ -621,6 +621,7 @@ MonoBehaviour:
   _dialogueFont: {fileID: 11400000, guid: 2cee722033e1b8f4f8ec64e020435b8d, type: 2}
   _movementSpeed: 2
   _flyer: {fileID: 343569432}
+  _slenderman: {fileID: 1645463877}
 --- !u!65 &164444357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1510,6 +1511,7 @@ MonoBehaviour:
   _dialogueFont: {fileID: 11400000, guid: 2cee722033e1b8f4f8ec64e020435b8d, type: 2}
   _movementSpeed: 2
   _flyer: {fileID: 0}
+  _slenderman: {fileID: 0}
 --- !u!1 &617533742
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,6 +2292,8 @@ MonoBehaviour:
   chunkSize: 75
   renderDistance: 1
   updateInterval: 0.5
+  viewConeAngle: 90
+  alwaysUpdateForRotation: 1
 --- !u!4 &1200574644
 Transform:
   m_ObjectHideFlags: 0
