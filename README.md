@@ -23,7 +23,9 @@ Put your group Devlog here.
 
 
 ### Jess Tran
-Put your individual final Devlog here.
+Since the check-in, I've continued work on the dialogue/NPC logic while also implementing the quest system in our game (albeit it is REALLY messy...)
+
+I specifically worked around our NPCs inheriting from the NPC class and figuring out QuestStates in the Player to control what options would appear for the NPCs' dialogue. For example, Slenderman has around 4 options hooked up to him in his dialogue node that checks the player's quest progress, but the UIController will change the option available depending on the current quest state. This is certainly not a well-scaling solution, but it works..!! I also added different dialogue fonts and an audio controller that could randomize the dialogue sounds!
 ### Kaleb Reyes
 Put your individual final Devlog here.
 ### Sebastian Magana
