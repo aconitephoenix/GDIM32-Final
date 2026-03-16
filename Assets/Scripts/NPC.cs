@@ -18,7 +18,6 @@ public class NPC : Interactable
     protected bool _runningDialogue;
     protected bool _canContinue;
     protected bool _quest1Complete;
-    protected bool _quest2Complete;
     protected bool _quest3Complete;
 
     // Start is called before the first frame update
