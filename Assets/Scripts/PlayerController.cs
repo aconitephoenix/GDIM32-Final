@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     // tracking pages collected
     public int _currentPageCount = 0;
-    public int _maxPageCount = 1; // this is temp 1 for the check-in -jess
+    public int _maxPageCount = 2;
 
     public delegate void StringDelegate(string str);
     public event StringDelegate InteractableDetected;
@@ -86,6 +86,8 @@ public class PlayerController : MonoBehaviour
         // Get camera component
         playerCamera = cameraTransform.GetComponent<Camera>();
         normalFOV = playerCamera.fieldOfView;
+
+        Debug.Log(_maxPageCount);
     }
 
     // Raycasting Methods
@@ -134,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        Debug.Log(verticalRotation);
+        //Debug.Log(verticalRotation);
     }
 
     private void FixedUpdate()
@@ -390,11 +392,8 @@ public class PlayerController : MonoBehaviour
             {
                 _lookingAtInteractable = true;
             }
-            // will relocate this later in a diff method probably -jess
-            //InteractableDetected?.Invoke(hitInfo.collider.gameObject.tag);
         } else
         {
-            //InteractableDetected?.Invoke("Untagged");
             _lookingAtInteractable = false;
         }
 

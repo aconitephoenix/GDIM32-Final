@@ -2197,7 +2197,7 @@ MonoBehaviour:
   _raycastStartOffset: {x: 0, y: 0, z: 0}
   rb: {fileID: 1310158051}
   _currentPageCount: 0
-  _maxPageCount: 1
+  _maxPageCount: 2
 --- !u!136 &1310158047
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3081,7 +3081,6 @@ GameObject:
   - component: {fileID: 1645463880}
   - component: {fileID: 1645463879}
   - component: {fileID: 1645463878}
-  - component: {fileID: 1645463883}
   - component: {fileID: 1645463884}
   m_Layer: 0
   m_Name: Slenderman
@@ -3176,26 +3175,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1645463883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645463877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f6da9b6854ea14438c76c13f3850446, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactionDistance: 3
-  _uiController: {fileID: 1363857249}
-  _name: Slenderman
-  _startingNode: {fileID: 11400000, guid: a15fd126ce235b444a3cc15441754742, type: 2}
-  _questInProgressNode: {fileID: 11400000, guid: 96aa98867e38392429ee6faad87bb9d6, type: 2}
-  _dialogueAudioClips: []
-  _dialogueAudioController: {fileID: 461446602}
-  _dialogueFont: {fileID: 11400000, guid: ecee31dfb1f3f05498c84a3caa4a65fd, type: 2}
 --- !u!114 &1645463884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3208,6 +3187,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1cf39457011c904eb935c6cffc2e3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interactionDistance: 3
+  _uiController: {fileID: 1363857249}
+  _name: Slenderman
+  _startingNode: {fileID: 11400000, guid: a15fd126ce235b444a3cc15441754742, type: 2}
+  _questInProgressNode: {fileID: 11400000, guid: 96aa98867e38392429ee6faad87bb9d6, type: 2}
+  _dialogueAudioClips: []
+  _dialogueAudioController: {fileID: 461446602}
+  _dialogueFont: {fileID: 11400000, guid: ecee31dfb1f3f05498c84a3caa4a65fd, type: 2}
 --- !u!1 &1682806097
 GameObject:
   m_ObjectHideFlags: 0

@@ -186,13 +186,5 @@ public class NPC : Interactable
             _quest1Complete = false;
             _uiController._questActive = true;
         }
-
-        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount)
-        {
-            _quest2Complete = true;
-        } else
-        {
-            _quest2Complete = false;
-        }
     }
 }

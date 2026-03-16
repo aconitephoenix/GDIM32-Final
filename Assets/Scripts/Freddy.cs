@@ -67,12 +67,6 @@ public class Freddy : NPC
 
     public override void QuestCheck()
     {
-        if (GameController.Instance.Player._currentPageCount == GameController.Instance.Player._maxPageCount - 1 && GameController.Instance.Player._currentPageCount > 0)
-        {
-            _uiController._questActive = false;
-        } else
-        {
-            _uiController._questActive = true;
-        }
+        base.QuestCheck();
     }
 }
