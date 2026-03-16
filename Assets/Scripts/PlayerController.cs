@@ -246,15 +246,16 @@ public class PlayerController : MonoBehaviour
     private void HandleJump()
     {
         // Check if grounded
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1f);
         if (isGrounded)
         {
             isJumping = false;
         }
         // Jump
-        if (Input.GetKey(KeyCode.Space) && isGrounded && !isJumping && rb.velocity.y <= .2f)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && !isJumping && rb.velocity.y <= 1f)
         {
             //rb force jump
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // reset y velocity before jump to prevent double jump height
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true;
         }
