@@ -28,6 +28,11 @@ public class Slenderman : NPC
         base.OnMouseOver();
     }
 
+    protected override void EndDialogue()
+    {
+        base.EndDialogue();
+    }
+
     public override void QuestCheck()
     {
         base.QuestCheck();

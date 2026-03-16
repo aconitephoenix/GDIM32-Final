@@ -37,6 +37,9 @@ public class Interactable : MonoBehaviour
             if (!_collected)
             {
                 _uiController.HandleHoverText(gameObject.tag);
+            } else
+            {
+                _uiController.HandleHoverText("Untagged");
             }
             
         }
