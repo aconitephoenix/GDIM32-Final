@@ -52,7 +52,8 @@ public class NPC : Interactable
                     if (_dialogueFont != null)
                     {
                         _uiController.SetDialogueFont(_dialogueFont);
-                    } else
+                    }
+                    else
                     {
                         _uiController.SetDialogueFont(null);
                     }
@@ -131,9 +132,10 @@ public class NPC : Interactable
         {
             _currentNode = _questInProgressNode;
             if (!_quest1Complete)
-            { 
+            {
                 _uiController._questActive = true;
-            } else
+            }
+            else
             {
                 _uiController._questActive = false;
             }
@@ -179,7 +181,7 @@ public class NPC : Interactable
         }
     }
 
-    // Check if NPC quest is complete
+    // Check if NPC quest is complete every time a page is collected
     public virtual void QuestCheck()
     {
         // If player has collected at least 7/8 pages, make it possible for them to ask Slenderman about the last page

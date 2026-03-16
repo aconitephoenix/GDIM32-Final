@@ -44,6 +44,8 @@ public class Slenderman : NPC
             else if (_currentNode._playerReplyOptions != null && _currentNode._playerReplyOptions.Length > 0)
             {
                 // show player dialogue options, if any
+
+                // If Freddy's Quest has been started or the player has collected all the pages, make the second option visible
                 if (GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Started || GameController.Instance.Player._questState == PlayerController.QuestState.Quest2Complete)
                 {
                     _uiController._questActive = false;
@@ -75,7 +77,8 @@ public class Slenderman : NPC
             _quest2Complete = true;
             _uiController._questActive = false;
             GameController.Instance.Player._questState = PlayerController.QuestState.Quest2Complete;
-        } else
+        }
+        else
         {
             _quest2Complete = false;
         }

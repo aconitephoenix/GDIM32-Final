@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerState currentState = PlayerState.Normal;
     // Public property to get current state
     public PlayerState CurrentState => currentState;
+
+    // Tracks the current quest condition
     public QuestState _questState = QuestState.NotInQuest;
 
     [Header("Movement Settings")]

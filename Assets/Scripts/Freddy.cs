@@ -19,6 +19,9 @@ public class Freddy : NPC
     public override void Start()
     {
         base.Start();
+
+        // currently set this just for testing purposes.. feel free to remove this if it conflicts with the AI -jess
+        _state = FreddyState.IsMoving;
     }
 
     // Update is called once per frame
@@ -44,10 +47,8 @@ public class Freddy : NPC
     {
         if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
         {
+            // If the player is currently missing the last page, make Freddy interactable
             _state = FreddyState.IsInteractable;
-        } else
-        {
-            _state = FreddyState.IsMoving;
         }
     }
 
@@ -57,7 +58,8 @@ public class Freddy : NPC
         {
             // If Freddy is currently interactable, do normal NPC interaction
             base.OnMouseOver();
-        } else
+        }
+        else
         {
             return;
         }
@@ -101,11 +103,12 @@ public class Freddy : NPC
                 if (GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Complete)
                 {
                     _uiController._questActive = false;
-                } else if (GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Started)
+                }
+                else if (GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Started)
                 {
                     _uiController._questActive = true;
                 }
-                    _waitingForPlayerResponse = true;
+                _waitingForPlayerResponse = true;
                 _uiController.ShowPlayerOptions(_currentNode._playerReplyOptions);
                 _canContinue = false;
             }
@@ -126,8 +129,9 @@ public class Freddy : NPC
         {
             _currentNode = _questInProgressNode;
 
+            // Start Freddy's quest if the player has chosen to
             GameController.Instance.Player._questState = PlayerController.QuestState.Quest3Started;
-            
+
             if (!_quest3Complete)
             {
                 _uiController._questActive = true;
@@ -145,9 +149,10 @@ public class Freddy : NPC
             }
             else
             {
+                // Make the flyer collectable if the player has rejected Freddy's quest
                 if (GameController.Instance.Player._questState != PlayerController.QuestState.Quest3Complete)
-                { 
-                    _flyer.GetComponent<Interactable>().enabled = true; 
+                {
+                    _flyer.GetComponent<Interactable>().enabled = true;
                 }
                 _canContinue = false;
                 gameObject.GetComponent<NPC>().enabled = false;
@@ -159,10 +164,5 @@ public class Freddy : NPC
         _runningDialogue = false;
         _uiController.HideDialogue();
         GameController.Instance.Player.SetState(PlayerController.PlayerState.Normal);
-    }
-
-    public override void QuestCheck()
-    {
-        base.QuestCheck();
     }
 }

@@ -37,14 +37,6 @@ public class UIController : MonoBehaviour
         _pagesText.text = "Pages: 0/" + GameController.Instance.Player._maxPageCount;
     }
 
-    // Update is called once per frame
-    /*
-    void Update()
-    {
-
-    }
-    */
-
     public void SetNPC(GameObject npc)
     {
         CurrentNPC = npc;
@@ -172,6 +164,8 @@ public class UIController : MonoBehaviour
         if (options.Length >= 2 && !_questActive)
         {
             _option2.transform.parent.gameObject.SetActive(true);
+
+            // Changing the second option's text + resulting dialogue depending on the quest condition
             if (options.Length >= 4 && GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Started)
             {
                 _option2.text = options[3];
