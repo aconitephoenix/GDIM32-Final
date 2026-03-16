@@ -7,6 +7,8 @@ public class Interactable : MonoBehaviour
 {
     [SerializeField] protected float _interactionDistance = 2.0f;
     [SerializeField] protected UIController _uiController;
+    [SerializeField] protected AudioClip _pageCollectSound;
+    [SerializeField] protected AudioSource _audioSource;
 
     private bool _collected;
 
@@ -14,6 +16,12 @@ public class Interactable : MonoBehaviour
     void Start()
     {
         _collected = false;
+        
+        // Get AudioSource if not assigned
+        if (_audioSource == null)
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
     }
 
     // Update is called once per frame
@@ -59,6 +67,9 @@ public class Interactable : MonoBehaviour
     private void Collect()
     {
         _collected = true;
+        
+        // Play page collect sound if audio source and clip are available
+        _audioSource.PlayOneShot(_pageCollectSound);
         GameController.Instance.Player.CollectPage();
         Destroy(gameObject);
     }

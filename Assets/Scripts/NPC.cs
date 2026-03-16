@@ -39,6 +39,8 @@ public class NPC : Interactable
         // Checking if player is within interaction distance
         if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance && gameObject.GetComponent<NPC>().enabled == true)
         {
+            _uiController.SetNPC(gameObject);
+
             // Player interaction once they press E or click the mouse
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
             {
@@ -196,4 +198,6 @@ public class NPC : Interactable
             _uiController._questActive = true;
         }
     }
+
+    public string Name => _name;
 }

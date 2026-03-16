@@ -183,9 +183,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 781925485}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _pageCollectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af15a3c9eadd0b64abc0aca546f3cb49, type: 3}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _interactionDistance
       value: 3
@@ -257,9 +265,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 781925485}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _pageCollectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af15a3c9eadd0b64abc0aca546f3cb49, type: 3}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _interactionDistance
       value: 3
@@ -289,7 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 89319302}
   - component: {fileID: 89319301}
-  - component: {fileID: 89319300}
+  - component: {fileID: 89319303}
   m_Layer: 5
   m_Name: Dialogue Option 2 Text
   m_TagString: Untagged
@@ -297,7 +313,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &89319300
+--- !u!222 &89319301
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89319299}
+  m_CullTransparentMesh: 1
+--- !u!224 &89319302
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89319299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 195561977}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.95150757, y: -0.95149994}
+  m_SizeDelta: {x: -32.3497, y: -14.5891}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &89319303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -317,17 +360,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is ALSO a dialogue option...
+  m_text: This is also dialogue option...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
+  m_sharedMaterial: {fileID: 1286716095429867794, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4292532954
+  m_fontColor: {r: 0.85490197, g: 0.85490197, b: 0.85490197, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -344,10 +387,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.4
-  m_fontSizeBase: 24
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -386,33 +429,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &89319301
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89319299}
-  m_CullTransparentMesh: 1
---- !u!224 &89319302
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89319299}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 195561977}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.95150757, y: -0.95149994}
-  m_SizeDelta: {x: -32.3497, y: -14.5891}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &91214920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -470,9 +486,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 781925485}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _pageCollectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af15a3c9eadd0b64abc0aca546f3cb49, type: 3}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _interactionDistance
       value: 3
@@ -626,6 +650,11 @@ MonoBehaviour:
   _pageTransform:
   - {fileID: 664376794}
   - {fileID: 3722410}
+  - {fileID: 2112280345}
+  - {fileID: 1983806033}
+  - {fileID: 16906864}
+  - {fileID: 91214921}
+  - {fileID: 722737392}
   _rotateSpeed: 999999
 --- !u!1001 &125233327
 PrefabInstance:
@@ -688,9 +717,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 781925485}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _pageCollectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af15a3c9eadd0b64abc0aca546f3cb49, type: 3}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _interactionDistance
       value: 3
@@ -717,7 +754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &158709192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -815,6 +852,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDistance: 3
   _uiController: {fileID: 1363857249}
+  _pageCollectSound: {fileID: 0}
+  _audioSource: {fileID: 0}
   _name: Freddy
   _startingNode: {fileID: 11400000, guid: 0e9b873702c26e348a59811c205263de, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 2edca7893ca24164fa122dd87e803816, type: 2}
@@ -958,14 +997,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.23529412, g: 0.23921569, b: 0.23921569, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1079,14 +1118,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.23529412, g: 0.23921569, b: 0.23921569, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1909,17 +1948,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[NPC Name]'
+  m_text: Slenderman
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
+  m_sharedMaterial: {fileID: 1286716095429867794, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4284131495
+  m_fontColor: {r: 0.6546542, g: 0.66, b: 0.35134768, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1936,15 +1975,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25.8
+  m_fontSizeBase: 25.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2268,6 +2307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDistance: 3
   _uiController: {fileID: 1363857249}
+  _pageCollectSound: {fileID: 0}
+  _audioSource: {fileID: 0}
   _name: Freddy
   _startingNode: {fileID: 11400000, guid: 3baa708490b3ae2488c4d0fcfda4a911, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 9d799dd76d5fdf740a28396b988957e8, type: 2}
@@ -2342,24 +2383,24 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is dialogue text.....
+  m_text: This is a dialogue text...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
+  m_sharedMaterial: {fileID: 1286716095429867794, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4292532954
+  m_fontColor: {r: 0.8544474, g: 0.8544474, b: 0.8544474, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 0, g: 0, b: 0, a: 1}
+    topRight: {r: 0.85983825, g: 0.85983825, b: 0.85983825, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 0, g: 0, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -2369,8 +2410,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 23.11
+  m_fontSizeBase: 23.11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2563,9 +2604,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 781925485}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _pageCollectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af15a3c9eadd0b64abc0aca546f3cb49, type: 3}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _interactionDistance
       value: 3
@@ -2585,6 +2634,134 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1584227946270123934, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
   m_PrefabInstance: {fileID: 824708674}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &781925484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781925486}
+  - component: {fileID: 781925485}
+  m_Layer: 0
+  m_Name: AudioSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &781925485
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781925484}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &781925486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781925484}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.9396927, z: -0, w: 0.34202018}
+  m_LocalPosition: {x: 33.69, y: 0.27, z: -47.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &824708674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2792,6 +2969,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDistance: 3
   _uiController: {fileID: 1363857249}
+  _pageCollectSound: {fileID: 0}
+  _audioSource: {fileID: 0}
   _destination: {fileID: 1964846172}
   _offset: {x: 0, y: 2, z: 0}
 --- !u!65 &925204576
@@ -2853,17 +3032,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click to talk
+  m_text: Page
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
+  m_sharedMaterial: {fileID: 1286716095429867794, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293980400
+  m_fontColor: {r: 0.94070077, g: 0.94070077, b: 0.94070077, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2880,15 +3059,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 17.1
+  m_fontSizeBase: 17.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2946,7 +3125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39800003, y: 0.46}
   m_AnchorMax: {x: 0.60200006, y: 0.53833336}
-  m_AnchoredPosition: {x: -0.020019531, y: 0.5}
+  m_AnchoredPosition: {x: -0.020019531, y: -21}
   m_SizeDelta: {x: 1, y: -0.4200101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1070533028
@@ -3002,7 +3181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
+  m_Color: {r: 0.23529412, g: 0.23921569, b: 0.23921569, a: 0.47843137}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3156,10 +3335,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1363857253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.016666666, y: 0.84833336}
-  m_AnchorMax: {x: 0.42100003, y: 0.98166674}
-  m_AnchoredPosition: {x: 1.1103516, y: 1.3751221}
-  m_SizeDelta: {x: 2.220501, y: 19.2499}
+  m_AnchorMin: {x: 0.020000001, y: 0.8366667}
+  m_AnchorMax: {x: 0.423, y: 1}
+  m_AnchoredPosition: {x: -1.3896484, y: -0.6248779}
+  m_SizeDelta: {x: 3.2204895, y: 1.2499084}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1144267753 stripped
 GameObject:
@@ -3668,7 +3847,7 @@ MonoBehaviour:
   _compass: {fileID: 111410413}
   _nameText: {fileID: 433359346}
   _option1: {fileID: 1984301368}
-  _option2: {fileID: 89319300}
+  _option2: {fileID: 89319303}
   _typingSpeed: 0.04
   _dialogueButton1: {fileID: 203355862}
   _dialogueButton2: {fileID: 195561978}
@@ -3990,15 +4169,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: click/press e to continue >>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
+  m_sharedMaterial: {fileID: 1286716095429867794, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285229931
-  m_fontColor: {r: 0.42138356, g: 0.42138356, b: 0.42138356, a: 1}
+    rgba: 4289835441
+  m_fontColor: {r: 0.69272226, g: 0.69272226, b: 0.69272226, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4015,8 +4194,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 16.22
+  m_fontSizeBase: 16.22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4159,6 +4338,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDistance: 3
   _uiController: {fileID: 1363857249}
+  _pageCollectSound: {fileID: 0}
+  _audioSource: {fileID: 0}
   _destination: {fileID: 925204574}
   _offset: {x: -1, y: 0, z: 0}
 --- !u!65 &1635860319
@@ -4367,12 +4548,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDistance: 3
   _uiController: {fileID: 1363857249}
+  _pageCollectSound: {fileID: 0}
+  _audioSource: {fileID: 0}
   _name: Slenderman
   _startingNode: {fileID: 11400000, guid: a15fd126ce235b444a3cc15441754742, type: 2}
   _questInProgressNode: {fileID: 11400000, guid: 96aa98867e38392429ee6faad87bb9d6, type: 2}
   _dialogueAudioClips: []
   _dialogueAudioController: {fileID: 461446602}
-  _dialogueFont: {fileID: 11400000, guid: ecee31dfb1f3f05498c84a3caa4a65fd, type: 2}
+  _dialogueFont: {fileID: 11400000, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
 --- !u!1 &1682806097
 GameObject:
   m_ObjectHideFlags: 0
@@ -5768,9 +5951,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 781925485}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _pageCollectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af15a3c9eadd0b64abc0aca546f3cb49, type: 3}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _interactionDistance
       value: 3
@@ -5852,15 +6043,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: This is a dialogue option...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
+  m_sharedMaterial: {fileID: 1286716095429867794, guid: 0650a06d4b6bf334a92fa5fbf88ee91c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4292532954
+  m_fontColor: {r: 0.85490197, g: 0.85490197, b: 0.85490197, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5877,10 +6068,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.95
-  m_fontSizeBase: 24
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -6105,9 +6296,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 781925485}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _pageCollectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af15a3c9eadd0b64abc0aca546f3cb49, type: 3}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _interactionDistance
       value: 3
@@ -6187,4 +6386,5 @@ SceneRoots:
   - {fileID: 461446601}
   - {fileID: 1786806501}
   - {fileID: 1200574644}
+  - {fileID: 781925486}
   - {fileID: 1209029406}

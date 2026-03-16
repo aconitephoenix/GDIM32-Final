@@ -29,6 +29,9 @@ public class UIController : MonoBehaviour
     public bool _isTyping;
     public bool _questActive = false;
 
+    private bool _skipDialogue = false;
+    private bool _canSkip = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,15 +52,23 @@ public class UIController : MonoBehaviour
         {
             if (tag == "NPC")
             {
-                _hoverText.text = "Click or press E to talk";
+                NPC npc = CurrentNPC.GetComponent<NPC>();
+                if (npc != null)
+                {
+                    _hoverText.text = npc.Name;
+                }
+                else
+                {
+                    _hoverText.text = "NPC";
+                }
             }
             else if (tag == "Interactable")
             {
-                _hoverText.text = "Click or press E to interact";
+                _hoverText.text = "Page";
             }
             else if (tag == "Door")
             {
-                _hoverText.text = "Click or press E to enter";
+                _hoverText.text = "Door";
             }
 
             _hoverText.gameObject.SetActive(true);
@@ -89,6 +100,7 @@ public class UIController : MonoBehaviour
             StopCoroutine(_typeLineCoroutine);
         }
 
+        _canSkip = false;
         _typeLineCoroutine = StartCoroutine(TypeLine(dialogue));
 
         _nameText.text = name;
@@ -98,21 +110,25 @@ public class UIController : MonoBehaviour
     private IEnumerator TypeLine(string dialogue)
     {
         _isTyping = true;
+        _skipDialogue = false;
 
         _dialogueText.text = dialogue;
         _dialogueText.maxVisibleCharacters = 0;
 
+        yield return new WaitForEndOfFrame();
+        _canSkip = true;
+
         for (int i = 0; i < dialogue.Length + 1; i++)
         {
-            // skip to the end of the line (i'll fix this later) -jess
-            if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)) && _isTyping && i > 0)
+            if (_skipDialogue)
             {
                 _dialogueText.maxVisibleCharacters = dialogue.Length + 1;
-                _isTyping = false;
+                _skipDialogue = false;
                 _dialogueAudioController.StopClip();
                 _dialogueAudioController.RemoveAudioClips();
                 _continueDialogueText.gameObject.SetActive(true);
-                break;
+                _isTyping = false;
+                yield break;
             }
 
             _dialogueText.maxVisibleCharacters = i;
@@ -122,11 +138,20 @@ public class UIController : MonoBehaviour
         }
 
         _isTyping = false;
+        _skipDialogue = false;
         _dialogueAudioController.StopClip();
         _dialogueAudioController.RemoveAudioClips();
         _continueDialogueText.gameObject.SetActive(true);
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (_isTyping && _canSkip && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E)))
+        {
+            _skipDialogue = true;
+        }
+    }
 
     // Hide dialogue box
     public void HideDialogue()
