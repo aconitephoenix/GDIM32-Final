@@ -74,13 +74,8 @@ public class Slenderman : NPC
 
         if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount)
         {
-            _quest2Complete = true;
             _uiController._questActive = false;
             GameController.Instance.Player._questState = PlayerController.QuestState.Quest2Complete;
-        }
-        else
-        {
-            _quest2Complete = false;
         }
     }
 }

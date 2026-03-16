@@ -17,11 +17,11 @@ public class PlayerController : MonoBehaviour
 
     public enum QuestState
     {
-        NotInQuest,
-        Quest1Complete,
-        Quest2Complete,
-        Quest3Started,
-        Quest3Complete
+        NotInQuest,         // Starting quest state, player is not currently in a quest
+        Quest1Complete,     // Player has collected all pages except for Freddy's
+        Quest2Complete,     // Player has collected all pages, including Freddy's
+        Quest3Started,      // Player has initiated Freddy's quest
+        Quest3Complete      // Player has completed Freddy's quest
     }
 
     [Header("State")]
