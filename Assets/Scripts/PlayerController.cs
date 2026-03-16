@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
         // Jump
-        if (Input.GetKey(KeyCode.Space) && isGrounded && !isJumping && rb.velocity.y <= 1f)
+        if (Input.GetKey(KeyCode.Space) && isGrounded && !isJumping && rb.velocity.y <= .2f)
         {
             //rb force jump
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
