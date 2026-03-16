@@ -25,7 +25,7 @@ public class Interactable : MonoBehaviour
     public virtual void OnMouseOver()
     {
         // Checking if player is within interaction distance
-        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance)
+        if (Vector3.Distance(transform.position, GameController.Instance.Player.transform.position) <= _interactionDistance && gameObject.GetComponent<Interactable>().enabled == true)
         {
             // Player interaction once they press E or click the mouse
             if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.E))
@@ -38,10 +38,11 @@ public class Interactable : MonoBehaviour
             {
                 _uiController.HandleHoverText(gameObject.tag);
             }
-            else
-            {
-                _uiController.HandleHoverText("Untagged");
-            }
+            
+        }
+        else
+        {
+            _uiController.HandleHoverText("Untagged");
         }
     }
 
