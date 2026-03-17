@@ -3678,7 +3678,7 @@ MonoBehaviour:
   _lineofSightMaxDist: 3.01
   _raycastStartOffset: {x: 0, y: 0, z: 0}
   rb: {fileID: 1310158051}
-  _currentPageCount: 5
+  _currentPageCount: 0
   _maxPageCount: 8
 --- !u!136 &1310158047
 CapsuleCollider:
