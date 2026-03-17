@@ -57,11 +57,8 @@ public class PlayerController : MonoBehaviour
     [Header("Raycast Settings")]
     [SerializeField] private float _lineofSightMaxDist;
     [SerializeField] private Vector3 _raycastStartOffset;
-    private bool _lookingAtInteractable = false;
 
     private string _npcTag = "NPC";
-    private string _interactableTag = "Interactable";
-    private string _doorTag = "Door";
     
     [SerializeField] private Rigidbody rb;
     private Camera playerCamera;
@@ -75,9 +72,6 @@ public class PlayerController : MonoBehaviour
     // tracking pages collected
     public int _currentPageCount = 0;
     public int _maxPageCount = 8;
-
-    public delegate void StringDelegate(string str);
-    public event StringDelegate InteractableDetected;
 
     public delegate void EmptyDelegate();
     public event EmptyDelegate PageCollected;
@@ -129,12 +123,10 @@ public class PlayerController : MonoBehaviour
                 HandleMovement();
                 HandleMouseLook();
                 HandleSprint();
-                LookingAtInteractable();
                 break;
 
             case PlayerState.InDialogue:
                 // no movement, camera lerp to npc
-                LookingAtInteractable();
                 LerpToNPC();
                 break;
 
@@ -387,27 +379,6 @@ public class PlayerController : MonoBehaviour
 
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
         SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);
-    }
-
-    // Check if player is looking at something they can interact with
-    private bool LookingAtInteractable()
-    { 
-        RaycastHit hitInfo;
-
-        // Firing raycast out from camera
-        if (Physics.Raycast(_raycastStart, _raycastDir, out hitInfo, _lineofSightMaxDist))
-        {
-            _raycastHitLocation = hitInfo.point;
-            if (hitInfo.collider.gameObject.tag.Equals(_interactableTag) || hitInfo.collider.gameObject.tag.Equals(_npcTag) || hitInfo.collider.gameObject.tag.Equals(_doorTag))
-            {
-                _lookingAtInteractable = true;
-            }
-        } else
-        {
-            _lookingAtInteractable = false;
-        }
-
-        return _lookingAtInteractable;
     }
 
     private void OnDrawGizmos()
