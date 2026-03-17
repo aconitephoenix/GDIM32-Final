@@ -29,7 +29,77 @@ I specifically worked around our NPCs inheriting from the NPC class and figuring
 ### Kaleb Reyes
 Put your individual final Devlog here.
 ### Sebastian Magana
-Put your individual final Devlog here.
+This is a bit of a restatement of my self review but I mainly contributed to the aesthetics to the game. I did the music, the footsteps of the characters, and the page collection sound effect. I recorded them in my room. I reworked the UI for the dialogue, changing the text style and font, I imported the PSX style shader, I did the 3D Model for the building, I imported the trees, made the terrain elevation changes to the environment. I also added the sprite for Slenderman and the model and animation states for Freddy, and did the AI code for Freddy, as well as the player controller finite state machine, and rigidbody first-person controller/camera controller script. I also made a fog system with particle systems that renders in chunks around the player which gives the game its eerie vibe. Architecturally, my main contribution was the player controller and the freddy ai finite state machines and methods for each. They served a vital purpose in their behaviours and how they effect the mechanics outside of page collection and dialogue.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Open-Source Assets
 - [PSX-Style Shader](https://assetstore.unity.com/packages/vfx/shaders/fullscreen-camera-effects/psx-style-shader-351978) - PSX Shader
