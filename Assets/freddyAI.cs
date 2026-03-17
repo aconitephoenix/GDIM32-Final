@@ -40,6 +40,11 @@ public class freddyAI : MonoBehaviour
     [Header("Jumpscare Settings")]
     [SerializeField] private float _jumpscareDistance = 2f; // Distance to trigger jumpscare
     [SerializeField] private float _jumpscareDuration = 3f; // How long the jumpscare lasts
+    [SerializeField] private float _jumpscareFollowDistance = 5f; // Distance from camera to position Freddy
+    [SerializeField] private float _jumpscareFollowHeight = -1f; // Height offset below camera
+    [SerializeField] private float _escapeRunDuration = 2f; // How long Freddy runs away
+    [SerializeField] private float _escapeRunSpeed = 8f; // Speed while escaping
+    [SerializeField] private float _lightFlashDuration = 1.5f; // Duration of red light flash
 
     [Header("Debug Settings")]
     [SerializeField] private bool _enableDebugLogs = true; // Toggle debug logs on/off
@@ -50,9 +55,11 @@ public class freddyAI : MonoBehaviour
     private readonly string ANIM_JUMPSCARE = "jumpscare";
 
     private Transform _player;
+    private Camera _playerCamera;
     private float _diagnosticTimer = 0f;
     private Vector3 _initialModelLocalPosition; // Store initial local position of model
     private bool _hasChildModel = false; // Track if we have a separate child model
+    private bool _hasBeenDeactivated = false; // Track if Freddy has been deactivated due to quest completion
 
     void Start()
     {
@@ -60,6 +67,7 @@ public class freddyAI : MonoBehaviour
         if (GameController.Instance != null && GameController.Instance.Player != null)
         {
             _player = GameController.Instance.Player.transform;
+            _playerCamera = _player.GetComponentInChildren<Camera>();
             DebugLog("Player reference found at position: " + _player.position);
         }
         else
@@ -185,15 +193,7 @@ public class freddyAI : MonoBehaviour
             ActivateNow();
         }
 
-        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
-        {
-            gameObject.GetComponent<freddyAI>().enabled = false;
-            gameObject.SetActive(false);
-        }
-
         if (!_isActive || _player == null) return;
-
-
 
         // Periodic diagnostic output (every 2 seconds)
         _diagnosticTimer += Time.deltaTime;
@@ -211,6 +211,14 @@ public class freddyAI : MonoBehaviour
             DebugLog("  Is Stopped: " + _agent.isStopped);
         }
 
+        // If player has collected all pages, deactivate Freddy
+        if (!_hasBeenDeactivated && GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
+        {
+            DebugLog("Player collected all pages! Deactivating Freddy.");
+            DeactivateFreddy();
+            return;
+        }
+
         // Update behavior based on current state
         switch (_currentState)
         {
@@ -226,6 +234,31 @@ public class freddyAI : MonoBehaviour
         }
     }
 
+    // Deactivate Freddy and make him invisible
+    private void DeactivateFreddy()
+    {
+        _hasBeenDeactivated = true;
+        _isActive = false;
+        _currentState = FreddyAIState.Inactive;
+
+        // Stop the NavMeshAgent
+        if (_agent != null)
+        {
+            _agent.isStopped = true;
+            _agent.enabled = false;
+        }
+
+        // Disable all renderers to make Freddy invisible
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.enabled = false;
+        }
+
+        DebugLog("Freddy AI deactivated and hidden.");
+
+
+    }
 
     // Check if player has started collecting pages (page quest started)
     private IEnumerator CheckForQuestStart()
@@ -448,34 +481,108 @@ public class freddyAI : MonoBehaviour
     private IEnumerator PerformJumpscare()
     {
         DebugLog("Jumpscare: Starting jumpscare sequence.");
-        PlayAnimation(ANIM_JUMPSCARE);
 
-        // Look at player during jumpscare - rotate PARENT
-        if (_player != null)
-        {
-            Vector3 directionToPlayer = (_player.position - transform.position);
-            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-            transform.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
-        }
-
-        // Disable player control (optional)
+        // Disable player control during jumpscare
         if (GameController.Instance != null && GameController.Instance.Player != null)
         {
             GameController.Instance.Player.SetState(PlayerController.PlayerState.Cutscene);
             DebugLog("Jumpscare: Player control disabled.");
         }
 
+        // Teleport Freddy in front of player camera
+        if (_player != null && _playerCamera != null)
+        {
+            Vector3 cameraPos = _playerCamera.transform.position;
+            Vector3 cameraForward = _playerCamera.transform.forward;
+            Vector3 jumpscarePos = cameraPos + (cameraForward * _jumpscareFollowDistance);
+            jumpscarePos.y += _jumpscareFollowHeight;
+
+            // Teleport and disable NavMeshAgent temporarily
+            if (_agent != null)
+            {
+                _agent.enabled = false;
+            }
+            transform.position = jumpscarePos;
+            if (_agent != null)
+            {
+                _agent.enabled = true;
+            }
+
+            // Look directly at player camera
+            Vector3 directionToPlayer = (_playerCamera.transform.position - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(directionToPlayer);
+
+            DebugLog("Jumpscare: Freddy teleported to " + jumpscarePos);
+        }
+
+        // Play jumpscare animation
+        PlayAnimation(ANIM_JUMPSCARE);
         yield return new WaitForSeconds(_jumpscareDuration);
 
-        DebugLog("Jumpscare: Jumpscare sequence complete. Restoring player control.");
+        DebugLog("Jumpscare: Animation complete. Restoring player control and running away.");
 
-        // After jumpscare, restore player control
+        // Flash the light red
+        StartCoroutine(FlashLightRed());
+
+        // Move Freddy away from player quickly
+        if (_agent != null && _player != null)
+        {
+            _agent.isStopped = false;
+            _agent.speed = _escapeRunSpeed;
+
+            // Set escape destination far away from player
+            Vector3 escapeDirection = (transform.position - _player.position).normalized;
+            Vector3 escapeTarget = transform.position + (escapeDirection * 50f);
+            escapeTarget.y = transform.position.y;
+
+            _agent.SetDestination(escapeTarget);
+            PlayAnimation(ANIM_RUNNING);
+
+            DebugLog("Jumpscare: Freddy running away at speed " + _escapeRunSpeed);
+        }
+
+        // Wait for escape run duration
+        yield return new WaitForSeconds(_escapeRunDuration);
+
+        // Restore player control after jumpscare is over
         if (GameController.Instance != null && GameController.Instance.Player != null)
         {
             GameController.Instance.Player.SetState(PlayerController.PlayerState.Normal);
+            DebugLog("Jumpscare: Player control restored.");
         }
 
         SetState(FreddyAIState.Roaming);
+    }
+
+    // Flash the light red for a brief moment
+    private IEnumerator FlashLightRed()
+    {
+        DebugLog("Jumpscare: Flashing light red.");
+        
+        // Find all lights in the scene and store their original colors
+        Light[] allLights = FindObjectsOfType<Light>();
+        Color[] originalColors = new Color[allLights.Length];
+        
+        for (int i = 0; i < allLights.Length; i++)
+        {
+            originalColors[i] = allLights[i].color;
+        }
+
+        // Flash to red
+        foreach (Light light in allLights)
+        {
+            light.color = Color.red;
+        }
+
+        yield return new WaitForSeconds(_lightFlashDuration);
+
+        // Restore original colors
+        for (int i = 0; i < allLights.Length; i++)
+        {
+            allLights[i].color = originalColors[i];
+        }
+
+        DebugLog("Jumpscare: Light flash complete.");
     }
 
     // Play animation
