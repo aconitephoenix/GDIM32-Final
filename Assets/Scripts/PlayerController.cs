@@ -58,16 +58,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip _walkingSound;
     [SerializeField] private AudioClip _sprintSound;
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private float _movementSpeedThreshold = 0.5f;
 
     [Header("Raycast Settings")]
     [SerializeField] private float _lineofSightMaxDist;
     [SerializeField] private Vector3 _raycastStartOffset;
-    private bool _lookingAtInteractable = false;
 
     private string _npcTag = "NPC";
-    private string _interactableTag = "Interactable";
-    private string _doorTag = "Door";
     
     [SerializeField] private Rigidbody rb;
     private Camera playerCamera;
@@ -75,17 +71,12 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float verticalRotation = 0f;
     private bool _isPlayingFootsteps = false;
-    private bool _isPlayingSprintSound = false;
-
     // Variables for Gizmo drawing
     private Vector3 _raycastHitLocation;
 
     // tracking pages collected
     public int _currentPageCount = 0;
     public int _maxPageCount = 8;
-
-    public delegate void StringDelegate(string str);
-    public event StringDelegate InteractableDetected;
 
     public delegate void EmptyDelegate();
     public event EmptyDelegate PageCollected;
