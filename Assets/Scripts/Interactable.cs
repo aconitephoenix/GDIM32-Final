@@ -69,7 +69,8 @@ public class Interactable : MonoBehaviour
         _collected = true;
         
         // Play page collect sound if audio source and clip are available
-        _audioSource.PlayOneShot(_pageCollectSound);
+        float boostedVolume = 1f; // 200% boost = 3x volume, capped at max
+        _audioSource.PlayOneShot(_pageCollectSound, boostedVolume * 3f);
         GameController.Instance.Player.CollectPage();
         Destroy(gameObject);
     }

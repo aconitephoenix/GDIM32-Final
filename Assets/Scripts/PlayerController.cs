@@ -316,7 +316,7 @@ public class PlayerController : MonoBehaviour
 
 
                 //slerp camera vertical rotation to npc
-                float targetVertical = -10f;
+                float targetVertical = -15f;
                 
                 // Clamp the target rotation to prevent exceeding look angle limits
                 //targetVertical = Mathf.Clamp(targetVertical, -maxLookAngle, maxLookAngle);

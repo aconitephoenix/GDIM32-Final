@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class freddyAI : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class freddyAI : MonoBehaviour
     public enum FreddyAIState
     {
         Inactive,       // Before activation
-        Roaming,        // Stalking/roaming behavior
         Charging,       // Chasing the player
         Jumpscare,      // Jumpscare animation
     }
@@ -23,28 +23,31 @@ public class freddyAI : MonoBehaviour
     [Header("AI Components")]
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Transform _modelTransform; // Child transform for adjusting jumpscare Y position
+    [SerializeField] private AudioSource _audioSource; // Audio source for running sounds
+    [SerializeField] private AudioSource _breathingAudioSource; // Separate audio source for breathing sound
     private FreddyAIState _currentState = FreddyAIState.Inactive;
 
-    [Header("Roaming Settings")]
-    [SerializeField] private float _roamRadius = 30f; // How far Freddy can roam
-    [SerializeField] private float _roamWaitTime = 3f; // Time to wait at each roam point
-    [SerializeField] private float _roamSpeed = 2f;
-    private Vector3 _roamTarget;
-    private float _roamTimer;
-
     [Header("Charging Settings")]
-    [SerializeField] private float _chargeDistance = 15f; // Distance at which Freddy starts charging
     [SerializeField] private float _chargeSpeed = 6f;
     [SerializeField] private float _losePlayerDistance = 25f; // Distance at which Freddy loses the player
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip _runningClip; // Running sound effect
+    [SerializeField] private AudioClip _jumpscareClip; // Jumpscare sound effect
+    [SerializeField] private float _maxAudioDistance = 20f; // Distance at which audio is at full volume
+    [SerializeField] private float _minAudioDistance = 2f; // Distance at which audio starts fading
 
     [Header("Jumpscare Settings")]
     [SerializeField] private float _jumpscareDistance = 2f; // Distance to trigger jumpscare
     [SerializeField] private float _jumpscareDuration = 3f; // How long the jumpscare lasts
     [SerializeField] private float _jumpscareFollowDistance = 5f; // Distance from camera to position Freddy
-    [SerializeField] private float _jumpscareFollowHeight = -1f; // Height offset below camera
+    [SerializeField] private float _jumpscareFollowHeight = -1f; // Height offset for child model during jumpscare
     [SerializeField] private float _escapeRunDuration = 2f; // How long Freddy runs away
     [SerializeField] private float _escapeRunSpeed = 8f; // Speed while escaping
-    [SerializeField] private float _lightFlashDuration = 1.5f; // Duration of red light flash
+    [SerializeField] private float _vignetteEffectDuration = 3f; // Duration of vignette ping-pong effect
+    [SerializeField] private PostProcessVolume _postProcessVolume; // Reference to post-processing volume
+    [SerializeField] private AudioClip _breathingSound; // Breathing sound effect during vignette ping-pong
 
     [Header("Debug Settings")]
     [SerializeField] private bool _enableDebugLogs = true; // Toggle debug logs on/off
@@ -60,6 +63,7 @@ public class freddyAI : MonoBehaviour
     private Vector3 _initialModelLocalPosition; // Store initial local position of model
     private bool _hasChildModel = false; // Track if we have a separate child model
     private bool _hasBeenDeactivated = false; // Track if Freddy has been deactivated due to quest completion
+    private bool _isPlayingRunningAudio = false; // Track if running audio is currently playing
 
     void Start()
     {
@@ -103,6 +107,36 @@ public class freddyAI : MonoBehaviour
             }
         }
 
+        // Get AudioSource if not assigned
+        if (_audioSource == null)
+        {
+            _audioSource = GetComponent<AudioSource>();
+            if (_audioSource != null)
+            {
+                DebugLog("AudioSource component found on parent.");
+            }
+            else
+            {
+                Debug.LogWarning("Freddy AI: AudioSource component missing! Running sounds will not play.");
+            }
+        }
+
+        // Get model transform if not assigned
+        if (_modelTransform == null && transform.childCount > 0)
+        {
+            _modelTransform = transform.GetChild(0);
+            _hasChildModel = true;
+            _initialModelLocalPosition = _modelTransform.localPosition;
+            DebugLog("Model transform found on child: " + _modelTransform.gameObject.name);
+            DebugLog("  Initial local position: " + _initialModelLocalPosition);
+        }
+        else if (_modelTransform != null)
+        {
+            _hasChildModel = true;
+            _initialModelLocalPosition = _modelTransform.localPosition;
+            DebugLog("Model transform assigned: " + _modelTransform.gameObject.name);
+            DebugLog("  Initial local position: " + _initialModelLocalPosition);
+        }
 
         // Check NavMeshAgent status
         if (_agent != null)
@@ -159,7 +193,8 @@ public class freddyAI : MonoBehaviour
                 DebugLog("  - Available Parameters:");
                 foreach (AnimatorControllerParameter param in _animator.parameters)
                 {
-                    DebugLog("    * " + param.name + " (Type: " + param.type + ")");
+                    DebugLog("    * " + param.name + " (Type: " + param.type + ")"
+                    );
                 }
             }
             else
@@ -171,7 +206,7 @@ public class freddyAI : MonoBehaviour
         // Set initial agent speed
         if (_agent != null)
         {
-            _agent.speed = _roamSpeed;
+            _agent.speed = _chargeSpeed;
         }
 
         DebugLog("=== Freddy AI Initialized ===");
@@ -222,9 +257,6 @@ public class freddyAI : MonoBehaviour
         // Update behavior based on current state
         switch (_currentState)
         {
-            case FreddyAIState.Roaming:
-                UpdateRoaming();
-                break;
             case FreddyAIState.Charging:
                 UpdateCharging();
                 break;
@@ -248,6 +280,9 @@ public class freddyAI : MonoBehaviour
             _agent.enabled = false;
         }
 
+        // Stop running audio
+        StopRunningAudio();
+
         // Disable all renderers to make Freddy invisible
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
         foreach (Renderer renderer in renderers)
@@ -256,8 +291,6 @@ public class freddyAI : MonoBehaviour
         }
 
         DebugLog("Freddy AI deactivated and hidden.");
-
-
     }
 
     // Check if player has started collecting pages (page quest started)
@@ -285,7 +318,7 @@ public class freddyAI : MonoBehaviour
         yield return new WaitForSeconds(_activationDelay);
         _isActive = true;
         DebugLog("Freddy AI activated!");
-        SetState(FreddyAIState.Roaming);
+        SetState(FreddyAIState.Charging);
     }
 
     // Change AI state
@@ -312,17 +345,6 @@ public class freddyAI : MonoBehaviour
 
         switch (state)
         {
-            case FreddyAIState.Roaming:
-                if (_agent != null)
-                {
-                    _agent.isStopped = false;
-                    _agent.speed = _roamSpeed;
-                    DebugLog("Roaming: Speed set to " + _roamSpeed + ", isStopped = " + _agent.isStopped);
-                }
-                SetRoamTarget();
-                PlayAnimation(ANIM_RUNNING);
-                break;
-
             case FreddyAIState.Charging:
                 if (_agent != null)
                 {
@@ -331,6 +353,7 @@ public class freddyAI : MonoBehaviour
                     DebugLog("Charging: Speed set to " + _chargeSpeed + ". Player detected!");
                 }
                 PlayAnimation(ANIM_RUNNING);
+                StartRunningAudio();
                 break;
 
             case FreddyAIState.Jumpscare:
@@ -338,6 +361,7 @@ public class freddyAI : MonoBehaviour
                 {
                     _agent.isStopped = true;
                 }
+                StopRunningAudio();
                 DebugLog("Jumpscare: Triggering jumpscare!");
                 StartCoroutine(PerformJumpscare());
                 break;
@@ -348,64 +372,6 @@ public class freddyAI : MonoBehaviour
     private void OnStateExit(FreddyAIState state)
     {
         DebugLog("Exiting State: " + state);
-    }
-
-    // Update roaming behavior
-    private void UpdateRoaming()
-    {
-        if (_agent == null || _player == null) return;
-
-        float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
-
-        // Check if player is close enough to start charging
-        if (distanceToPlayer <= _chargeDistance)
-        {
-            DebugLog("Roaming: Player within charge distance (" + distanceToPlayer.ToString("F2") + "m). Switching to Charging state.");
-            SetState(FreddyAIState.Charging);
-            return;
-        }
-
-        // Check if reached roam destination
-        if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
-        {
-            _roamTimer += Time.deltaTime;
-
-            // Play idle animation while waiting
-            if (_animator != null && _roamTimer > 0.1f)
-            {
-                PlayAnimation(ANIM_IDLE);
-            }
-
-            // Wait at destination, then pick new target
-            if (_roamTimer >= _roamWaitTime)
-            {
-                DebugLog("Roaming: Reached destination. Picking new roam target.");
-                SetRoamTarget();
-                _roamTimer = 0f;
-                PlayAnimation(ANIM_RUNNING);
-            }
-        }
-        else if (_agent.velocity.sqrMagnitude > 0.1f)
-        {
-            // Moving to destination - ensure running animation is playing
-            PlayAnimation(ANIM_RUNNING);
-        }
-
-        // Rotate the PARENT towards movement direction
-        if (_agent.velocity.sqrMagnitude > 0.1f)
-        {
-            Vector3 direction = _agent.velocity.normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 15f);
-        }
-
-        // Occasionally look towards player while roaming (stalking behavior)
-        if (Random.value < 0.1f)
-        {
-            Vector3 directionToPlayer = (_player.position - transform.position);
-            Quaternion lookRotation = Quaternion.LookRotation(directionToPlayer);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2f);
-        }
     }
 
     // Update charging behavior
@@ -423,16 +389,11 @@ public class freddyAI : MonoBehaviour
             return;
         }
 
-        // Check if player escaped
-        if (distanceToPlayer > _losePlayerDistance)
-        {
-            DebugLog("Charging: Player escaped (distance: " + distanceToPlayer.ToString("F2") + "m). Returning to Roaming state.");
-            SetState(FreddyAIState.Roaming);
-            return;
-        }
-
         // Chase the player
         _agent.SetDestination(_player.position);
+
+        // Update running audio volume based on distance
+        UpdateRunningAudioVolume(distanceToPlayer);
 
         // Always look at player while charging - rotate PARENT
         if (_agent.velocity.sqrMagnitude > 0.1f)
@@ -443,38 +404,66 @@ public class freddyAI : MonoBehaviour
         }
     }
 
-    // Set a random roaming target
-    private void SetRoamTarget()
+    // Start playing running audio
+    private void StartRunningAudio()
     {
-        if (_agent == null) return;
-
-        Vector3 randomDirection = Random.insideUnitSphere * _roamRadius;
-        randomDirection += transform.position;
-        randomDirection.y = transform.position.y; // Keep on same Y level
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomDirection, out hit, _roamRadius, NavMesh.AllAreas))
+        if (_audioSource == null || _runningClip == null)
         {
-            _roamTarget = hit.position;
-            bool pathSet = _agent.SetDestination(_roamTarget);
-            DebugLog("Roaming: New target set at " + _roamTarget + " (Path valid: " + pathSet + ")");
-            DebugLog("  Distance to target: " + Vector3.Distance(transform.position, _roamTarget).ToString("F2"));
-            
-            if (_agent.hasPath)
-            {
-                DebugLog("  Path corners: " + _agent.path.corners.Length + ", Status: " + _agent.pathStatus);
-            }
-            else
-            {
-                Debug.LogWarning("Freddy AI: Agent has no path after setting destination!");
-            }
+            return;
         }
-        else
+
+        if (!_isPlayingRunningAudio)
         {
-            Debug.LogWarning("Freddy AI: Failed to find valid NavMesh position for roaming target.");
-            Debug.LogWarning("  Tried position: " + randomDirection);
-            Debug.LogWarning("  Freddy position: " + transform.position);
+            _audioSource.clip = _runningClip;
+            _audioSource.loop = true;
+            _audioSource.Play();
+            _isPlayingRunningAudio = true;
+            DebugLog("Running audio started.");
         }
+    }
+
+    // Stop playing running audio
+    private void StopRunningAudio()
+    {
+        if (_audioSource == null)
+        {
+            return;
+        }
+
+        if (_isPlayingRunningAudio)
+        {
+            _audioSource.Stop();
+            _isPlayingRunningAudio = false;
+            DebugLog("Running audio stopped.");
+        }
+    }
+
+    // Update running audio volume based on distance to player
+    private void UpdateRunningAudioVolume(float distanceToPlayer)
+    {
+        if (_audioSource == null || !_isPlayingRunningAudio)
+        {
+            return;
+        }
+
+        // Calculate volume based on distance
+        // Full volume at _minAudioDistance, zero volume at _maxAudioDistance
+        float volume = 1f - Mathf.Clamp01((distanceToPlayer - _minAudioDistance) / (_maxAudioDistance - _minAudioDistance));
+        _audioSource.volume = volume;
+    }
+
+    // Play jumpscare sound once
+    private void PlayJumpscareSound()
+    {
+        if (_audioSource == null || _jumpscareClip == null)
+        {
+            return;
+        }
+
+        _audioSource.clip = _jumpscareClip;
+        _audioSource.loop = false;
+        _audioSource.PlayOneShot(_jumpscareClip, 0.5f);
+        DebugLog("Jumpscare sound played.");
     }
 
     // Perform jumpscare
@@ -489,48 +478,79 @@ public class freddyAI : MonoBehaviour
             DebugLog("Jumpscare: Player control disabled.");
         }
 
+        // Stop NavMeshAgent movement during jumpscare
+        if (_agent != null)
+        {
+            _agent.isStopped = true;
+        }
+
+        // Store original child Y position if we have a model transform
+        float originalChildY = 0f;
+        if (_modelTransform != null)
+        {
+            originalChildY = _modelTransform.localPosition.y;
+            DebugLog("Jumpscare: Stored original child Y position: " + originalChildY);
+        }
+
         // Teleport Freddy in front of player camera
         if (_player != null && _playerCamera != null)
         {
             Vector3 cameraPos = _playerCamera.transform.position;
             Vector3 cameraForward = _playerCamera.transform.forward;
             Vector3 jumpscarePos = cameraPos + (cameraForward * _jumpscareFollowDistance);
-            jumpscarePos.y += _jumpscareFollowHeight;
+            jumpscarePos.y = transform.position.y; // Keep parent at same height
 
-            // Teleport and disable NavMeshAgent temporarily
-            if (_agent != null)
-            {
-                _agent.enabled = false;
-            }
             transform.position = jumpscarePos;
-            if (_agent != null)
-            {
-                _agent.enabled = true;
-            }
-
+            
             // Look directly at player camera
             Vector3 directionToPlayer = (_playerCamera.transform.position - transform.position).normalized;
             transform.rotation = Quaternion.LookRotation(directionToPlayer);
 
+            // Adjust child model Y position for jumpscare
+            if (_modelTransform != null)
+            {
+                Vector3 newChildPos = _modelTransform.localPosition;
+                newChildPos.y = _jumpscareFollowHeight;
+                _modelTransform.localPosition = newChildPos;
+                DebugLog("Jumpscare: Adjusted child Y to " + _jumpscareFollowHeight);
+            }
+
             DebugLog("Jumpscare: Freddy teleported to " + jumpscarePos);
         }
 
-        // Play jumpscare animation
+        // Play jumpscare animation and sound
         PlayAnimation(ANIM_JUMPSCARE);
+        PlayJumpscareSound();
         yield return new WaitForSeconds(_jumpscareDuration);
 
         DebugLog("Jumpscare: Animation complete. Restoring player control and running away.");
 
-        // Flash the light red
-        StartCoroutine(FlashLightRed());
+        // Restore player control immediately
+        if (GameController.Instance != null && GameController.Instance.Player != null)
+        {
+            GameController.Instance.Player.SetState(PlayerController.PlayerState.Normal);
+            DebugLog("Jumpscare: Player control restored.");
+        }
 
-        // Move Freddy away from player quickly
-        if (_agent != null && _player != null)
+        // Start vignette ping-pong effect
+        StartCoroutine(PingPongVignette());
+
+        // Restore child model Y position
+        if (_modelTransform != null)
+        {
+            Vector3 restoredChildPos = _modelTransform.localPosition;
+            restoredChildPos.y = originalChildY;
+            _modelTransform.localPosition = restoredChildPos;
+            DebugLog("Jumpscare: Restored child Y to " + originalChildY);
+        }
+
+        // Resume normal AI behavior
+        if (_agent != null)
         {
             _agent.isStopped = false;
             _agent.speed = _escapeRunSpeed;
 
-            // Set escape destination far away from player
+            // Set escape destination away from player
             Vector3 escapeDirection = (transform.position - _player.position).normalized;
             Vector3 escapeTarget = transform.position + (escapeDirection * 50f);
             escapeTarget.y = transform.position.y;
@@ -538,51 +558,75 @@ public class freddyAI : MonoBehaviour
             _agent.SetDestination(escapeTarget);
             PlayAnimation(ANIM_RUNNING);
 
-            DebugLog("Jumpscare: Freddy running away at speed " + _escapeRunSpeed);
+            DebugLog("Jumpscare: Freddy running away from " + transform.position + " at speed " + _escapeRunSpeed);
         }
 
         // Wait for escape run duration
         yield return new WaitForSeconds(_escapeRunDuration);
 
-        // Restore player control after jumpscare is over
-        if (GameController.Instance != null && GameController.Instance.Player != null)
-        {
-            GameController.Instance.Player.SetState(PlayerController.PlayerState.Normal);
-            DebugLog("Jumpscare: Player control restored.");
-        }
-
-        SetState(FreddyAIState.Roaming);
+        StartRunningAudio();
+        SetState(FreddyAIState.Charging);
     }
 
-    // Flash the light red for a brief moment
-    private IEnumerator FlashLightRed()
+    // Ping-pong vignette effect
+    private IEnumerator PingPongVignette()
     {
-        DebugLog("Jumpscare: Flashing light red.");
+        DebugLog("Jumpscare: Starting vignette ping-pong effect.");
         
-        // Find all lights in the scene and store their original colors
-        Light[] allLights = FindObjectsOfType<Light>();
-        Color[] originalColors = new Color[allLights.Length];
-        
-        for (int i = 0; i < allLights.Length; i++)
+        Vignette vignetteEffect = null;
+        if (_postProcessVolume != null && _postProcessVolume.profile != null)
         {
-            originalColors[i] = allLights[i].color;
+            _postProcessVolume.profile.TryGetSettings<Vignette>(out vignetteEffect);
         }
 
-        // Flash to red
-        foreach (Light light in allLights)
+        if (vignetteEffect == null)
         {
-            light.color = Color.red;
+            DebugLog("Jumpscare: Vignette effect not found in post-processing volume.");
+            yield break;
         }
 
-        yield return new WaitForSeconds(_lightFlashDuration);
-
-        // Restore original colors
-        for (int i = 0; i < allLights.Length; i++)
+        // Play breathing sound effect as a one-shot on separate audio source
+        if (_breathingAudioSource != null && _breathingSound != null)
         {
-            allLights[i].color = originalColors[i];
+            // Ensure the breathing audio source is not muted or affected by other settings
+            _breathingAudioSource.mute = false;
+            _breathingAudioSource.PlayOneShot(_breathingSound, 0.7f);
+            DebugLog("Jumpscare: Breathing sound started on separate audio source.");
         }
 
-        DebugLog("Jumpscare: Light flash complete.");
+        float elapsedTime = 0f;
+        float originalSmoothness = vignetteEffect.smoothness.value;
+        float originalIntensity = vignetteEffect.intensity.value;
+
+        // Ping-pong phase
+        while (elapsedTime < _vignetteEffectDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            
+            // Ping-pong the smoothness value between 0.155 and 0.7
+            float pingPongValue = Mathf.PingPong(elapsedTime * 1.3f, 1f);
+            vignetteEffect.smoothness.value = Mathf.Lerp(0.155f, 0.7f, pingPongValue);
+            vignetteEffect.intensity.value = Mathf.Lerp(0.5f, 0.75f, pingPongValue);
+
+            yield return null;
+        }
+
+        // Smooth return to original value
+        float returnTime = 0f;
+        float returnDuration = 0.5f; // Duration of smooth transition back
+        while (returnTime < returnDuration)
+        {
+            returnTime += Time.deltaTime;
+            float t = returnTime / returnDuration;
+            vignetteEffect.smoothness.value = Mathf.Lerp(vignetteEffect.smoothness.value, originalSmoothness, t);
+            vignetteEffect.intensity.value = Mathf.Lerp(vignetteEffect.intensity.value, originalIntensity, t);
+
+            yield return null;
+        }
+
+        // Ensure it's set to exactly the original value
+        vignetteEffect.smoothness.value = originalIntensity;
+        DebugLog("Jumpscare: Vignette ping-pong effect complete and restored to original value.");
     }
 
     // Play animation
@@ -627,7 +671,7 @@ public class freddyAI : MonoBehaviour
         }
         _isActive = true;
         DebugLog("Freddy AI manually activated via ActivateNow().");
-        SetState(FreddyAIState.Roaming);
+        SetState(FreddyAIState.Charging);
     }
 
     // Helper method for debug logging
@@ -644,25 +688,19 @@ public class freddyAI : MonoBehaviour
     {
         if (!Application.isPlaying) return;
 
-        // Draw roam radius
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _roamRadius);
-
         // Draw charge distance
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _chargeDistance);
+        Gizmos.DrawWireSphere(transform.position, _chargeSpeed);
 
         // Draw jumpscare distance
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, _jumpscareDistance);
 
-        // Draw current roam target
-        if (_currentState == FreddyAIState.Roaming)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(_roamTarget, 0.5f);
-            Gizmos.DrawLine(transform.position, _roamTarget);
-        }
+        // Draw audio distance visualization
+        Gizmos.color = new Color(1f, 1f, 0f, 0.3f); // Yellow with transparency
+        Gizmos.DrawWireSphere(transform.position, _minAudioDistance);
+        Gizmos.color = new Color(1f, 0.5f, 0f, 0.2f); // Orange with transparency
+        Gizmos.DrawWireSphere(transform.position, _maxAudioDistance);
 
         // Draw NavMesh agent path if it exists
         if (_agent != null && _agent.hasPath)

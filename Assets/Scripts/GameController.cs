@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public PlayerController Player { get; private set; }
 
     [SerializeField] private GameObject _interactableFreddy;
+    [SerializeField] private GameObject _arrow;
 
     //Setting up player locator
     private void Awake()
@@ -28,6 +29,10 @@ public class GameController : MonoBehaviour
     void Start()
     {
         _interactableFreddy.SetActive(false);
+        if (_arrow != null)
+        {
+            _arrow.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -37,6 +42,12 @@ public class GameController : MonoBehaviour
         {
             // If the player is currently missing the last page, make Freddy interactable
             _interactableFreddy.SetActive(true);
+        }
+
+        // Activate arrow when Slenderman's quest starts
+        if (Instance.Player._questState == PlayerController.QuestState.Quest3Started && _arrow != null)
+        {
+            _arrow.SetActive(true);
         }
     }
 }

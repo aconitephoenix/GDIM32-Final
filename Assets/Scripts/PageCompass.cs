@@ -6,17 +6,42 @@ public class PageCompass : MonoBehaviour
 {
     [SerializeField] private Transform[] _pageTransform; 
     [SerializeField] private float _rotateSpeed;
+    [SerializeField] private Transform freddyTransform;
 
     private Transform _closestPage;
+    private CanvasGroup _canvasGroup;
+
     private void Start()
     {
         _closestPage = _pageTransform[0];
+
+        // Get CanvasGroup component for visibility control
+        _canvasGroup = GetComponent<CanvasGroup>();
+        if (_canvasGroup == null)
+        {
+            _canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+        // Initially hide the compass
+        _canvasGroup.alpha = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (GameController.Instance.Player == null) return;
+
+        // Check if player has 7/8 pages - point to Freddy's transformation
+        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
+        {
+            
+            
+            if (freddyTransform != null)
+            {
+                RotateTowardsFreddy(freddyTransform);
+                return;
+            }
+        }
 
         //Checks if the closest page exists. If it doesn't, sets new transform as closest page
         int n = 0;
@@ -67,5 +92,14 @@ public class PageCompass : MonoBehaviour
         Vector3 currentForward = new Vector3(transform.forward.x, 0, transform.forward.z);
         Vector3 newForward = Vector3.RotateTowards(currentForward, direction, _rotateSpeed * Time.deltaTime, 0.0f);
         transform.forward = newForward;
+    }
+
+    private void RotateTowardsFreddy(Transform freddyTransform)
+    {
+        Vector3 compassPos = new Vector3(GameController.Instance.Player.transform.position.x, 0, GameController.Instance.Player.transform.position.z);
+        Vector3 freddyPos = new Vector3(freddyTransform.position.x, 0, freddyTransform.position.z);
+        Vector3 playerToFreddy = (freddyPos - compassPos).normalized;
+
+        RotateTowards(playerToFreddy);
     }
 }
