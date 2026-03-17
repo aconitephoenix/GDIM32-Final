@@ -148,8 +148,11 @@ public class PlayerController : MonoBehaviour
 
             case PlayerState.InDialogue:
                 // no movement, camera lerp to npc
+<<<<<<< HEAD
                 StopWalkingSound();
                 LookingAtInteractable();
+=======
+>>>>>>> 772deb2f117ff075c7959ea65d5314a845b7527c
                 LerpToNPC();
                 break;
 
@@ -427,6 +430,7 @@ public class PlayerController : MonoBehaviour
         SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);
     }
 
+<<<<<<< HEAD
     // Handle walking sound effects
     private void HandleWalkingSound()
     {
@@ -505,6 +509,8 @@ public class PlayerController : MonoBehaviour
         return _lookingAtInteractable;
     }
 
+=======
+>>>>>>> 772deb2f117ff075c7959ea65d5314a845b7527c
     private void OnDrawGizmos()
     {
         // Don't draw gizmos until game is running
