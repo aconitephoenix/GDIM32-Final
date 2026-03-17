@@ -19,7 +19,18 @@ My main contributions to the project were the player movement, camera movement, 
 
 ## Final Submission
 ### Group Devlog
-Put your group Devlog here.
+Model-View-Controller - A model-view-controller pattern is used in our dialogue system. The model (data) in this case would be the scriptable objects that hold the lines of dialogue, the controller (logic) would be the NPC script which handles the logic for controlling the dialogue, the view would be the UIController which enables and disables the dialogue box and outputs the text. This pattern helps keep our game scaled well by keeping our game decoupled. With this pattern, we are able to add new dialogue easily into our game without having to code too much or any at all.
+
+Finite State Machine - A finite state machine is used in our game by both the PlayerController class and the freddyAI class. For the sake of time, we will focus mainly on the finite state machine used in the PlayerController class. The PlayerController class uses a finite state machine twice; once for the player’s state and another for the quest state. The player state defines if the player is in:
+- a normal state, where they can move freely and interact with items and NPCs 
+- In dialogue, which disables player movement and locks the camera onto the NPC that the player is talking to 
+- In a cutscene, which disables player movement and has the camera be controlled by the cutscene
+- Disabled, which is mainly a Debug state that disables all movement and interaction.
+
+Having these states be in a finite state machine helps prevent the player from being able to move when we don’t want them to, such as when the player is talking to an NPC. 
+
+Singleton - In our game, we used a singleton in the form of a locator that references the PlayerController script for other scripts to be able to subscribe to an event in PlayerController. For example, the UIController script accesses the PlayerController script through the singleton in order to subscribe to an event that fires whenever a page is collected. This helps structure our project as it helps keep our scripts, specifically the PlayerController, decoupled. Without the use of a singleton, our PlayerController would have to be doing nearly everything which isn’t good for a project of this scale that has multiple users. 
+
 
 
 ### Jess Tran
