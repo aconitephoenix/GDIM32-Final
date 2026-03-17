@@ -78,7 +78,7 @@ public class Freddy : NPC
                 _flyer.SetActive(true);
                 _flyer.GetComponent<Interactable>().enabled = false;
                 _walmart.SetActive(true);
-                
+                transform.position = _targetTransform.position;
                 break;
             case FreddyState.IsJumpscaring:
                 _flyer.SetActive(false);

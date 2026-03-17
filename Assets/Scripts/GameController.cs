@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
     public PlayerController Player { get; private set; }
 
+    [SerializeField] private GameObject _interactableFreddy;
+
     //Setting up player locator
     private void Awake()
     {
@@ -25,12 +27,16 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _interactableFreddy.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Instance.Player._currentPageCount >= Instance.Player._maxPageCount - 1)
+        {
+            // If the player is currently missing the last page, make Freddy interactable
+            _interactableFreddy.SetActive(true);
+        }
     }
 }

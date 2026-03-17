@@ -11,7 +11,7 @@ public class freddyAI : MonoBehaviour
         Inactive,       // Before activation
         Roaming,        // Stalking/roaming behavior
         Charging,       // Chasing the player
-        Jumpscare       // Jumpscare animation
+        Jumpscare,      // Jumpscare animation
     }
 
     [Header("AI Activation")]
@@ -205,6 +205,11 @@ public class freddyAI : MonoBehaviour
             DebugLog("  Is Stopped: " + _agent.isStopped);
         }
 
+        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
+        {
+            gameObject.SetActive(false);
+        }
+
         // Update behavior based on current state
         switch (_currentState)
         {
@@ -227,8 +232,7 @@ public class freddyAI : MonoBehaviour
         while (!_isActive)
         {
             // Activate when player has collected at least 1 page (quest has started) but less than 7
-            if (GameController.Instance != null && 
-                GameController.Instance.Player != null && 
+            if (GameController.Instance.Player != null && 
                 GameController.Instance.Player._currentPageCount > 0 &&
                 GameController.Instance.Player._currentPageCount < GameController.Instance.Player._maxPageCount - 1)
             {
