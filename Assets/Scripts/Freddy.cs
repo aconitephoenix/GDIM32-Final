@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Freddy : NPC
 {
@@ -12,6 +13,8 @@ public class Freddy : NPC
     [SerializeField] private float _movementSpeed = 2.0f;
     [SerializeField] private GameObject _flyer;
     [SerializeField] private GameObject _slenderman;
+    [SerializeField] private GameObject _walmart;
+    [SerializeField] private Transform _targetTransform;
 
     private FreddyState _state;
 
@@ -22,6 +25,7 @@ public class Freddy : NPC
 
         // currently set this just for testing purposes.. feel free to remove this if it conflicts with the AI -jess
         _state = FreddyState.IsMoving;
+        _walmart.SetActive(false);
     }
 
     // Update is called once per frame
@@ -73,6 +77,8 @@ public class Freddy : NPC
                 _movementSpeed = 0.0f;
                 _flyer.SetActive(true);
                 _flyer.GetComponent<Interactable>().enabled = false;
+                _walmart.SetActive(true);
+                
                 break;
             case FreddyState.IsJumpscaring:
                 _flyer.SetActive(false);

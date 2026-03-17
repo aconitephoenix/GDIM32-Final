@@ -863,6 +863,8 @@ MonoBehaviour:
   _movementSpeed: 2
   _flyer: {fileID: 343569432}
   _slenderman: {fileID: 1645463877}
+  _walmart: {fileID: 283538910}
+  _targetTransform: {fileID: 513277824}
 --- !u!65 &164444357
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -889,6 +891,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
   m_PrefabInstance: {fileID: 1956720814}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &164444359
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164444353}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &195561976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,13 +1184,14 @@ GameObject:
   - component: {fileID: 283538913}
   - component: {fileID: 283538912}
   - component: {fileID: 283538911}
+  - component: {fileID: 283538915}
   m_Layer: 0
   m_Name: Walmart Substitute
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &283538911
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1248,6 +1278,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &283538915
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283538910}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &343569432 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1115513861995567589, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
@@ -2201,7 +2258,7 @@ GameObject:
   - component: {fileID: 513277821}
   - component: {fileID: 513277825}
   m_Layer: 0
-  m_Name: Freddy
+  m_Name: Freddy Target Location
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2287,7 +2344,7 @@ Transform:
   m_GameObject: {fileID: 513277819}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.69, y: 0.5, z: -49.32}
+  m_LocalPosition: {x: 43.83, y: 0.5, z: -8.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2318,6 +2375,8 @@ MonoBehaviour:
   _movementSpeed: 2
   _flyer: {fileID: 0}
   _slenderman: {fileID: 0}
+  _walmart: {fileID: 0}
+  _targetTransform: {fileID: 0}
 --- !u!1 &617533742
 GameObject:
   m_ObjectHideFlags: 0
@@ -5891,6 +5950,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 8052167510477299420, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8052167510477299420, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8052167510477299420, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00194
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5907,6 +5978,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
       insertIndex: -1
       addedObject: {fileID: 164444357}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 164444359}
   m_SourcePrefab: {fileID: 100100000, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
 --- !u!1 &1964846168
 GameObject:
@@ -6503,7 +6577,6 @@ SceneRoots:
   - {fileID: 105943417}
   - {fileID: 1617391536}
   - {fileID: 283538914}
-  - {fileID: 1956720814}
   - {fileID: 1964846172}
   - {fileID: 1635860322}
   - {fileID: 461446601}
@@ -6512,3 +6585,4 @@ SceneRoots:
   - {fileID: 781925486}
   - {fileID: 1209029406}
   - {fileID: 683026542}
+  - {fileID: 1956720814}
