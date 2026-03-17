@@ -860,7 +860,6 @@ MonoBehaviour:
   _dialogueAudioClips: []
   _dialogueAudioController: {fileID: 461446602}
   _dialogueFont: {fileID: 11400000, guid: 2cee722033e1b8f4f8ec64e020435b8d, type: 2}
-  _movementSpeed: 2
   _flyer: {fileID: 343569432}
   _slenderman: {fileID: 1645463877}
   _walmart: {fileID: 283538910}
@@ -1808,9 +1807,6 @@ PrefabInstance:
       addedObject: {fileID: 402119339}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 402119338}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 402119341}
   m_SourcePrefab: {fileID: 100100000, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
 --- !u!1 &402119336 stripped
@@ -1823,31 +1819,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 21b6c701617055d4ba32f0d91dd64339, type: 3}
   m_PrefabInstance: {fileID: 402119335}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &402119338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402119336}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ec011379d2c074ea9cc57167febb2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _activationDelay: 5
-  _allowDebugActivation: 1
-  _agent: {fileID: 402119341}
-  _animator: {fileID: 402119340}
-  _roamRadius: 30
-  _roamWaitTime: 3
-  _roamSpeed: 2
-  _chargeDistance: 15
-  _chargeSpeed: 50
-  _losePlayerDistance: 25
-  _jumpscareDistance: 2
-  _jumpscareDuration: 3
-  _enableDebugLogs: 1
 --- !u!65 &402119339
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2317,7 +2288,6 @@ MonoBehaviour:
   _dialogueAudioClips: []
   _dialogueAudioController: {fileID: 461446602}
   _dialogueFont: {fileID: 11400000, guid: 2cee722033e1b8f4f8ec64e020435b8d, type: 2}
-  _movementSpeed: 2
   _flyer: {fileID: 0}
   _slenderman: {fileID: 0}
   _walmart: {fileID: 0}
@@ -2899,7 +2869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1115513861995567589, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1584227946270123934, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: m_LocalScale.x
@@ -2958,9 +2928,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 781925485}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _uiController
       value: 
       objectReference: {fileID: 1363857249}
+    - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
+      propertyPath: _pageCollectSound
+      value: 
+      objectReference: {fileID: 8300000, guid: af15a3c9eadd0b64abc0aca546f3cb49, type: 3}
     - target: {fileID: 8371662007643843731, guid: 1e8b02d4fc95dd340bac0abaead31c7a, type: 3}
       propertyPath: _interactionDistance
       value: 3

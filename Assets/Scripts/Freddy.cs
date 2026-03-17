@@ -5,26 +5,16 @@ using UnityEngine.UIElements;
 
 public class Freddy : NPC
 {
-    public enum FreddyState
-    {
-        IsInteractable, IsJumpscaring, IsMoving
-    }
-
-    [SerializeField] private float _movementSpeed = 2.0f;
     [SerializeField] private GameObject _flyer;
     [SerializeField] private GameObject _slenderman;
     [SerializeField] private GameObject _walmart;
     [SerializeField] private Transform _targetTransform;
-
-    private FreddyState _state;
 
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
 
-        // currently set this just for testing purposes.. feel free to remove this if it conflicts with the AI -jess
-        _state = FreddyState.IsMoving;
         _walmart.SetActive(false);
     }
 
@@ -32,8 +22,13 @@ public class Freddy : NPC
     public override void Update()
     {
         base.Update();
-        UpdateState();
-        UpdateBehavior();
+
+        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
+        {
+            _flyer.GetComponent<Interactable>().enabled = false;
+            _walmart.SetActive(true);
+            transform.position = _targetTransform.position;
+        }
 
         if (!_slenderman.GetComponent<NPC>().enabled && GameController.Instance.Player._questState == PlayerController.QuestState.Quest3Started)
         {
@@ -46,48 +41,9 @@ public class Freddy : NPC
         }
     }
 
-    // Update Freddy's state
-    private void UpdateState()
-    {
-        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
-        {
-            // If the player is currently missing the last page, make Freddy interactable
-            _state = FreddyState.IsInteractable;
-        }
-    }
-
     public override void OnMouseOver()
     {
-        if (_state == FreddyState.IsInteractable)
-        {
-            // If Freddy is currently interactable, do normal NPC interaction
-            base.OnMouseOver();
-        }
-        else
-        {
-            return;
-        }
-    }
-
-    private void UpdateBehavior()
-    {
-        switch (_state)
-        {
-            case FreddyState.IsInteractable:
-                _movementSpeed = 0.0f;
-                _flyer.SetActive(true);
-                _flyer.GetComponent<Interactable>().enabled = false;
-                _walmart.SetActive(true);
-                transform.position = _targetTransform.position;
-                break;
-            case FreddyState.IsJumpscaring:
-                _flyer.SetActive(false);
-                break;
-            case FreddyState.IsMoving:
-                _movementSpeed = 2.0f;
-                _flyer.SetActive(false);
-                break;
-        }
+        base.OnMouseOver();
     }
 
     protected override void AdvanceDialogue()

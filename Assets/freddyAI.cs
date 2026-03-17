@@ -185,6 +185,11 @@ public class freddyAI : MonoBehaviour
             ActivateNow();
         }
 
+        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
+        {
+            gameObject.SetActive(false);
+        }
+
         if (!_isActive || _player == null) return;
 
 
@@ -203,11 +208,6 @@ public class freddyAI : MonoBehaviour
             DebugLog("  Path Status: " + _agent.pathStatus);
             DebugLog("  Remaining Distance: " + _agent.remainingDistance.ToString("F2"));
             DebugLog("  Is Stopped: " + _agent.isStopped);
-        }
-
-        if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
-        {
-            gameObject.SetActive(false);
         }
 
         // Update behavior based on current state
