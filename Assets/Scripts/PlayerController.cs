@@ -143,16 +143,11 @@ public class PlayerController : MonoBehaviour
                 HandleMovement();
                 HandleMouseLook();
                 HandleSprint();
-                LookingAtInteractable();
                 break;
 
             case PlayerState.InDialogue:
                 // no movement, camera lerp to npc
-<<<<<<< HEAD
                 StopWalkingSound();
-                LookingAtInteractable();
-=======
->>>>>>> 772deb2f117ff075c7959ea65d5314a845b7527c
                 LerpToNPC();
                 break;
 
@@ -430,7 +425,6 @@ public class PlayerController : MonoBehaviour
         SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);
     }
 
-<<<<<<< HEAD
     // Handle walking sound effects
     private void HandleWalkingSound()
     {
@@ -488,29 +482,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Check if player is looking at something they can interact with
-    private bool LookingAtInteractable()
-    { 
-        RaycastHit hitInfo;
 
-        // Firing raycast out from camera
-        if (Physics.Raycast(_raycastStart, _raycastDir, out hitInfo, _lineofSightMaxDist))
-        {
-            _raycastHitLocation = hitInfo.point;
-            if (hitInfo.collider.gameObject.tag.Equals(_interactableTag) || hitInfo.collider.gameObject.tag.Equals(_npcTag) || hitInfo.collider.gameObject.tag.Equals(_doorTag))
-            {
-                _lookingAtInteractable = true;
-            }
-        } else
-        {
-            _lookingAtInteractable = false;
-        }
 
-        return _lookingAtInteractable;
-    }
-
-=======
->>>>>>> 772deb2f117ff075c7959ea65d5314a845b7527c
     private void OnDrawGizmos()
     {
         // Don't draw gizmos until game is running
