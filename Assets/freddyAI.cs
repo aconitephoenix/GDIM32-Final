@@ -187,6 +187,7 @@ public class freddyAI : MonoBehaviour
 
         if (GameController.Instance.Player._currentPageCount >= GameController.Instance.Player._maxPageCount - 1)
         {
+            gameObject.GetComponent<freddyAI>().enabled = false;
             gameObject.SetActive(false);
         }
 
