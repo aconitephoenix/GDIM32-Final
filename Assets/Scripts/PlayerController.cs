@@ -54,6 +54,12 @@ public class PlayerController : MonoBehaviour
     private bool isSprinting = false;
     private bool isJumping = true;
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip _walkingSound;
+    [SerializeField] private AudioClip _sprintSound;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private float _movementSpeedThreshold = 0.5f;
+
     [Header("Raycast Settings")]
     [SerializeField] private float _lineofSightMaxDist;
     [SerializeField] private Vector3 _raycastStartOffset;
@@ -68,6 +74,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private float verticalRotation = 0f;
+    private bool _isPlayingFootsteps = false;
+    private bool _isPlayingSprintSound = false;
 
     // Variables for Gizmo drawing
     private Vector3 _raycastHitLocation;
@@ -98,6 +106,12 @@ public class PlayerController : MonoBehaviour
         // Get camera component
         playerCamera = cameraTransform.GetComponent<Camera>();
         normalFOV = playerCamera.fieldOfView;
+
+        // Get AudioSource if not assigned
+        if (_audioSource == null)
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
 
         Debug.Log(_maxPageCount);
     }
@@ -134,16 +148,19 @@ public class PlayerController : MonoBehaviour
 
             case PlayerState.InDialogue:
                 // no movement, camera lerp to npc
+                StopWalkingSound();
                 LookingAtInteractable();
                 LerpToNPC();
                 break;
 
             case PlayerState.Cutscene:
                 // Camera is controlled by cutscene, no player input
+                StopWalkingSound();
                 break;
 
             case PlayerState.Disabled:
                 // No interactions or movement
+                StopWalkingSound();
                 break;
         }
 
@@ -157,8 +174,8 @@ public class PlayerController : MonoBehaviour
         if (currentState == PlayerState.Normal)
         {
             HandleJump();
+            HandleWalkingSound();
         }
-
     }
 
     // Change the player's state
@@ -190,18 +207,21 @@ public class PlayerController : MonoBehaviour
                 // Stop any movement
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
                 isSprinting = false;
+                StopWalkingSound();
                 break;
 
             case PlayerState.Cutscene:
                 // Stop all movement and store camera state if needed
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
                 isSprinting = false;
+                StopWalkingSound();
                 break;
 
             case PlayerState.Disabled:
                 // Stop all movement
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
                 isSprinting = false;
+                StopWalkingSound();
                 break;
         }
     }
@@ -225,6 +245,12 @@ public class PlayerController : MonoBehaviour
         // Get input
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveZ = Input.GetAxisRaw("Vertical");
+        
+        // Only process movement if there's input
+        if (moveX == 0 && moveZ == 0)
+        {
+            return;
+        }
         
         // Check if sprinting
         isSprinting = Input.GetKey(KeyCode.LeftShift) && CanSprint && (moveX != 0 || moveZ != 0);
@@ -260,6 +286,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // reset y velocity before jump to prevent double jump height
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = true;
+            StopWalkingSound();
         }
     }
 
@@ -322,6 +349,17 @@ public class PlayerController : MonoBehaviour
 
     private void HandleSprint()
     {        
+        // Get current movement input to determine if player is sprinting
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveZ = Input.GetAxisRaw("Vertical");
+        bool hasMovementInput = moveX != 0 || moveZ != 0;
+        
+        // Update sprint state based on current conditions
+        if (!hasMovementInput)
+        {
+            isSprinting = false;
+        }
+        
         // lerp to transition FOV based on sprint state
         float targetFOV;
         
@@ -387,6 +425,63 @@ public class PlayerController : MonoBehaviour
 
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovTransitionSpeed * Time.deltaTime);
         SprintBar.rectTransform.localScale = new Vector3(Sprint, 1f, 1f);
+    }
+
+    // Handle walking sound effects
+    private void HandleWalkingSound()
+    {
+        // Calculate horizontal velocity magnitude (ignore vertical movement)
+        //Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveZ = Input.GetAxisRaw("Vertical");
+        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        float movementSpeed = move.magnitude;
+
+
+        // Play footsteps if player is moving and grounded
+        if (movementSpeed >= 0.1f && isGrounded)
+        {
+            if (!_isPlayingFootsteps && _audioSource != null && _walkingSound != null)
+            {
+                if(isSprinting && _sprintSound != null)
+                {
+                    _audioSource.clip = _sprintSound;
+                }
+                else
+                {
+                    _audioSource.clip = _walkingSound;
+                }
+                _audioSource.loop = true;
+                _audioSource.Play();
+                _isPlayingFootsteps = true;
+            }
+            else if (_isPlayingFootsteps && _audioSource != null)
+            {
+                // Switch audio clips if sprint state changed while already playing
+                AudioClip targetClip = (isSprinting && _sprintSound != null) ? _sprintSound : _walkingSound;
+                if (_audioSource.clip != targetClip)
+                {
+                    _audioSource.Stop();
+                    _audioSource.clip = targetClip;
+                    _audioSource.Play();
+                }
+            }
+        }
+        else
+        {
+            StopWalkingSound();
+        }
+    }
+
+    // Stop walking sound
+    private void StopWalkingSound()
+    {
+        if (_isPlayingFootsteps && _audioSource != null)
+        {
+            _audioSource.loop = false;
+            _audioSource.Stop();
+            _isPlayingFootsteps = false;
+        }
     }
 
     // Check if player is looking at something they can interact with

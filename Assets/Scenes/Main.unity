@@ -3561,7 +3561,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209029403}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69ec011379d2c074ea9cc57167febb2c, type: 3}
   m_Name: 
@@ -3668,6 +3668,10 @@ MonoBehaviour:
   SprintBarBackground: {fileID: 1682806098}
   alphaBlinkSpeed: 2
   Sprint: 1
+  _walkingSound: {fileID: 8300000, guid: 838f64bbe94bd394189ebe90cf188183, type: 3}
+  _sprintSound: {fileID: 8300000, guid: fb87812c9319bcf42a582c6c513420ef, type: 3}
+  _audioSource: {fileID: 781925485}
+  _movementSpeedThreshold: 0.01
   _lineofSightMaxDist: 3.01
   _raycastStartOffset: {x: 0, y: 0, z: 0}
   rb: {fileID: 1310158051}
